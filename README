@@ -1,0 +1,213 @@
+Sudoku Utilities by Jonathan Olson
+
+sudosolve is a utility that takes in a Sudoku puzzle and uses
+a number of human-usable logical solving techniques to try to
+solve the puzzle. It will display each step, and optionally show
+graphically what pattern (technique) it uses. It will output
+a grid for each step into one postscript file total, or one svg
+file for each step.
+
+Installation:
+Notes (2013-09-20) for building (on Ubuntu 12.04):
+sudo apt-get install libgtkmm-2.4-dev
+sudo apt-get install libplot-dev
+make sudosolve
+
+
+
+Sudoku:
+It is a puzzle on a 9x9 grid split into 3x3 "boxes". Each row,
+column and box must have each digit 1-9 in it exactly once.
+sudosolve uses a large number of solving techniques up to
+"simple coloring", which is extremely difficult to spot most of
+the time. There are many many more solving techniques
+out there.
+
+Input:
+on standard input, type in left to right then top row to bottom
+row, each digit (or if there is no digit, just a period '.'). Once you
+type in 81 characters, it will have read the puzzle.
+Example:
+.4398.25.6..425...2....1.949....4.7.3..6.8...41.2.9..382.5.........4...553489.71.
+
+Here are quick descriptions of the techniques:
+
+Simple Naked Single:
+If a row, column or box has only one cell open, it is uniquely
+determined as the only number not seen in that row, column,
+or box (from hereafter called a 'unit').
+	Unit is highlighted, cell is colored light blue
+
+Naked Single:
+If a cell is in the same rows, columns, and boxes with eight
+other digits, it must be the remaining digit.
+	No units highlighted, only cell is colored light blue as
+	in a simple naked single.
+
+Hidden Single:
+If a unit (row/column/box) has only one place a digit can be,
+no other digits could be there. Hidden Singles are spotted
+fairly quickly by human players with crosshatching.
+	Unit highlighted in gray. Identified cell highlighted in red,
+	and the candidate in a stronger red. Cross-hatching
+	squares are in light cyan.
+
+Naked/Hidden Subset:
+Includes Naked/Hidden Pairs, Triples, and Quads. Essentially,
+if N cells all in one unit contain only N possible digits (called
+candidates), then those candidates may not exist elsewhere
+in the unit.
+	Unit darkened slightly. Removed candidates highlighted
+	in green. Subset cells are darkened even more.
+
+Pointing (Pair/Triple):
+If all cells for a candidate in a box are in a row or column,
+the candidate can be removed from all other places in the
+row/column not in the box.
+	Unit is lightly highlighted. Removed cells are highlighted
+	in violet, candidates causing the pointing pair/triple are
+	highlighted even more darkly.
+
+Box-Line Interaction:
+If all cells for a candidate in a row/column are in a box,
+the candidate can be removed from all other places in the box
+which do not intersect with the row/column. Very similar to
+Pointings.
+	Unit(s) is lightly highlighted. Removed cells are highlighted in
+	magenta, and candidates causing the interaction are
+	highlighted in a darker color.
+
+N-Fish:
+Generalization of X-Wing, Swordfish, Jellyfish and Squirmbag
+patterns. if N rows have their candidates constrained to
+at most N columns, all candidates in those columns and NOT
+in those rows can be eliminated. Vice versa for columns/rows.
+	Major units are darkened, candidates belonging to both
+	sets are darkened even more. Removed candidates are
+	highlighted in orange.
+
+Simple Coloring:
+By looking at conjugate pairs (places where a digit must be in
+one of two spots), these can be chained together to determine
+whether (a) another candidate is impossible for both situations,
+and (b) whether one of the situations is false.
+	Colored cells in either red or green. Removed candidates
+	darkened, and identified cells have candidates highlighted
+	in white
+
+
+
+Output in general:
+each Output-classed object stores a list of what primitives will
+be displayed (numbers, highlights, outlines, etc). It seperates
+these out into layers so that no matter what order these primitives
+are added, highlights will still be below the numbers and grid lines.
+Each pattern can write to output in general without having to
+know what type of output it is.
+
+
+
+Output formats
+
+PostScript: (psout.h/cpp)
+Designed so that 6 grids fit on a page at once. It also dynamically
+handles different sized fonts by examining the actual bounds of
+all of the digits and averaging them together. It is programmed by
+including a "header" of handcrafted postscript made to generate
+the grids, and then a generated lower part which positions the grids
+and adds numbers/highlights/outlines etc. 6 fit on a page since
+having sometimes 60 pages for one puzzle seemed excessive, and
+they fit nicely. All of this makes it the best looking on paper, and
+is the most fine-tuned. Most fonts should look centered in the cells.
+
+SVG: (svgout.h/cpp)
+Here each grid is output to a different graphic, possibly useful for
+animations. It only supports Helvetica, since it unfortunately includes
+manual spacing data for general placement, which would change from
+font to font (one of the main disadvantages as opposed to PS).
+Basically all of the coordinate logic is contained within the SVG creation
+code, as opposed to the postscript code (where all the creation code
+has to do is specify row, column and color of common things).
+They both use the same scale for the grid, but have slightly different font
+properties and thus are somewhat customized.
+
+
+Display options:
+
+Candidates
+For each cell, this shows the list of possible digits that could be placed
+here (or more clearly, have not been logically eliminated from
+consideration). This is necessary for most of the more advanced solving
+techniques, and is thus required if patterns are displayed.
+
+Patterns
+This displays for each step in the solution what technique was used to
+reduce the puzzle. They are graphically described above.
+
+Keys
+These are central to generating sudoku grids. By starting with a completed
+grid, one can remove digits until the puzzle is no longer solvable. By knowing
+which patterns people will use, and what digits these patterns depend on
+most, a Sudoku generator can create different difficulties of puzzles, and even
+create puzzles which depend on a certain type of technique. They are displayed
+by outlines. Deep red means only this digit's removal is necessary, while
+lighter red or pink means that one or two extra digits would have to be
+removed with this digit to get rid of the pattern.
+
+Font
+The postscript output is designed to use a variety of fonts. The
+"Adobe 35" fonts should be available.
+
+
+Example use:
+./sudosolve --postscript --patterns --candidates --prefix output/ptest_c --font=Helvetica < puzzles/gr23xwing
+	(assuming puzzles/gr23xwing is in the dot-format) (will write to output/ptest_c.ps)
+
+
+
+
+Other (not directly related) programs:
+
+gui2 (currently in the heavy development way-pre-alpha) is a Cairo-based gui
+(which takes commands very similar to postscript) which was used since I saw
+it was used in firefox. It has a fairly large number of commands all bound
+to keys. gui2 just reads in the same dot format from standard input.
+
+NOTE: "make gui2", and you NEED the cairomm library to compile.
+
+Here is a list of key bindings:
+1 through 9: if candidates are being displayed, display ONLY the candidates whose
+	number keys are being pressed down
+right key/mouse wheel down: view next pattern
+left key/mouse wheel up: view previous pattern
+a: apply a pattern (remove candidates, etc)
+c: toggle whether candidates are shown
+C: permute the puzzle into "canonical" form (ie an equivalent puzzle mathematically
+	that has the lowest lexicographic value)
+f: fully solve with my logic-based steps (all steps will be undo-able)
+F: toggle showing the backtracked/dancing links solved solution. (brute force)
+G: generate a random complete grid (NOTE: biased)
+k: toggle whether keys are shown
+l: toggle whether links are shown (conjugate pairs, discussed in simple coloring)
+o: output (standard output) the dot format for the current grid
+O: output (standard output) a custom hex-based candidate format (not used yet)
+p: randomly permute the grid to a mathematically equivalent puzzle
+s: next pattern
+r: naively generate a random grid
+u: undo last step (works for most any steps)
+U: FULL undo, back to the start
+
+MORE IMPORTANT mouse controls:
+if candidates are NOT shown:
+	clicking on a square highlights it. Typing a digit puts the digit in that square
+if candidates ARE shown:
+	left click a candidate to make it the cell's digit
+	right click a candidate to eliminate it
+either:
+	mouse wheel scrolls through detected patterns
+
+It will not allow you to make a wrong move if the puzzle has a unique solution.
+
+
+
+

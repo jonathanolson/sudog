@@ -1,0 +1,327 @@
+%!EPS
+%%BoundingBox: 0 0 263 263
+
+/cellsize 27 def
+/boxsize {cellsize 3 mul} def
+/gridsize {boxsize 3 mul} def
+/celloffset {cellsize 2 div dup} def
+/candidatesize {cellsize 3 div} def
+/candidateoffset {candidatesize 2 div dup} def
+/cvals ( 123456789) def
+/toval {cvals exch 1 getinterval} def
+
+/horiz { % <1-8> horiz -
+	cellsize mul dup 0 exch moveto gridsize exch lineto
+} def
+/vert { % <1-8> vert -
+	cellsize mul dup 0 moveto gridsize lineto
+} def
+/lcross { % <1-8> lcross -
+	dup horiz vert
+} def
+/makegrid {
+	gsave
+	
+	newpath 1 2 4 5 7 8 lcross lcross lcross lcross lcross lcross
+	0.5 setgray
+	0.5 setlinewidth
+	stroke
+	newpath 3 6 lcross lcross
+	1 setlinewidth
+	0 setgray
+	stroke
+	newpath 0 0 moveto 0 gridsize lineto gridsize gridsize lineto gridsize 0 lineto	closepath
+	stroke
+	
+	grestore
+} def
+
+/rowpos { % <row> rowpos <y>
+	9 sub neg cellsize mul
+} def
+/colpos { % <col> colpos <x>
+	1 sub cellsize mul
+} def
+/gridpos { % <row> <col> gridpos <x> <y>
+	colpos exch rowpos
+} def
+/candidatepos { % <val> candidatepos <x> <y>
+	dup
+	1 sub 3 mod candidatesize mul
+	exch
+	9 sub neg 3 div candidatesize mul
+} def
+
+/highlightgrid { % <r> <g> <b> highlightgrid -
+	gsave
+	setrgbcolor
+	newpath 0 0 moveto 0 gridsize lineto gridsize gridsize lineto gridsize 0 lineto closepath
+	fill
+	grestore
+} def
+
+/highlightcell { % <row> <col> <r> <g> <b> highlightcell -
+	gsave
+	setrgbcolor
+	gridpos translate
+	newpath 0 0 moveto 0 cellsize lineto cellsize cellsize lineto cellsize 0 lineto closepath
+	fill
+	grestore
+} def
+
+/highlightcandidate { % <val> <row> <col> <r> <g> <b> highlightcell -
+	gsave
+	setrgbcolor
+	gridpos translate
+	candidatepos translate
+	newpath 0 0 moveto 0 candidatesize lineto candidatesize candidatesize lineto candidatesize 0 lineto closepath
+	fill
+	grestore
+} def
+
+/charbbox {gsave newpath 0 0 moveto false charpath flattenpath pathbbox grestore} def
+/charheight {charbbox exch pop sub neg exch pop} def
+/charwidth {charbbox pop exch pop sub neg} def
+/addheight {exch charheight add} def
+/addwidth {exch charwidth add} def
+/heightavg { % - heightavg <height average>
+	(1) (2) (3) (4) (5) (6) (7) (8) (9)
+	0
+	addheight addheight addheight addheight addheight addheight addheight addheight addheight
+	9 div
+} def
+/widthavg { % - widthavg <width average>
+	(1) (2) (3) (4) (5) (6) (7) (8) (9)
+	0
+	addwidth addwidth addwidth addwidth addwidth addwidth addwidth addwidth addwidth
+	9 div
+} def
+/charoffset { % - charoffset <xoff> <yoff>
+	widthavg 2 div neg heightavg 2 div neg
+} def
+
+/fullnumber { % <char> <row> <col> bignumber -
+	gsave
+	/Helvetica findfont 20 scalefont setfont
+	gridpos translate
+	celloffset translate
+	charoffset translate
+	0 0 moveto
+	toval
+	show
+	grestore
+} def
+
+
+10 10 translate
+2 4 0 1 0 highlightcell
+1 5 2	1 0 0 highlightcandidate
+2 5 2	0 1 0 highlightcandidate
+3 5 2	0 0 1 highlightcandidate
+4 5 2	0 1 0 highlightcandidate
+5 5 2	0 0 1 highlightcandidate
+6 5 2	1 0 0 highlightcandidate
+7 5 2	0 0 1 highlightcandidate
+8 5 2	1 0 0 highlightcandidate
+9 5 2	0 1 0 highlightcandidate
+
+7 1 2 fullnumber
+1 1 4 fullnumber
+8 1 6 fullnumber
+2 1 8 fullnumber
+2 2 1 fullnumber
+4 2 2 fullnumber
+6 2 8 fullnumber
+7 2 9 fullnumber
+3 3 3 fullnumber
+5 3 7 fullnumber
+3 4 4 fullnumber
+6 4 5 fullnumber
+1 4 6 fullnumber
+4 6 4 fullnumber
+5 6 5 fullnumber
+9 6 6 fullnumber
+1 7 3 fullnumber
+8 7 7 fullnumber
+9 8 1 fullnumber
+3 8 2 fullnumber
+4 8 8 fullnumber
+2 8 9 fullnumber
+8 9 2 fullnumber
+6 9 4 fullnumber
+7 9 6 fullnumber
+9 9 8 fullnumber
+
+
+makegrid
+
+
+
+showpage
+
+%~ /custwidth 27 def
+%~ /scmul {custwidth mul} def
+%~ /high {9 scmul} def
+%~ /horiz {scmul dup 0 exch moveto high exch lineto} def
+%~ /vert {scmul dup 0 moveto high lineto} def
+%~ /lcross {dup horiz vert} def
+%~ /charbbox {gsave newpath 0 0 moveto false charpath flattenpath pathbbox grestore} def
+%~ /charheight {charbbox exch pop sub neg exch pop} def
+%~ /charwidth {charbbox pop exch pop sub neg} def
+%~ /addheight {exch charheight add} def
+%~ /addwidth {exch charwidth add} def
+%~ /heightavg { % - heightavg <height average>
+	%~ (1) (2) (3) (4) (5) (6) (7) (8) (9)
+	%~ 0
+	%~ addheight addheight addheight addheight addheight addheight addheight addheight addheight
+	%~ 9 div
+%~ } def
+%~ /widthavg { % - widthavg <width average>
+	%~ (1) (2) (3) (4) (5) (6) (7) (8) (9)
+	%~ 0
+	%~ addwidth addwidth addwidth addwidth addwidth addwidth addwidth addwidth addwidth
+	%~ 9 div
+%~ } def
+%~ /charoffset { % - charoffset -
+	%~ widthavg 2 div neg heightavg 2 div neg rmoveto
+%~ } def
+%~ /displaynumber { % <char> <x> <y> displaynumber -
+	%~ moveto charoffset show
+%~ } def
+%~ /flipcoords { % <row> <col> flipcoords <x> <y>
+	%~ 1 sub 0.5 add custwidth mul exch
+	%~ 9 sub neg 0.5 add custwidth mul
+%~ } def
+%~ /fullnumber { % <char> <row> <col> fullnumber -
+	%~ /Helvetica findfont 20 scalefont setfont flipcoords displaynumber
+%~ } def
+%~ /smallnumber { % <char> <row> <col> smallnumber -
+	%~ /Helvetica findfont 25 scalefont setfont flipcoords displaynumber
+%~ } def
+%~ /linepaths { % - linepaths -
+	%~ newpath
+	%~ 1 2 4 5 7 8 lcross lcross lcross lcross lcross lcross
+	%~ 0.5 setgray
+	%~ 0.5 setlinewidth
+	%~ stroke
+	%~ newpath
+	%~ 3 6 lcross lcross
+	%~ closepath
+	%~ 1 setlinewidth
+	%~ 0 setgray
+	%~ stroke
+	%~ newpath
+	%~ 0 0 moveto 0 high lineto high high lineto high 0 lineto
+	%~ closepath
+	%~ stroke
+%~ } def
+%~ /rowcoloffset { % <row> <col> rowcoloffset <x> <y>
+	%~ 1 sub custwidth mul exch 9 sub neg custwidth mul
+%~ } def
+%~ /highlightcell { % <r> <g> <b> <row> <col> highlightcell -
+	%~ gsave
+	%~ rowcoloffset translate
+	%~ newpath 0 0 custwidth 0 custwidth custwidth 0 custwidth moveto lineto lineto lineto closepath setrgbcolor fill
+	%~ grestore
+%~ } def
+%~ /highlightcandidate { % <r> <g> <b> <candidate> <row> <col> highlightcandidate
+	%~ gsave
+	%~ rowcoloffset translate
+	%~ 1 3 div 1 3 div scale
+	%~ dup 1 sub 3 mod custwidth mul exch 9 sub neg 3 div floor custwidth mul translate
+	%~ newpath 0 0 custwidth 0 custwidth custwidth 0 custwidth moveto lineto lineto lineto closepath setrgbcolor fill
+	%~ grestore
+%~ } def
+%~ /showcandidate { % <char str> <char> <row> <col> showcandidate -
+%~ %	gsave
+%~ %	/Helvetica findfont 25 scalefont setfont
+%~ %	0 0 moveto
+%~ %	rowcoloffset rmoveto
+%~ %	1 3 div 1 3 div scale
+%~ %	dup 1 sub 3 mod custwidth mul exch 9 sub neg 3 div floor custwidth mul rmoveto 
+%~ %	%newpath 0 0 custwidth 0 custwidth custwidth 0 custwidth moveto lineto lineto lineto closepath 0 1 1 setrgbcolor fill
+%~ %	%dup 1 sub 3 mod custwidth mul exch 9 sub neg 3 div floor custwidth mul translate
+%~ %	%charoffset show
+%~ %	show
+%~ %	%widthavg 2 div neg heightavg 2 div neg translate show
+%~ %	grestore
+	%~ gsave
+	%~ 0 0 moveto
+	%~ rowcoloffset rmoveto
+	%~ 1 3 div dup scale
+	%~ %dup 1 sub 3 mod 1 add exch 1 sub 3 mod 7 add exch
+	%~ %dup 1 sub 3 mod exch 9 sub neg 3 div floor
+	%~ pop 9 2
+	%~ /Helvetica findfont 25 scalefont setfont flipcoords rmoveto charoffset show
+	%~ %(4) 8 1 /Helvetica findfont 25 scalefont setfont flipcoords rmoveto charoffset show
+	%~ grestore
+%~ } def
+
+%~ 10 10 translate
+
+%~ 1 0 0 2 6 highlightcell
+%~ 0 1 0 7 7 highlightcell
+
+%~ 1 1 0 5 9 1 highlightcandidate
+%~ 1 0 0 6 9 1 highlightcandidate
+
+%~ linepaths
+
+%~ (7) 1 2 fullnumber
+%~ (1) 1 4 fullnumber
+%~ (8) 1 6 fullnumber
+%~ (2) 1 8 fullnumber
+%~ (2) 2 1 fullnumber
+%~ (4) 2 2 fullnumber
+%~ (6) 2 8 fullnumber
+%~ (7) 2 9 fullnumber
+%~ (3) 3 3 fullnumber
+%~ (5) 3 7 fullnumber
+%~ (3) 4 4 fullnumber
+%~ (6) 4 5 fullnumber
+%~ (1) 4 6 fullnumber
+%~ (4) 6 4 fullnumber
+%~ (5) 6 5 fullnumber
+%~ (9) 6 6 fullnumber
+%~ (1) 7 3 fullnumber
+%~ (8) 7 7 fullnumber
+%~ (9) 8 1 fullnumber
+%~ (3) 8 2 fullnumber
+%~ (4) 8 8 fullnumber
+%~ (2) 8 9 fullnumber
+%~ (8) 9 2 fullnumber
+%~ (6) 9 4 fullnumber
+%~ (7) 9 6 fullnumber
+%~ (9) 9 8 fullnumber
+
+%~ gsave
+%~ 1 3 div dup scale
+%~ (1) 7 1 smallnumber
+%~ (2) 7 2 smallnumber
+%~ (3) 7 3 smallnumber
+%~ (4) 8 1 smallnumber
+%~ (5) 8 2 smallnumber
+%~ (6) 8 3 smallnumber
+%~ (7) 9 1 smallnumber
+%~ (8) 9 2 smallnumber
+%~ (9) 9 3 smallnumber
+%~ grestore
+
+%~ %(4) 4 3 2 showcandidate
+
+%~ %0 0 moveto
+%~ %3 2 rowcoloffset rmoveto
+%~ %1 3 div 1 3 div scale
+%~ %(4) show
+
+%~ gsave
+%~ 0 0 moveto
+%~ 3 2 rowcoloffset rmoveto
+%~ 1 3 div dup scale
+%~ (4) 8 1 /Helvetica findfont 25 scalefont setfont flipcoords rmoveto charoffset show
+%~ grestore
+
+%~ %/showcandidate { % <char str> <char> <row> <col> showcandidate -
+%~ (8) 8 5 8 showcandidate
+%~ (1) 1 4 7 showcandidate
+

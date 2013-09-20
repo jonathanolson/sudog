@@ -1,0 +1,1 @@
+gs -sDEVICE=png16m -r144 -g526x526 -sOutputFile=${1}.png -dTextAlphaBits=4 -dGraphicsAlphaBits=1 -dSAFER -dBATCH -dNOPAUSE t11.ps

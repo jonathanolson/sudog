@@ -1,0 +1,73 @@
+%!PS-Adobe-3.0 EPSF-3.0
+%%Creator: Dave's Sudoku Maker
+%%BoundingBox: 0 0 330 330
+%%LanguageLevel: 2
+%%Pages: 1
+%%DocumentData: Clean7Bit
+
+/c 30 def
+/ox 30 def
+/oy 40 def
+/mx .22 c mul def
+/my .15 c mul def
+
+/square {
+ newpath
+ moveto
+ dup 0 exch rlineto
+ dup 0 rlineto
+ -1 mul 0 exch rlineto
+ closepath
+ stroke
+} def
+
+/digit {
+ moveto
+ mx my rmoveto
+ show
+} def
+
+2 setlinewidth
+0 1 2 {
+  /x exch 3 c mul mul ox add def
+  0 1 2 {
+    /y exch 3 c mul mul oy add def
+    3 c mul x y square
+  } for
+} for
+
+0.5 setlinewidth
+0 1 8 {
+  /x exch c mul ox add def
+  0 1 8 {
+    /y exch c mul oy add def
+    c x y square
+  } for
+} for
+
+/Helvetica-Bold findfont
+c scalefont
+setfont
+
+( ) (6) ( ) ( ) ( ) (2) ( ) (7) ( )
+( ) ( ) ( ) ( ) ( ) ( ) ( ) ( ) ( )
+( ) ( ) ( ) ( ) (5) (6) (4) ( ) ( )
+(9) ( ) (1) ( ) ( ) ( ) ( ) (8) ( )
+( ) ( ) (7) ( ) (6) ( ) ( ) ( ) ( )
+( ) ( ) ( ) ( ) ( ) (4) ( ) (5) (2)
+( ) ( ) (2) ( ) ( ) (8) ( ) (6) ( )
+( ) (8) ( ) ( ) ( ) (7) (3) ( ) (1)
+(1) (5) (4) ( ) ( ) ( ) ( ) ( ) ( )
+
+0 1 8 {
+  /y exch c mul oy add def
+  0 1 8 {
+    /x exch c mul ox add def
+    x y digit
+  } for
+} for
+
+92 10 moveto
+(Level 2.25) show
+showpage
+

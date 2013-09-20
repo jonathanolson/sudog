@@ -1,0 +1,186 @@
+%!PS
+%%BoundingBox: 0 0 263 263
+
+/cellsize 27 def
+/fullfont {/Helvetica findfont 20 scalefont setfont} def
+/candidatefont {/Helvetica findfont 8 scalefont setfont} def
+/squish 0 def
+
+/boxsize {cellsize 3 mul} def
+/gridsize {boxsize 3 mul} def
+/celloffset {cellsize 2 div dup} def
+/candidatesize {cellsize 3 div} def
+/candidateoffset {candidatesize 2 div dup} def
+/cvals ( 123456789) def
+/toval {cvals exch 1 getinterval} def
+
+/horiz { % <1-8> horiz -
+	cellsize mul dup 0 exch moveto gridsize exch lineto
+} def
+/vert { % <1-8> vert -
+	cellsize mul dup 0 moveto gridsize lineto
+} def
+/lcross { % <1-8> lcross -
+	dup horiz vert
+} def
+/makegrid { % - makegrid -
+	gsave
+	newpath 1 2 4 5 7 8 lcross lcross lcross lcross lcross lcross
+	0.5 setgray
+	0.5 setlinewidth
+	stroke
+	newpath 3 6 lcross lcross
+	1 setlinewidth
+	0 setgray
+	stroke
+	newpath 0 0 moveto 0 gridsize lineto gridsize gridsize lineto gridsize 0 lineto	closepath
+	stroke
+	grestore
+} def
+
+/rowpos { % <row> rowpos <y>
+	9 sub neg cellsize mul
+} def
+/colpos { % <col> colpos <x>
+	1 sub cellsize mul
+} def
+/gridpos { % <row> <col> gridpos <x> <y>
+	colpos exch rowpos
+} def
+/candidatepos { % <val> candidatepos <x> <y>
+	dup
+	1 sub 3 mod candidatesize mul
+	exch
+	9 sub neg 3 div floor candidatesize mul
+} def
+/boxpos { % <val> boxpos <x> <y>
+	dup
+	1 sub 3 mod boxsize mul
+	exch
+	9 sub neg 3 div floor boxsize mul
+} def
+
+/highlightgrid { % <r> <g> <b> highlightgrid -
+	gsave
+	setrgbcolor
+	newpath 0 0 moveto 0 gridsize lineto gridsize gridsize lineto gridsize 0 lineto closepath
+	fill
+	grestore
+} def
+
+/highlightbox { % <boxnum> <r> <g> <b> highlightbox -
+	gsave
+	setrgbcolor
+	boxpos translate
+	newpath 0 0 moveto 0 boxsize lineto boxsize boxsize lineto boxsize 0 lineto closepath
+	fill
+	grestore
+} def
+
+/highlightcell { % <row> <col> <r> <g> <b> highlightcell -
+	gsave
+	setrgbcolor
+	gridpos translate
+	newpath 0 0 moveto 0 cellsize lineto cellsize cellsize lineto cellsize 0 lineto closepath
+	fill
+	grestore
+} def
+
+/highlightcandidate { % <val> <row> <col> <r> <g> <b> highlightcandidate -
+	gsave
+	setrgbcolor
+	gridpos translate
+	
+	squish dup translate
+	cellsize squish 2 mul sub cellsize div dup scale
+	
+	candidatepos translate
+	newpath 0 0 moveto 0 candidatesize lineto candidatesize candidatesize lineto candidatesize 0 lineto closepath
+	fill
+	grestore
+} def
+
+/highlightrow { % <row> <r> <g> <b> highlightrow -
+	gsave
+	setrgbcolor
+	1 gridpos translate
+	newpath 0 0 moveto 0 cellsize lineto gridsize cellsize lineto gridsize 0 lineto closepath
+	fill
+	fill
+	grestore
+} def
+
+/highlightcol { % <col> <r> <g> <b> highlightcol -
+	gsave
+	setrgbcolor
+	0 exch gridpos translate
+	newpath 0 0 moveto 0 gridsize neg lineto cellsize gridsize neg lineto cellsize 0 lineto closepath
+	fill
+	grestore
+} def
+
+/charbbox {gsave newpath 0 0 moveto false charpath flattenpath pathbbox grestore} def
+/charheight {charbbox exch pop sub neg exch pop} def
+/charwidth {charbbox pop exch pop sub neg} def
+/addheight {exch charheight add} def
+/addwidth {exch charwidth add} def
+/heightavg { % - heightavg <height average>
+	(1) (2) (3) (4) (5) (6) (7) (8) (9)
+	0
+	addheight addheight addheight addheight addheight addheight addheight addheight addheight
+	9 div
+} def
+/widthavg { % - widthavg <width average>
+	(1) (2) (3) (4) (5) (6) (7) (8) (9)
+	0
+	addwidth addwidth addwidth addwidth addwidth addwidth addwidth addwidth addwidth
+	9 div
+} def
+/charoffset { % - charoffset <xoff> <yoff>
+	widthavg 2 div neg heightavg 2 div neg
+} def
+
+/fullnumber { % <char> <row> <col> fullnumber -
+	gsave
+	fullfont
+	gridpos translate
+	celloffset translate
+	charoffset translate
+	0 0 moveto
+	toval
+	show
+	grestore
+} def
+
+/showcandidate { % <char> <row> <col> showcandidate -
+	gsave
+	candidatefont
+	gridpos translate
+	
+	squish dup translate
+	cellsize squish 2 mul sub cellsize div dup scale
+	
+	dup candidatepos translate
+	candidateoffset translate
+	charoffset translate
+	0 0 moveto
+	toval
+	show
+	grestore
+} def
+
+/outlinecell{ % <linewidth> <row> <col> <r> <g> <b> outlinecell -
+	gsave
+	setrgbcolor
+	gridpos translate
+	newpath
+	0 0 moveto cellsize 0 lineto cellsize cellsize lineto 0 cellsize lineto closepath
+	dup dup moveto
+	dup dup cellsize exch sub exch lineto
+	dup cellsize exch sub dup lineto
+	dup dup cellsize exch sub lineto
+	closepath
+	%2 2 moveto cellsize 2 sub 2 lineto cellsize 2 sub dup lineto 2 cellsize 2 sub lineto closepath
+	eofill
+	grestore
+} def

@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20000303 Stylable//EN"
+"http://www.w3.org/TR/2000/03/WD-SVG-20000303/DTD/svg-20000303-stylable.dtd">
+<svg width="8in" height="8in" viewBox="0 0 1 1" preserveAspectRatio="none">
+<title>SVG drawing</title>
+<desc>This was produced by version 4.1 of GNU libplot, a free library for exporting 2-D vector graphics.</desc>
+<rect x="0" y="0" width="1" height="1" style="stroke:none;fill:white;"/>
+<g transform="translate(0.017857,0.98214) scale(1,-1) scale(0.0017857) " xml:space="preserve" style="stroke:black;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10.433;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;fill:none;fill-rule:even-odd;fill-opacity:1;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size-adjust:none;letter-spacing:normal;word-spacing:normal;text-anchor:start;">
+<text transform="translate(110,530) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">3</text>
+<text transform="translate(90,510) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">5</text>
+<text transform="translate(110,510) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">6</text>
+<text transform="translate(170,530) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">3</text>
+<text transform="translate(150,510) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">5</text>
+<text transform="translate(130,490) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">7</text>
+<text transform="translate(190,510) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">4</text>
+<text transform="translate(230,510) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">6</text>
+<text transform="translate(190,490) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">7</text>
+<text transform="translate(210,490) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">8</text>
+<text transform="translate(250,510) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">4</text>
+<text transform="translate(290,510) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">6</text>
+<text transform="translate(250,490) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">7</text>
+<text transform="translate(270,490) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">8</text>
+<text transform="translate(310,510) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">4</text>
+<text transform="translate(350,510) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">6</text>
+<text transform="translate(310,490) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">7</text>
+<text transform="translate(330,490) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">8</text>
+<text transform="translate(530,530) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">3</text>
+<text transform="translate(510,510) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">5</text>
+<text transform="translate(490,490) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">7</text>
+<text transform="translate(510,490) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">8</text>
+<text transform="translate(10,470) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">1</text>
+<text transform="translate(30,450) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">5</text>
+<text transform="translate(50,450) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">6</text>
+<text transform="translate(10,430) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">7</text>
+<text transform="translate(30,430) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">8</text>
+<text transform="translate(70,470) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">1</text>
+<text transform="translate(90,450) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">5</text>
+<text transform="translate(110,450) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">6</text>
+<text transform="translate(250,470) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">1</text>
+<text transform="translate(250,450) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">4</text>
+<text transform="translate(290,450) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">6</text>
+<text transform="translate(250,430) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">7</text>
+<text transform="translate(270,430) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">8</text>
+<text transform="translate(290,430) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">9</text>
+<text transform="translate(310,450) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">4</text>
+<text transform="translate(350,450) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">6</text>
+<text transform="translate(310,430) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">7</text>
+<text transform="translate(330,430) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">8</text>
+<text transform="translate(370,450) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">4</text>
+<text transform="translate(390,450) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">5</text>
+<text transform="translate(390,430) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">8</text>
+<text transform="translate(430,450) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">4</text>
+<text transform="translate(450,450) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">5</text>
+<text transform="translate(430,430) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">7</text>
+<text transform="translate(450,430) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">8</text>
+<text transform="translate(510,450) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">5</text>
+<text transform="translate(490,430) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">7</text>
+<text transform="translate(510,430) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">8</text>
+<text transform="translate(70,410) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">1</text>
+<text transform="translate(110,410) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">3</text>
+<text transform="translate(170,410) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">3</text>
+<text transform="translate(130,370) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">7</text>
+<text transform="translate(190,410) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">1</text>
+<text transform="translate(190,370) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">7</text>
+<text transform="translate(210,370) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">8</text>
+<text transform="translate(250,410) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">1</text>
+<text transform="translate(270,410) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">2</text>
+<text transform="translate(250,370) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">7</text>
+<text transform="translate(270,370) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">8</text>
+<text transform="translate(530,410) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">3</text>
+<text transform="translate(490,370) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">7</text>
+<text transform="translate(510,370) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">8</text>
+<text transform="translate(50,350) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">3</text>
+<text transform="translate(30,330) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">5</text>
+<text transform="translate(10,310) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">7</text>
+<text transform="translate(170,350) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">3</text>
+<text transform="translate(130,330) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">4</text>
+<text transform="translate(150,330) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">5</text>
+<text transform="translate(130,310) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">7</text>
+<text transform="translate(170,310) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">9</text>
+<text transform="translate(250,350) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">1</text>
+<text transform="translate(290,350) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">3</text>
+<text transform="translate(250,330) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">4</text>
+<text transform="translate(250,310) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">7</text>
+<text transform="translate(350,350) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">3</text>
+<text transform="translate(310,330) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">4</text>
+<text transform="translate(310,310) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">7</text>
+<text transform="translate(430,350) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">1</text>
+<text transform="translate(430,330) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">4</text>
+<text transform="translate(450,330) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">5</text>
+<text transform="translate(430,310) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">7</text>
+<text transform="translate(470,310) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">9</text>
+<text transform="translate(510,330) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">5</text>
+<text transform="translate(490,310) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">7</text>
+<text transform="translate(530,310) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">9</text>
+<text transform="translate(30,290) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">2</text>
+<text transform="translate(50,290) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">3</text>
+<text transform="translate(50,270) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">6</text>
+<text transform="translate(10,250) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">7</text>
+<text transform="translate(90,290) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">2</text>
+<text transform="translate(110,290) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">3</text>
+<text transform="translate(70,270) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">4</text>
+<text transform="translate(110,270) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">6</text>
+<text transform="translate(170,290) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">3</text>
+<text transform="translate(130,270) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">4</text>
+<text transform="translate(130,250) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">7</text>
+<text transform="translate(170,250) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">9</text>
+<text transform="translate(190,290) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">1</text>
+<text transform="translate(190,270) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">4</text>
+<text transform="translate(230,270) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">6</text>
+<text transform="translate(190,250) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">7</text>
+<text transform="translate(210,250) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">8</text>
+<text transform="translate(350,290) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">3</text>
+<text transform="translate(310,270) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">4</text>
+<text transform="translate(350,270) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">6</text>
+<text transform="translate(310,250) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">7</text>
+<text transform="translate(330,250) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">8</text>
+<text transform="translate(390,290) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">2</text>
+<text transform="translate(370,270) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">4</text>
+<text transform="translate(390,250) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">8</text>
+<text transform="translate(430,290) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">1</text>
+<text transform="translate(430,270) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">4</text>
+<text transform="translate(430,250) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">7</text>
+<text transform="translate(450,250) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">8</text>
+<text transform="translate(470,250) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">9</text>
+<text transform="translate(510,290) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">2</text>
+<text transform="translate(490,250) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">7</text>
+<text transform="translate(510,250) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">8</text>
+<text transform="translate(530,250) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">9</text>
+<text transform="translate(30,230) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">2</text>
+<text transform="translate(30,210) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">5</text>
+<text transform="translate(50,210) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">6</text>
+<text transform="translate(10,190) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">7</text>
+<text transform="translate(90,230) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">2</text>
+<text transform="translate(70,210) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">4</text>
+<text transform="translate(90,210) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">5</text>
+<text transform="translate(110,210) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">6</text>
+<text transform="translate(190,210) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">4</text>
+<text transform="translate(230,210) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">6</text>
+<text transform="translate(190,190) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">7</text>
+<text transform="translate(210,190) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">8</text>
+<text transform="translate(250,210) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">4</text>
+<text transform="translate(290,210) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">6</text>
+<text transform="translate(250,190) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">7</text>
+<text transform="translate(270,190) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">8</text>
+<text transform="translate(390,230) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">2</text>
+<text transform="translate(370,210) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">4</text>
+<text transform="translate(390,210) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">5</text>
+<text transform="translate(390,190) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">8</text>
+<text transform="translate(510,230) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">2</text>
+<text transform="translate(510,210) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">5</text>
+<text transform="translate(490,190) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">7</text>
+<text transform="translate(510,190) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">8</text>
+<text transform="translate(30,170) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">2</text>
+<text transform="translate(50,170) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">3</text>
+<text transform="translate(30,150) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">5</text>
+<text transform="translate(270,170) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">2</text>
+<text transform="translate(290,170) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">3</text>
+<text transform="translate(250,150) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">4</text>
+<text transform="translate(270,130) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">8</text>
+<text transform="translate(330,170) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">2</text>
+<text transform="translate(350,170) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">3</text>
+<text transform="translate(310,150) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">4</text>
+<text transform="translate(330,130) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">8</text>
+<text transform="translate(390,170) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">2</text>
+<text transform="translate(410,170) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">3</text>
+<text transform="translate(390,150) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">5</text>
+<text transform="translate(390,130) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">8</text>
+<text transform="translate(450,150) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">5</text>
+<text transform="translate(450,130) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">8</text>
+<text transform="translate(30,110) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">2</text>
+<text transform="translate(50,110) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">3</text>
+<text transform="translate(30,90) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">5</text>
+<text transform="translate(90,110) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">2</text>
+<text transform="translate(110,110) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">3</text>
+<text transform="translate(70,90) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">4</text>
+<text transform="translate(90,90) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">5</text>
+<text transform="translate(170,110) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">3</text>
+<text transform="translate(130,90) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">4</text>
+<text transform="translate(150,90) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">5</text>
+<text transform="translate(190,90) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">4</text>
+<text transform="translate(210,90) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">5</text>
+<text transform="translate(230,90) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">6</text>
+<text transform="translate(210,70) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">8</text>
+<text transform="translate(270,110) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">2</text>
+<text transform="translate(290,110) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">3</text>
+<text transform="translate(250,90) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">4</text>
+<text transform="translate(290,90) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">6</text>
+<text transform="translate(270,70) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">8</text>
+<text transform="translate(450,90) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">5</text>
+<text transform="translate(450,70) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">8</text>
+<text transform="translate(470,70) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">9</text>
+<text transform="translate(510,110) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">2</text>
+<text transform="translate(530,110) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">3</text>
+<text transform="translate(510,90) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">5</text>
+<text transform="translate(530,90) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">6</text>
+<text transform="translate(510,70) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">8</text>
+<text transform="translate(530,70) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">9</text>
+<text transform="translate(10,50) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">1</text>
+<text transform="translate(30,50) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">2</text>
+<text transform="translate(50,50) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">3</text>
+<text transform="translate(30,30) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">5</text>
+<text transform="translate(210,30) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">5</text>
+<text transform="translate(230,30) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">6</text>
+<text transform="translate(190,10) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">7</text>
+<text transform="translate(270,50) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">2</text>
+<text transform="translate(290,50) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">3</text>
+<text transform="translate(290,30) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">6</text>
+<text transform="translate(250,10) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">7</text>
+<text transform="translate(330,50) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">2</text>
+<text transform="translate(350,50) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">3</text>
+<text transform="translate(350,30) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">6</text>
+<text transform="translate(310,10) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">7</text>
+<text transform="translate(390,50) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">2</text>
+<text transform="translate(410,50) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">3</text>
+<text transform="translate(390,30) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">5</text>
+<text transform="translate(450,30) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:15;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">5</text>
+<text transform="translate(30,510) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:37;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">9</text>
+<text transform="translate(390,510) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:37;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">1</text>
+<text transform="translate(450,510) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:37;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">2</text>
+<text transform="translate(150,450) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:37;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">2</text>
+<text transform="translate(210,450) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:37;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">3</text>
+<text transform="translate(30,390) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:37;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">4</text>
+<text transform="translate(330,390) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:37;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">5</text>
+<text transform="translate(390,390) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:37;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">9</text>
+<text transform="translate(450,390) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:37;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">6</text>
+<text transform="translate(90,330) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:37;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">8</text>
+<text transform="translate(210,330) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:37;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">2</text>
+<text transform="translate(390,330) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:37;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">6</text>
+<text transform="translate(270,270) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:37;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">5</text>
+<text transform="translate(150,210) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:37;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">1</text>
+<text transform="translate(330,210) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:37;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">9</text>
+<text transform="translate(450,210) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:37;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">3</text>
+<text transform="translate(90,150) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:37;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">7</text>
+<text transform="translate(150,150) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:37;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">6</text>
+<text transform="translate(210,150) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:37;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">9</text>
+<text transform="translate(510,150) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:37;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">1</text>
+<text transform="translate(330,90) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:37;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">1</text>
+<text transform="translate(390,90) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:37;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">7</text>
+<text transform="translate(90,30) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:37;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">9</text>
+<text transform="translate(150,30) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:37;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">8</text>
+<text transform="translate(510,30) scale(1,-1) " style="font-family:'Helvetica',sans-serif;font-size:37;text-anchor:middle;baseline-identifier:centerline;stroke:none;fill:black;">4</text>
+<line x1="0" y1="60" x2="540" y2="60" style="stroke:#888888;stroke-width:1;"/>
+<line x1="0" y1="120" x2="540" y2="120" style="stroke:#888888;stroke-width:1;"/>
+<line x1="0" y1="240" x2="540" y2="240" style="stroke:#888888;stroke-width:1;"/>
+<line x1="0" y1="300" x2="540" y2="300" style="stroke:#888888;stroke-width:1;"/>
+<line x1="0" y1="420" x2="540" y2="420" style="stroke:#888888;stroke-width:1;"/>
+<line x1="0" y1="480" x2="540" y2="480" style="stroke:#888888;stroke-width:1;"/>
+<line x1="60" y1="0" x2="60" y2="540" style="stroke:#888888;stroke-width:1;"/>
+<line x1="120" y1="0" x2="120" y2="540" style="stroke:#888888;stroke-width:1;"/>
+<line x1="240" y1="0" x2="240" y2="540" style="stroke:#888888;stroke-width:1;"/>
+<line x1="300" y1="0" x2="300" y2="540" style="stroke:#888888;stroke-width:1;"/>
+<line x1="420" y1="0" x2="420" y2="540" style="stroke:#888888;stroke-width:1;"/>
+<line x1="480" y1="0" x2="480" y2="540" style="stroke:#888888;stroke-width:1;"/>
+<rect x="0" y="0" width="540" height="540" style="stroke-width:2;"/>
+<line x1="0" y1="180" x2="540" y2="180" style="stroke-width:2;"/>
+<line x1="0" y1="360" x2="540" y2="360" style="stroke-width:2;"/>
+<line x1="180" y1="0" x2="180" y2="540" style="stroke-width:2;"/>
+<line x1="360" y1="0" x2="360" y2="540" style="stroke-width:2;"/>
+</g>
+</svg>

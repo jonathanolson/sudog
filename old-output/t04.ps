@@ -1,0 +1,107 @@
+%!EPS
+%%BoundingBox: 0 0 263 263	
+/custwidth 27 def
+/scmul {custwidth mul} def
+/high {9 scmul} def
+/horiz {scmul dup 0 exch moveto high exch lineto} def
+/vert {scmul dup 0 moveto high lineto} def
+/lcross {dup horiz vert} def
+/charbbox {gsave newpath 0 0 moveto false charpath flattenpath pathbbox grestore} def
+/charheight {charbbox exch pop sub neg exch pop} def
+/charwidth {charbbox pop exch pop sub neg} def
+/addheight {exch charheight add} def
+/addwidth {exch charwidth add} def
+/heightavg {
+	(1) (2) (3) (4) (5) (6) (7) (8) (9)
+	0
+	addheight addheight addheight addheight addheight addheight addheight addheight addheight
+	9 div
+} def
+/widthavg {
+	(1) (2) (3) (4) (5) (6) (7) (8) (9)
+	0
+	addwidth addwidth addwidth addwidth addwidth addwidth addwidth addwidth addwidth
+	9 div
+} def
+/charoffset {
+	%dup charwidth 2 div neg exch charheight 2 div neg rmoveto
+	widthavg 2 div neg heightavg 2 div neg rmoveto
+} def
+/displaynumber {
+	moveto dup charoffset show
+} def
+/flipcoords {
+	1 sub 0.5 add custwidth mul exch
+	9 sub neg 0.5 add custwidth mul
+} def
+/fullnumber {
+	/Helvetica findfont 20 scalefont setfont flipcoords displaynumber
+} def
+/smallnumber {
+	/Helvetica findfont 25 scalefont setfont flipcoords displaynumber
+} def
+10 10 translate
+
+newpath 9 9 moveto 9 18 lineto 18 18 lineto 18 9 lineto closepath 1 1 0 setrgbcolor fill
+
+newpath
+1 2 4 5 7 8 lcross lcross lcross lcross lcross lcross
+0.5 setgray
+0.5 setlinewidth
+stroke
+newpath
+3 6 lcross lcross
+closepath
+1 setlinewidth
+0 setgray
+stroke
+newpath
+0 0 moveto 0 high lineto high high lineto high 0 lineto
+closepath
+stroke
+
+
+%(6) 1 2 fullnumber
+(7) 1 2 fullnumber
+(1) 1 4 fullnumber
+(8) 1 6 fullnumber
+(2) 1 8 fullnumber
+(2) 2 1 fullnumber
+(4) 2 2 fullnumber
+(6) 2 8 fullnumber
+(7) 2 9 fullnumber
+(3) 3 3 fullnumber
+(5) 3 7 fullnumber
+(3) 4 4 fullnumber
+(6) 4 5 fullnumber
+(1) 4 6 fullnumber
+(4) 6 4 fullnumber
+(5) 6 5 fullnumber
+(9) 6 6 fullnumber
+(1) 7 3 fullnumber
+(8) 7 7 fullnumber
+(9) 8 1 fullnumber
+(3) 8 2 fullnumber
+(4) 8 8 fullnumber
+(2) 8 9 fullnumber
+(8) 9 2 fullnumber
+(6) 9 4 fullnumber
+(7) 9 6 fullnumber
+(9) 9 8 fullnumber
+
+gsave
+1 3 div dup scale
+(1) 7 1 smallnumber
+(2) 7 2 smallnumber
+(3) 7 3 smallnumber
+(4) 8 1 smallnumber
+(5) 8 2 smallnumber
+(6) 8 3 smallnumber
+(7) 9 1 smallnumber
+(8) 9 2 smallnumber
+(9) 9 3 smallnumber
+grestore
+
+
+showpage
+

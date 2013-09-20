@@ -1,0 +1,7832 @@
+%!PS
+%%BoundingBox: 0 0 263 263
+
+/cellsize 27 def
+/fullfont {/Helvetica findfont 20 scalefont setfont} def
+/candidatefont {/Helvetica findfont 8 scalefont setfont} def
+/squish 0 def
+
+/boxsize {cellsize 3 mul} def
+/gridsize {boxsize 3 mul} def
+/celloffset {cellsize 2 div dup} def
+/candidatesize {cellsize 3 div} def
+/candidateoffset {candidatesize 2 div dup} def
+/cvals ( 123456789) def
+/toval {cvals exch 1 getinterval} def
+
+/horiz { % <1-8> horiz -
+	cellsize mul dup 0 exch moveto gridsize exch lineto
+} def
+/vert { % <1-8> vert -
+	cellsize mul dup 0 moveto gridsize lineto
+} def
+/lcross { % <1-8> lcross -
+	dup horiz vert
+} def
+/makegrid { % - makegrid -
+	gsave
+	newpath 1 2 4 5 7 8 lcross lcross lcross lcross lcross lcross
+	0.5 setgray
+	0.5 setlinewidth
+	stroke
+	newpath 3 6 lcross lcross
+	1 setlinewidth
+	0 setgray
+	stroke
+	newpath 0 0 moveto 0 gridsize lineto gridsize gridsize lineto gridsize 0 lineto	closepath
+	stroke
+	grestore
+} def
+
+/rowpos { % <row> rowpos <y>
+	9 sub neg cellsize mul
+} def
+/colpos { % <col> colpos <x>
+	1 sub cellsize mul
+} def
+/gridpos { % <row> <col> gridpos <x> <y>
+	colpos exch rowpos
+} def
+/candidatepos { % <val> candidatepos <x> <y>
+	dup
+	1 sub 3 mod candidatesize mul
+	exch
+	9 sub neg 3 div floor candidatesize mul
+} def
+/boxpos { % <val> boxpos <x> <y>
+	dup
+	1 sub 3 mod boxsize mul
+	exch
+	9 sub neg 3 div floor boxsize mul
+} def
+
+/highlightgrid { % <r> <g> <b> highlightgrid -
+	gsave
+	setrgbcolor
+	newpath 0 0 moveto 0 gridsize lineto gridsize gridsize lineto gridsize 0 lineto closepath
+	fill
+	grestore
+} def
+
+/highlightbox { % <boxnum> <r> <g> <b> highlightbox -
+	gsave
+	setrgbcolor
+	boxpos translate
+	newpath 0 0 moveto 0 boxsize lineto boxsize boxsize lineto boxsize 0 lineto closepath
+	fill
+	grestore
+} def
+
+/highlightcell { % <row> <col> <r> <g> <b> highlightcell -
+	gsave
+	setrgbcolor
+	gridpos translate
+	newpath 0 0 moveto 0 cellsize lineto cellsize cellsize lineto cellsize 0 lineto closepath
+	fill
+	grestore
+} def
+
+/highlightcandidate { % <val> <row> <col> <r> <g> <b> highlightcandidate -
+	gsave
+	setrgbcolor
+	gridpos translate
+	
+	squish dup translate
+	cellsize squish 2 mul sub cellsize div dup scale
+	
+	candidatepos translate
+	newpath 0 0 moveto 0 candidatesize lineto candidatesize candidatesize lineto candidatesize 0 lineto closepath
+	fill
+	grestore
+} def
+
+/highlightrow { % <row> <r> <g> <b> highlightrow -
+	gsave
+	setrgbcolor
+	1 gridpos translate
+	newpath 0 0 moveto 0 cellsize lineto gridsize cellsize lineto gridsize 0 lineto closepath
+	fill
+	fill
+	grestore
+} def
+
+/highlightcol { % <col> <r> <g> <b> highlightcol -
+	gsave
+	setrgbcolor
+	0 exch gridpos translate
+	newpath 0 0 moveto 0 gridsize neg lineto cellsize gridsize neg lineto cellsize 0 lineto closepath
+	fill
+	grestore
+} def
+
+/charbbox {gsave newpath 0 0 moveto false charpath flattenpath pathbbox grestore} def
+/charheight {charbbox exch pop sub neg exch pop} def
+/charwidth {charbbox pop exch pop sub neg} def
+/addheight {exch charheight add} def
+/addwidth {exch charwidth add} def
+/heightavg { % - heightavg <height average>
+	(1) (2) (3) (4) (5) (6) (7) (8) (9)
+	0
+	addheight addheight addheight addheight addheight addheight addheight addheight addheight
+	9 div
+} def
+/widthavg { % - widthavg <width average>
+	(1) (2) (3) (4) (5) (6) (7) (8) (9)
+	0
+	addwidth addwidth addwidth addwidth addwidth addwidth addwidth addwidth addwidth
+	9 div
+} def
+/charoffset { % - charoffset <xoff> <yoff>
+	widthavg 2 div neg heightavg 2 div neg
+} def
+
+/fullnumber { % <char> <row> <col> fullnumber -
+	gsave
+	fullfont
+	gridpos translate
+	celloffset translate
+	charoffset translate
+	0 0 moveto
+	toval
+	show
+	grestore
+} def
+
+/showcandidate { % <char> <row> <col> showcandidate -
+	gsave
+	candidatefont
+	gridpos translate
+	
+	squish dup translate
+	cellsize squish 2 mul sub cellsize div dup scale
+	
+	dup candidatepos translate
+	candidateoffset translate
+	charoffset translate
+	0 0 moveto
+	toval
+	show
+	grestore
+} def
+
+/outlinecell{ % <linewidth> <row> <col> <r> <g> <b> outlinecell -
+	gsave
+	setrgbcolor
+	gridpos translate
+	newpath
+	0 0 moveto cellsize 0 lineto cellsize cellsize lineto 0 cellsize lineto closepath
+	dup dup moveto
+	dup dup cellsize exch sub exch lineto
+	dup cellsize exch sub dup lineto
+	dup dup cellsize exch sub lineto
+	closepath
+	%2 2 moveto cellsize 2 sub 2 lineto cellsize 2 sub dup lineto 2 cellsize 2 sub lineto closepath
+	eofill
+	grestore
+} def
+10 510 translate
+9 2 0.8 0.8 1 highlightcell
+1.5 8 2 1 0 0 outlinecell
+1.5 7 1 1 0 0 outlinecell
+1.5 8 1 1 0 0 outlinecell
+1.5 9 4 1 0 0 outlinecell
+1.5 9 6 1 0 0 outlinecell
+1.5 6 2 1 0 0 outlinecell
+1.5 4 2 1 0 0 outlinecell
+1.5 2 2 1 0 0 outlinecell
+9 1 4 fullnumber
+4 1 6 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+2 3 4 fullnumber
+1 3 9 fullnumber
+8 4 2 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+3 4 8 fullnumber
+7 6 2 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+4 6 8 fullnumber
+2 7 1 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+5 9 4 fullnumber
+6 9 6 fullnumber
+1 1 1 showcandidate
+3 1 1 showcandidate
+5 1 1 showcandidate
+6 1 1 showcandidate
+2 1 2 showcandidate
+3 1 2 showcandidate
+5 1 2 showcandidate
+6 1 2 showcandidate
+1 1 3 showcandidate
+2 1 3 showcandidate
+3 1 3 showcandidate
+5 1 3 showcandidate
+6 1 3 showcandidate
+1 1 5 showcandidate
+3 1 5 showcandidate
+7 1 5 showcandidate
+8 1 5 showcandidate
+3 1 7 showcandidate
+5 1 7 showcandidate
+6 1 7 showcandidate
+7 1 7 showcandidate
+8 1 7 showcandidate
+5 1 8 showcandidate
+7 1 8 showcandidate
+8 1 8 showcandidate
+5 1 9 showcandidate
+6 1 9 showcandidate
+7 1 9 showcandidate
+8 1 9 showcandidate
+1 2 3 showcandidate
+3 2 3 showcandidate
+5 2 3 showcandidate
+6 2 3 showcandidate
+1 2 4 showcandidate
+6 2 4 showcandidate
+8 2 4 showcandidate
+1 2 5 showcandidate
+3 2 5 showcandidate
+8 2 5 showcandidate
+3 2 6 showcandidate
+5 2 6 showcandidate
+8 2 6 showcandidate
+3 2 7 showcandidate
+5 2 7 showcandidate
+6 2 7 showcandidate
+8 2 7 showcandidate
+3 3 2 showcandidate
+4 3 2 showcandidate
+5 3 2 showcandidate
+6 3 2 showcandidate
+3 3 3 showcandidate
+4 3 3 showcandidate
+5 3 3 showcandidate
+6 3 3 showcandidate
+3 3 5 showcandidate
+7 3 5 showcandidate
+3 3 6 showcandidate
+5 3 6 showcandidate
+3 3 7 showcandidate
+5 3 7 showcandidate
+6 3 7 showcandidate
+7 3 7 showcandidate
+9 3 7 showcandidate
+5 3 8 showcandidate
+7 3 8 showcandidate
+9 3 8 showcandidate
+6 4 1 showcandidate
+9 4 1 showcandidate
+2 4 3 showcandidate
+6 4 3 showcandidate
+9 4 3 showcandidate
+2 4 7 showcandidate
+6 4 7 showcandidate
+7 4 7 showcandidate
+9 4 7 showcandidate
+6 4 9 showcandidate
+7 4 9 showcandidate
+9 4 9 showcandidate
+1 5 1 showcandidate
+3 5 1 showcandidate
+5 5 1 showcandidate
+6 5 1 showcandidate
+9 5 1 showcandidate
+2 5 2 showcandidate
+3 5 2 showcandidate
+4 5 2 showcandidate
+5 5 2 showcandidate
+6 5 2 showcandidate
+1 5 3 showcandidate
+2 5 3 showcandidate
+3 5 3 showcandidate
+4 5 3 showcandidate
+5 5 3 showcandidate
+6 5 3 showcandidate
+9 5 3 showcandidate
+7 5 4 showcandidate
+8 5 4 showcandidate
+2 5 5 showcandidate
+7 5 5 showcandidate
+8 5 5 showcandidate
+2 5 6 showcandidate
+8 5 6 showcandidate
+1 5 7 showcandidate
+2 5 7 showcandidate
+5 5 7 showcandidate
+6 5 7 showcandidate
+7 5 7 showcandidate
+8 5 7 showcandidate
+9 5 7 showcandidate
+1 5 8 showcandidate
+5 5 8 showcandidate
+7 5 8 showcandidate
+8 5 8 showcandidate
+9 5 8 showcandidate
+5 5 9 showcandidate
+6 5 9 showcandidate
+7 5 9 showcandidate
+8 5 9 showcandidate
+9 5 9 showcandidate
+1 6 1 showcandidate
+5 6 1 showcandidate
+1 6 3 showcandidate
+2 6 3 showcandidate
+5 6 3 showcandidate
+1 6 7 showcandidate
+2 6 7 showcandidate
+5 6 7 showcandidate
+8 6 7 showcandidate
+5 6 9 showcandidate
+8 6 9 showcandidate
+5 7 2 showcandidate
+6 7 2 showcandidate
+5 7 3 showcandidate
+6 7 3 showcandidate
+8 7 3 showcandidate
+9 7 3 showcandidate
+1 7 4 showcandidate
+8 7 4 showcandidate
+1 7 5 showcandidate
+4 7 5 showcandidate
+8 7 5 showcandidate
+9 7 5 showcandidate
+1 7 7 showcandidate
+4 7 7 showcandidate
+5 7 7 showcandidate
+8 7 7 showcandidate
+9 7 7 showcandidate
+1 7 8 showcandidate
+5 7 8 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+3 8 3 showcandidate
+5 8 3 showcandidate
+7 8 3 showcandidate
+8 8 3 showcandidate
+9 8 3 showcandidate
+8 8 4 showcandidate
+3 8 5 showcandidate
+8 8 5 showcandidate
+9 8 5 showcandidate
+3 8 6 showcandidate
+8 8 6 showcandidate
+5 8 7 showcandidate
+7 8 7 showcandidate
+8 8 7 showcandidate
+9 8 7 showcandidate
+3 9 1 showcandidate
+9 9 1 showcandidate
+3 9 2 showcandidate
+3 9 3 showcandidate
+7 9 3 showcandidate
+8 9 3 showcandidate
+9 9 3 showcandidate
+1 9 5 showcandidate
+2 9 5 showcandidate
+3 9 5 showcandidate
+4 9 5 showcandidate
+8 9 5 showcandidate
+9 9 5 showcandidate
+1 9 7 showcandidate
+4 9 7 showcandidate
+7 9 7 showcandidate
+8 9 7 showcandidate
+9 9 7 showcandidate
+1 9 8 showcandidate
+7 9 8 showcandidate
+8 9 8 showcandidate
+9 9 8 showcandidate
+7 9 9 showcandidate
+8 9 9 showcandidate
+9 9 9 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+9 1 0.8 0.8 1 highlightcell
+1.5 8 2 1 0 0 outlinecell
+1.5 7 1 1 0 0 outlinecell
+1.5 9 2 1 0 0 outlinecell
+1.5 8 1 1 0 0 outlinecell
+1.5 9 4 1 0 0 outlinecell
+1.5 9 6 1 0 0 outlinecell
+1.5 2 1 1 0 0 outlinecell
+1.5 3 1 1 0 0 outlinecell
+9 1 4 fullnumber
+4 1 6 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+2 3 4 fullnumber
+1 3 9 fullnumber
+8 4 2 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+3 4 8 fullnumber
+7 6 2 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+4 6 8 fullnumber
+2 7 1 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+3 9 2 fullnumber
+5 9 4 fullnumber
+6 9 6 fullnumber
+1 1 1 showcandidate
+3 1 1 showcandidate
+5 1 1 showcandidate
+6 1 1 showcandidate
+2 1 2 showcandidate
+5 1 2 showcandidate
+6 1 2 showcandidate
+1 1 3 showcandidate
+2 1 3 showcandidate
+3 1 3 showcandidate
+5 1 3 showcandidate
+6 1 3 showcandidate
+1 1 5 showcandidate
+3 1 5 showcandidate
+7 1 5 showcandidate
+8 1 5 showcandidate
+3 1 7 showcandidate
+5 1 7 showcandidate
+6 1 7 showcandidate
+7 1 7 showcandidate
+8 1 7 showcandidate
+5 1 8 showcandidate
+7 1 8 showcandidate
+8 1 8 showcandidate
+5 1 9 showcandidate
+6 1 9 showcandidate
+7 1 9 showcandidate
+8 1 9 showcandidate
+1 2 3 showcandidate
+3 2 3 showcandidate
+5 2 3 showcandidate
+6 2 3 showcandidate
+1 2 4 showcandidate
+6 2 4 showcandidate
+8 2 4 showcandidate
+1 2 5 showcandidate
+3 2 5 showcandidate
+8 2 5 showcandidate
+3 2 6 showcandidate
+5 2 6 showcandidate
+8 2 6 showcandidate
+3 2 7 showcandidate
+5 2 7 showcandidate
+6 2 7 showcandidate
+8 2 7 showcandidate
+4 3 2 showcandidate
+5 3 2 showcandidate
+6 3 2 showcandidate
+3 3 3 showcandidate
+4 3 3 showcandidate
+5 3 3 showcandidate
+6 3 3 showcandidate
+3 3 5 showcandidate
+7 3 5 showcandidate
+3 3 6 showcandidate
+5 3 6 showcandidate
+3 3 7 showcandidate
+5 3 7 showcandidate
+6 3 7 showcandidate
+7 3 7 showcandidate
+9 3 7 showcandidate
+5 3 8 showcandidate
+7 3 8 showcandidate
+9 3 8 showcandidate
+6 4 1 showcandidate
+9 4 1 showcandidate
+2 4 3 showcandidate
+6 4 3 showcandidate
+9 4 3 showcandidate
+2 4 7 showcandidate
+6 4 7 showcandidate
+7 4 7 showcandidate
+9 4 7 showcandidate
+6 4 9 showcandidate
+7 4 9 showcandidate
+9 4 9 showcandidate
+1 5 1 showcandidate
+3 5 1 showcandidate
+5 5 1 showcandidate
+6 5 1 showcandidate
+9 5 1 showcandidate
+2 5 2 showcandidate
+4 5 2 showcandidate
+5 5 2 showcandidate
+6 5 2 showcandidate
+1 5 3 showcandidate
+2 5 3 showcandidate
+3 5 3 showcandidate
+4 5 3 showcandidate
+5 5 3 showcandidate
+6 5 3 showcandidate
+9 5 3 showcandidate
+7 5 4 showcandidate
+8 5 4 showcandidate
+2 5 5 showcandidate
+7 5 5 showcandidate
+8 5 5 showcandidate
+2 5 6 showcandidate
+8 5 6 showcandidate
+1 5 7 showcandidate
+2 5 7 showcandidate
+5 5 7 showcandidate
+6 5 7 showcandidate
+7 5 7 showcandidate
+8 5 7 showcandidate
+9 5 7 showcandidate
+1 5 8 showcandidate
+5 5 8 showcandidate
+7 5 8 showcandidate
+8 5 8 showcandidate
+9 5 8 showcandidate
+5 5 9 showcandidate
+6 5 9 showcandidate
+7 5 9 showcandidate
+8 5 9 showcandidate
+9 5 9 showcandidate
+1 6 1 showcandidate
+5 6 1 showcandidate
+1 6 3 showcandidate
+2 6 3 showcandidate
+5 6 3 showcandidate
+1 6 7 showcandidate
+2 6 7 showcandidate
+5 6 7 showcandidate
+8 6 7 showcandidate
+5 6 9 showcandidate
+8 6 9 showcandidate
+5 7 2 showcandidate
+6 7 2 showcandidate
+5 7 3 showcandidate
+6 7 3 showcandidate
+8 7 3 showcandidate
+9 7 3 showcandidate
+1 7 4 showcandidate
+8 7 4 showcandidate
+1 7 5 showcandidate
+4 7 5 showcandidate
+8 7 5 showcandidate
+9 7 5 showcandidate
+1 7 7 showcandidate
+4 7 7 showcandidate
+5 7 7 showcandidate
+8 7 7 showcandidate
+9 7 7 showcandidate
+1 7 8 showcandidate
+5 7 8 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+5 8 3 showcandidate
+7 8 3 showcandidate
+8 8 3 showcandidate
+9 8 3 showcandidate
+8 8 4 showcandidate
+3 8 5 showcandidate
+8 8 5 showcandidate
+9 8 5 showcandidate
+3 8 6 showcandidate
+8 8 6 showcandidate
+5 8 7 showcandidate
+7 8 7 showcandidate
+8 8 7 showcandidate
+9 8 7 showcandidate
+9 9 1 showcandidate
+7 9 3 showcandidate
+8 9 3 showcandidate
+9 9 3 showcandidate
+1 9 5 showcandidate
+2 9 5 showcandidate
+4 9 5 showcandidate
+8 9 5 showcandidate
+9 9 5 showcandidate
+1 9 7 showcandidate
+4 9 7 showcandidate
+7 9 7 showcandidate
+8 9 7 showcandidate
+9 9 7 showcandidate
+1 9 8 showcandidate
+7 9 8 showcandidate
+8 9 8 showcandidate
+9 9 8 showcandidate
+7 9 9 showcandidate
+8 9 9 showcandidate
+9 9 9 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+8 4 0.8 0.8 1 highlightcell
+1.5 8 2 1 0 0 outlinecell
+1.5 3 4 1 0.5 0.5 outlinecell
+1.5 8 9 1 0.5 0.5 outlinecell
+1.5 6 4 1 0 0 outlinecell
+1.5 8 1 1 0.5 0.5 outlinecell
+1.5 4 4 1 0.5 0.5 outlinecell
+1.5 9 4 1 0 0 outlinecell
+1.5 8 8 1 0.5 0.5 outlinecell
+1.5 9 6 1 0.5 0.5 outlinecell
+1.5 7 6 1 0 0 outlinecell
+1.5 1 4 1 0 0 outlinecell
+9 1 4 fullnumber
+4 1 6 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+2 3 4 fullnumber
+1 3 9 fullnumber
+8 4 2 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+3 4 8 fullnumber
+7 6 2 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+4 6 8 fullnumber
+2 7 1 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+5 9 4 fullnumber
+6 9 6 fullnumber
+1 1 1 showcandidate
+3 1 1 showcandidate
+5 1 1 showcandidate
+6 1 1 showcandidate
+2 1 2 showcandidate
+5 1 2 showcandidate
+6 1 2 showcandidate
+1 1 3 showcandidate
+2 1 3 showcandidate
+3 1 3 showcandidate
+5 1 3 showcandidate
+6 1 3 showcandidate
+1 1 5 showcandidate
+3 1 5 showcandidate
+7 1 5 showcandidate
+8 1 5 showcandidate
+3 1 7 showcandidate
+5 1 7 showcandidate
+6 1 7 showcandidate
+7 1 7 showcandidate
+8 1 7 showcandidate
+5 1 8 showcandidate
+7 1 8 showcandidate
+8 1 8 showcandidate
+5 1 9 showcandidate
+6 1 9 showcandidate
+7 1 9 showcandidate
+8 1 9 showcandidate
+1 2 3 showcandidate
+3 2 3 showcandidate
+5 2 3 showcandidate
+6 2 3 showcandidate
+1 2 4 showcandidate
+6 2 4 showcandidate
+8 2 4 showcandidate
+1 2 5 showcandidate
+3 2 5 showcandidate
+8 2 5 showcandidate
+3 2 6 showcandidate
+5 2 6 showcandidate
+8 2 6 showcandidate
+3 2 7 showcandidate
+5 2 7 showcandidate
+6 2 7 showcandidate
+8 2 7 showcandidate
+4 3 2 showcandidate
+5 3 2 showcandidate
+6 3 2 showcandidate
+3 3 3 showcandidate
+4 3 3 showcandidate
+5 3 3 showcandidate
+6 3 3 showcandidate
+3 3 5 showcandidate
+7 3 5 showcandidate
+3 3 6 showcandidate
+5 3 6 showcandidate
+3 3 7 showcandidate
+5 3 7 showcandidate
+6 3 7 showcandidate
+7 3 7 showcandidate
+9 3 7 showcandidate
+5 3 8 showcandidate
+7 3 8 showcandidate
+9 3 8 showcandidate
+6 4 1 showcandidate
+2 4 3 showcandidate
+6 4 3 showcandidate
+9 4 3 showcandidate
+2 4 7 showcandidate
+6 4 7 showcandidate
+7 4 7 showcandidate
+9 4 7 showcandidate
+6 4 9 showcandidate
+7 4 9 showcandidate
+9 4 9 showcandidate
+1 5 1 showcandidate
+3 5 1 showcandidate
+5 5 1 showcandidate
+6 5 1 showcandidate
+2 5 2 showcandidate
+4 5 2 showcandidate
+5 5 2 showcandidate
+6 5 2 showcandidate
+1 5 3 showcandidate
+2 5 3 showcandidate
+3 5 3 showcandidate
+4 5 3 showcandidate
+5 5 3 showcandidate
+6 5 3 showcandidate
+9 5 3 showcandidate
+7 5 4 showcandidate
+8 5 4 showcandidate
+2 5 5 showcandidate
+7 5 5 showcandidate
+8 5 5 showcandidate
+2 5 6 showcandidate
+8 5 6 showcandidate
+1 5 7 showcandidate
+2 5 7 showcandidate
+5 5 7 showcandidate
+6 5 7 showcandidate
+7 5 7 showcandidate
+8 5 7 showcandidate
+9 5 7 showcandidate
+1 5 8 showcandidate
+5 5 8 showcandidate
+7 5 8 showcandidate
+8 5 8 showcandidate
+9 5 8 showcandidate
+5 5 9 showcandidate
+6 5 9 showcandidate
+7 5 9 showcandidate
+8 5 9 showcandidate
+9 5 9 showcandidate
+1 6 1 showcandidate
+5 6 1 showcandidate
+1 6 3 showcandidate
+2 6 3 showcandidate
+5 6 3 showcandidate
+1 6 7 showcandidate
+2 6 7 showcandidate
+5 6 7 showcandidate
+8 6 7 showcandidate
+5 6 9 showcandidate
+8 6 9 showcandidate
+5 7 2 showcandidate
+6 7 2 showcandidate
+5 7 3 showcandidate
+6 7 3 showcandidate
+8 7 3 showcandidate
+1 7 4 showcandidate
+8 7 4 showcandidate
+1 7 5 showcandidate
+4 7 5 showcandidate
+8 7 5 showcandidate
+9 7 5 showcandidate
+1 7 7 showcandidate
+4 7 7 showcandidate
+5 7 7 showcandidate
+8 7 7 showcandidate
+9 7 7 showcandidate
+1 7 8 showcandidate
+5 7 8 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+5 8 3 showcandidate
+7 8 3 showcandidate
+8 8 3 showcandidate
+8 8 4 showcandidate
+3 8 5 showcandidate
+8 8 5 showcandidate
+9 8 5 showcandidate
+3 8 6 showcandidate
+8 8 6 showcandidate
+5 8 7 showcandidate
+7 8 7 showcandidate
+8 8 7 showcandidate
+9 8 7 showcandidate
+7 9 3 showcandidate
+8 9 3 showcandidate
+1 9 5 showcandidate
+2 9 5 showcandidate
+4 9 5 showcandidate
+8 9 5 showcandidate
+1 9 7 showcandidate
+4 9 7 showcandidate
+7 9 7 showcandidate
+8 9 7 showcandidate
+1 9 8 showcandidate
+7 9 8 showcandidate
+8 9 8 showcandidate
+7 9 9 showcandidate
+8 9 9 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+5 4 0.8 0.8 1 highlightcell
+1.5 4 6 1 0 0 outlinecell
+1.5 3 4 1 0 0 outlinecell
+1.5 6 4 1 0 0 outlinecell
+1.5 4 4 1 0 0 outlinecell
+1.5 4 5 1 0.5 0.5 outlinecell
+1.5 9 4 1 0.5 0.5 outlinecell
+1.5 6 5 1 0 0 outlinecell
+1.5 8 4 1 0 0 outlinecell
+1.5 1 4 1 0.5 0.5 outlinecell
+1.5 6 6 1 0.5 0.5 outlinecell
+9 1 4 fullnumber
+4 1 6 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+2 3 4 fullnumber
+1 3 9 fullnumber
+8 4 2 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+3 4 8 fullnumber
+7 6 2 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+4 6 8 fullnumber
+2 7 1 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+8 8 4 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+5 9 4 fullnumber
+6 9 6 fullnumber
+1 1 1 showcandidate
+3 1 1 showcandidate
+5 1 1 showcandidate
+6 1 1 showcandidate
+2 1 2 showcandidate
+5 1 2 showcandidate
+6 1 2 showcandidate
+1 1 3 showcandidate
+2 1 3 showcandidate
+3 1 3 showcandidate
+5 1 3 showcandidate
+6 1 3 showcandidate
+1 1 5 showcandidate
+3 1 5 showcandidate
+7 1 5 showcandidate
+8 1 5 showcandidate
+3 1 7 showcandidate
+5 1 7 showcandidate
+6 1 7 showcandidate
+7 1 7 showcandidate
+8 1 7 showcandidate
+5 1 8 showcandidate
+7 1 8 showcandidate
+8 1 8 showcandidate
+5 1 9 showcandidate
+6 1 9 showcandidate
+7 1 9 showcandidate
+8 1 9 showcandidate
+1 2 3 showcandidate
+3 2 3 showcandidate
+5 2 3 showcandidate
+6 2 3 showcandidate
+1 2 4 showcandidate
+6 2 4 showcandidate
+1 2 5 showcandidate
+3 2 5 showcandidate
+8 2 5 showcandidate
+3 2 6 showcandidate
+5 2 6 showcandidate
+8 2 6 showcandidate
+3 2 7 showcandidate
+5 2 7 showcandidate
+6 2 7 showcandidate
+8 2 7 showcandidate
+4 3 2 showcandidate
+5 3 2 showcandidate
+6 3 2 showcandidate
+3 3 3 showcandidate
+4 3 3 showcandidate
+5 3 3 showcandidate
+6 3 3 showcandidate
+3 3 5 showcandidate
+7 3 5 showcandidate
+3 3 6 showcandidate
+5 3 6 showcandidate
+3 3 7 showcandidate
+5 3 7 showcandidate
+6 3 7 showcandidate
+7 3 7 showcandidate
+9 3 7 showcandidate
+5 3 8 showcandidate
+7 3 8 showcandidate
+9 3 8 showcandidate
+6 4 1 showcandidate
+2 4 3 showcandidate
+6 4 3 showcandidate
+9 4 3 showcandidate
+2 4 7 showcandidate
+6 4 7 showcandidate
+7 4 7 showcandidate
+9 4 7 showcandidate
+6 4 9 showcandidate
+7 4 9 showcandidate
+9 4 9 showcandidate
+1 5 1 showcandidate
+3 5 1 showcandidate
+5 5 1 showcandidate
+6 5 1 showcandidate
+2 5 2 showcandidate
+4 5 2 showcandidate
+5 5 2 showcandidate
+6 5 2 showcandidate
+1 5 3 showcandidate
+2 5 3 showcandidate
+3 5 3 showcandidate
+4 5 3 showcandidate
+5 5 3 showcandidate
+6 5 3 showcandidate
+9 5 3 showcandidate
+7 5 4 showcandidate
+2 5 5 showcandidate
+7 5 5 showcandidate
+8 5 5 showcandidate
+2 5 6 showcandidate
+8 5 6 showcandidate
+1 5 7 showcandidate
+2 5 7 showcandidate
+5 5 7 showcandidate
+6 5 7 showcandidate
+7 5 7 showcandidate
+8 5 7 showcandidate
+9 5 7 showcandidate
+1 5 8 showcandidate
+5 5 8 showcandidate
+7 5 8 showcandidate
+8 5 8 showcandidate
+9 5 8 showcandidate
+5 5 9 showcandidate
+6 5 9 showcandidate
+7 5 9 showcandidate
+8 5 9 showcandidate
+9 5 9 showcandidate
+1 6 1 showcandidate
+5 6 1 showcandidate
+1 6 3 showcandidate
+2 6 3 showcandidate
+5 6 3 showcandidate
+1 6 7 showcandidate
+2 6 7 showcandidate
+5 6 7 showcandidate
+8 6 7 showcandidate
+5 6 9 showcandidate
+8 6 9 showcandidate
+5 7 2 showcandidate
+6 7 2 showcandidate
+5 7 3 showcandidate
+6 7 3 showcandidate
+8 7 3 showcandidate
+1 7 4 showcandidate
+1 7 5 showcandidate
+4 7 5 showcandidate
+9 7 5 showcandidate
+1 7 7 showcandidate
+4 7 7 showcandidate
+5 7 7 showcandidate
+8 7 7 showcandidate
+9 7 7 showcandidate
+1 7 8 showcandidate
+5 7 8 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+5 8 3 showcandidate
+7 8 3 showcandidate
+3 8 5 showcandidate
+9 8 5 showcandidate
+3 8 6 showcandidate
+5 8 7 showcandidate
+7 8 7 showcandidate
+9 8 7 showcandidate
+7 9 3 showcandidate
+8 9 3 showcandidate
+1 9 5 showcandidate
+2 9 5 showcandidate
+4 9 5 showcandidate
+1 9 7 showcandidate
+4 9 7 showcandidate
+7 9 7 showcandidate
+8 9 7 showcandidate
+1 9 8 showcandidate
+7 9 8 showcandidate
+8 9 8 showcandidate
+7 9 9 showcandidate
+8 9 9 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+4 1 0.8 0.8 1 highlightcell
+1.5 4 6 1 0 0 outlinecell
+1.5 7 1 1 0 0 outlinecell
+1.5 4 8 1 0 0 outlinecell
+1.5 4 4 1 0.5 0.5 outlinecell
+1.5 8 1 1 0.5 0.5 outlinecell
+1.5 4 5 1 0 0 outlinecell
+1.5 2 1 1 0.5 0.5 outlinecell
+1.5 6 2 1 0.5 0.5 outlinecell
+1.5 4 2 1 0.5 0.5 outlinecell
+1.5 3 1 1 0.5 0.5 outlinecell
+1.5 9 1 1 0 0 outlinecell
+9 1 4 fullnumber
+4 1 6 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+2 3 4 fullnumber
+1 3 9 fullnumber
+8 4 2 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+3 4 8 fullnumber
+7 5 4 fullnumber
+7 6 2 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+4 6 8 fullnumber
+2 7 1 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+8 8 4 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+5 9 4 fullnumber
+6 9 6 fullnumber
+1 1 1 showcandidate
+3 1 1 showcandidate
+5 1 1 showcandidate
+6 1 1 showcandidate
+2 1 2 showcandidate
+5 1 2 showcandidate
+6 1 2 showcandidate
+1 1 3 showcandidate
+2 1 3 showcandidate
+3 1 3 showcandidate
+5 1 3 showcandidate
+6 1 3 showcandidate
+1 1 5 showcandidate
+3 1 5 showcandidate
+7 1 5 showcandidate
+8 1 5 showcandidate
+3 1 7 showcandidate
+5 1 7 showcandidate
+6 1 7 showcandidate
+7 1 7 showcandidate
+8 1 7 showcandidate
+5 1 8 showcandidate
+7 1 8 showcandidate
+8 1 8 showcandidate
+5 1 9 showcandidate
+6 1 9 showcandidate
+7 1 9 showcandidate
+8 1 9 showcandidate
+1 2 3 showcandidate
+3 2 3 showcandidate
+5 2 3 showcandidate
+6 2 3 showcandidate
+1 2 4 showcandidate
+6 2 4 showcandidate
+1 2 5 showcandidate
+3 2 5 showcandidate
+8 2 5 showcandidate
+3 2 6 showcandidate
+5 2 6 showcandidate
+8 2 6 showcandidate
+3 2 7 showcandidate
+5 2 7 showcandidate
+6 2 7 showcandidate
+8 2 7 showcandidate
+4 3 2 showcandidate
+5 3 2 showcandidate
+6 3 2 showcandidate
+3 3 3 showcandidate
+4 3 3 showcandidate
+5 3 3 showcandidate
+6 3 3 showcandidate
+3 3 5 showcandidate
+7 3 5 showcandidate
+3 3 6 showcandidate
+5 3 6 showcandidate
+3 3 7 showcandidate
+5 3 7 showcandidate
+6 3 7 showcandidate
+7 3 7 showcandidate
+9 3 7 showcandidate
+5 3 8 showcandidate
+7 3 8 showcandidate
+9 3 8 showcandidate
+6 4 1 showcandidate
+2 4 3 showcandidate
+6 4 3 showcandidate
+9 4 3 showcandidate
+2 4 7 showcandidate
+6 4 7 showcandidate
+7 4 7 showcandidate
+9 4 7 showcandidate
+6 4 9 showcandidate
+7 4 9 showcandidate
+9 4 9 showcandidate
+1 5 1 showcandidate
+3 5 1 showcandidate
+5 5 1 showcandidate
+6 5 1 showcandidate
+2 5 2 showcandidate
+4 5 2 showcandidate
+5 5 2 showcandidate
+6 5 2 showcandidate
+1 5 3 showcandidate
+2 5 3 showcandidate
+3 5 3 showcandidate
+4 5 3 showcandidate
+5 5 3 showcandidate
+6 5 3 showcandidate
+9 5 3 showcandidate
+2 5 5 showcandidate
+8 5 5 showcandidate
+2 5 6 showcandidate
+8 5 6 showcandidate
+1 5 7 showcandidate
+2 5 7 showcandidate
+5 5 7 showcandidate
+6 5 7 showcandidate
+8 5 7 showcandidate
+9 5 7 showcandidate
+1 5 8 showcandidate
+5 5 8 showcandidate
+8 5 8 showcandidate
+9 5 8 showcandidate
+5 5 9 showcandidate
+6 5 9 showcandidate
+8 5 9 showcandidate
+9 5 9 showcandidate
+1 6 1 showcandidate
+5 6 1 showcandidate
+1 6 3 showcandidate
+2 6 3 showcandidate
+5 6 3 showcandidate
+1 6 7 showcandidate
+2 6 7 showcandidate
+5 6 7 showcandidate
+8 6 7 showcandidate
+5 6 9 showcandidate
+8 6 9 showcandidate
+5 7 2 showcandidate
+6 7 2 showcandidate
+5 7 3 showcandidate
+6 7 3 showcandidate
+8 7 3 showcandidate
+1 7 4 showcandidate
+1 7 5 showcandidate
+4 7 5 showcandidate
+9 7 5 showcandidate
+1 7 7 showcandidate
+4 7 7 showcandidate
+5 7 7 showcandidate
+8 7 7 showcandidate
+9 7 7 showcandidate
+1 7 8 showcandidate
+5 7 8 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+5 8 3 showcandidate
+7 8 3 showcandidate
+3 8 5 showcandidate
+9 8 5 showcandidate
+3 8 6 showcandidate
+5 8 7 showcandidate
+7 8 7 showcandidate
+9 8 7 showcandidate
+7 9 3 showcandidate
+8 9 3 showcandidate
+1 9 5 showcandidate
+2 9 5 showcandidate
+4 9 5 showcandidate
+1 9 7 showcandidate
+4 9 7 showcandidate
+7 9 7 showcandidate
+8 9 7 showcandidate
+1 9 8 showcandidate
+7 9 8 showcandidate
+8 9 8 showcandidate
+7 9 9 showcandidate
+8 9 9 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+7 4 0.8 0.8 1 highlightcell
+1.5 7 1 1 0.5 0.5 outlinecell
+1.5 3 4 1 0.5 0.5 outlinecell
+1.5 6 4 1 0.5 0.5 outlinecell
+1.5 7 9 1 0.5 0.5 outlinecell
+1.5 4 4 1 0 0 outlinecell
+1.5 9 4 1 0 0 outlinecell
+1.5 9 6 1 0 0 outlinecell
+1.5 7 6 1 0.5 0.5 outlinecell
+1.5 5 4 1 0.5 0.5 outlinecell
+1.5 8 4 1 0 0 outlinecell
+1.5 1 4 1 0 0 outlinecell
+9 1 4 fullnumber
+4 1 6 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+2 3 4 fullnumber
+1 3 9 fullnumber
+6 4 1 fullnumber
+8 4 2 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+3 4 8 fullnumber
+7 5 4 fullnumber
+7 6 2 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+4 6 8 fullnumber
+2 7 1 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+8 8 4 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+5 9 4 fullnumber
+6 9 6 fullnumber
+1 1 1 showcandidate
+3 1 1 showcandidate
+5 1 1 showcandidate
+2 1 2 showcandidate
+5 1 2 showcandidate
+6 1 2 showcandidate
+1 1 3 showcandidate
+2 1 3 showcandidate
+3 1 3 showcandidate
+5 1 3 showcandidate
+6 1 3 showcandidate
+1 1 5 showcandidate
+3 1 5 showcandidate
+7 1 5 showcandidate
+8 1 5 showcandidate
+3 1 7 showcandidate
+5 1 7 showcandidate
+6 1 7 showcandidate
+7 1 7 showcandidate
+8 1 7 showcandidate
+5 1 8 showcandidate
+7 1 8 showcandidate
+8 1 8 showcandidate
+5 1 9 showcandidate
+6 1 9 showcandidate
+7 1 9 showcandidate
+8 1 9 showcandidate
+1 2 3 showcandidate
+3 2 3 showcandidate
+5 2 3 showcandidate
+6 2 3 showcandidate
+1 2 4 showcandidate
+6 2 4 showcandidate
+1 2 5 showcandidate
+3 2 5 showcandidate
+8 2 5 showcandidate
+3 2 6 showcandidate
+5 2 6 showcandidate
+8 2 6 showcandidate
+3 2 7 showcandidate
+5 2 7 showcandidate
+6 2 7 showcandidate
+8 2 7 showcandidate
+4 3 2 showcandidate
+5 3 2 showcandidate
+6 3 2 showcandidate
+3 3 3 showcandidate
+4 3 3 showcandidate
+5 3 3 showcandidate
+6 3 3 showcandidate
+3 3 5 showcandidate
+7 3 5 showcandidate
+3 3 6 showcandidate
+5 3 6 showcandidate
+3 3 7 showcandidate
+5 3 7 showcandidate
+6 3 7 showcandidate
+7 3 7 showcandidate
+9 3 7 showcandidate
+5 3 8 showcandidate
+7 3 8 showcandidate
+9 3 8 showcandidate
+2 4 3 showcandidate
+9 4 3 showcandidate
+2 4 7 showcandidate
+7 4 7 showcandidate
+9 4 7 showcandidate
+7 4 9 showcandidate
+9 4 9 showcandidate
+1 5 1 showcandidate
+3 5 1 showcandidate
+5 5 1 showcandidate
+2 5 2 showcandidate
+4 5 2 showcandidate
+5 5 2 showcandidate
+1 5 3 showcandidate
+2 5 3 showcandidate
+3 5 3 showcandidate
+4 5 3 showcandidate
+5 5 3 showcandidate
+9 5 3 showcandidate
+2 5 5 showcandidate
+8 5 5 showcandidate
+2 5 6 showcandidate
+8 5 6 showcandidate
+1 5 7 showcandidate
+2 5 7 showcandidate
+5 5 7 showcandidate
+6 5 7 showcandidate
+8 5 7 showcandidate
+9 5 7 showcandidate
+1 5 8 showcandidate
+5 5 8 showcandidate
+8 5 8 showcandidate
+9 5 8 showcandidate
+5 5 9 showcandidate
+6 5 9 showcandidate
+8 5 9 showcandidate
+9 5 9 showcandidate
+1 6 1 showcandidate
+5 6 1 showcandidate
+1 6 3 showcandidate
+2 6 3 showcandidate
+5 6 3 showcandidate
+1 6 7 showcandidate
+2 6 7 showcandidate
+5 6 7 showcandidate
+8 6 7 showcandidate
+5 6 9 showcandidate
+8 6 9 showcandidate
+5 7 2 showcandidate
+6 7 2 showcandidate
+5 7 3 showcandidate
+6 7 3 showcandidate
+8 7 3 showcandidate
+1 7 4 showcandidate
+1 7 5 showcandidate
+4 7 5 showcandidate
+9 7 5 showcandidate
+1 7 7 showcandidate
+4 7 7 showcandidate
+5 7 7 showcandidate
+8 7 7 showcandidate
+9 7 7 showcandidate
+1 7 8 showcandidate
+5 7 8 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+5 8 3 showcandidate
+7 8 3 showcandidate
+3 8 5 showcandidate
+9 8 5 showcandidate
+3 8 6 showcandidate
+5 8 7 showcandidate
+7 8 7 showcandidate
+9 8 7 showcandidate
+7 9 3 showcandidate
+8 9 3 showcandidate
+1 9 5 showcandidate
+2 9 5 showcandidate
+4 9 5 showcandidate
+1 9 7 showcandidate
+4 9 7 showcandidate
+7 9 7 showcandidate
+8 9 7 showcandidate
+1 9 8 showcandidate
+7 9 8 showcandidate
+8 9 8 showcandidate
+7 9 9 showcandidate
+8 9 9 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+4 0.9 0.9 0.9 highlightcol
+2 4 0.8 0.8 1 highlightcell
+9 1 4 fullnumber
+4 1 6 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+2 3 4 fullnumber
+1 3 9 fullnumber
+6 4 1 fullnumber
+8 4 2 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+3 4 8 fullnumber
+7 5 4 fullnumber
+7 6 2 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+4 6 8 fullnumber
+2 7 1 fullnumber
+1 7 4 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+8 8 4 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+5 9 4 fullnumber
+6 9 6 fullnumber
+1 1 1 showcandidate
+3 1 1 showcandidate
+5 1 1 showcandidate
+2 1 2 showcandidate
+5 1 2 showcandidate
+6 1 2 showcandidate
+1 1 3 showcandidate
+2 1 3 showcandidate
+3 1 3 showcandidate
+5 1 3 showcandidate
+6 1 3 showcandidate
+1 1 5 showcandidate
+3 1 5 showcandidate
+7 1 5 showcandidate
+8 1 5 showcandidate
+3 1 7 showcandidate
+5 1 7 showcandidate
+6 1 7 showcandidate
+7 1 7 showcandidate
+8 1 7 showcandidate
+5 1 8 showcandidate
+7 1 8 showcandidate
+8 1 8 showcandidate
+5 1 9 showcandidate
+6 1 9 showcandidate
+7 1 9 showcandidate
+8 1 9 showcandidate
+1 2 3 showcandidate
+3 2 3 showcandidate
+5 2 3 showcandidate
+6 2 3 showcandidate
+6 2 4 showcandidate
+1 2 5 showcandidate
+3 2 5 showcandidate
+8 2 5 showcandidate
+3 2 6 showcandidate
+5 2 6 showcandidate
+8 2 6 showcandidate
+3 2 7 showcandidate
+5 2 7 showcandidate
+6 2 7 showcandidate
+8 2 7 showcandidate
+4 3 2 showcandidate
+5 3 2 showcandidate
+6 3 2 showcandidate
+3 3 3 showcandidate
+4 3 3 showcandidate
+5 3 3 showcandidate
+6 3 3 showcandidate
+3 3 5 showcandidate
+7 3 5 showcandidate
+3 3 6 showcandidate
+5 3 6 showcandidate
+3 3 7 showcandidate
+5 3 7 showcandidate
+6 3 7 showcandidate
+7 3 7 showcandidate
+9 3 7 showcandidate
+5 3 8 showcandidate
+7 3 8 showcandidate
+9 3 8 showcandidate
+2 4 3 showcandidate
+9 4 3 showcandidate
+2 4 7 showcandidate
+7 4 7 showcandidate
+9 4 7 showcandidate
+7 4 9 showcandidate
+9 4 9 showcandidate
+1 5 1 showcandidate
+3 5 1 showcandidate
+5 5 1 showcandidate
+2 5 2 showcandidate
+4 5 2 showcandidate
+5 5 2 showcandidate
+1 5 3 showcandidate
+2 5 3 showcandidate
+3 5 3 showcandidate
+4 5 3 showcandidate
+5 5 3 showcandidate
+9 5 3 showcandidate
+2 5 5 showcandidate
+8 5 5 showcandidate
+2 5 6 showcandidate
+8 5 6 showcandidate
+1 5 7 showcandidate
+2 5 7 showcandidate
+5 5 7 showcandidate
+6 5 7 showcandidate
+8 5 7 showcandidate
+9 5 7 showcandidate
+1 5 8 showcandidate
+5 5 8 showcandidate
+8 5 8 showcandidate
+9 5 8 showcandidate
+5 5 9 showcandidate
+6 5 9 showcandidate
+8 5 9 showcandidate
+9 5 9 showcandidate
+1 6 1 showcandidate
+5 6 1 showcandidate
+1 6 3 showcandidate
+2 6 3 showcandidate
+5 6 3 showcandidate
+1 6 7 showcandidate
+2 6 7 showcandidate
+5 6 7 showcandidate
+8 6 7 showcandidate
+5 6 9 showcandidate
+8 6 9 showcandidate
+5 7 2 showcandidate
+6 7 2 showcandidate
+5 7 3 showcandidate
+6 7 3 showcandidate
+8 7 3 showcandidate
+4 7 5 showcandidate
+9 7 5 showcandidate
+4 7 7 showcandidate
+5 7 7 showcandidate
+8 7 7 showcandidate
+9 7 7 showcandidate
+5 7 8 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+5 8 3 showcandidate
+7 8 3 showcandidate
+3 8 5 showcandidate
+9 8 5 showcandidate
+3 8 6 showcandidate
+5 8 7 showcandidate
+7 8 7 showcandidate
+9 8 7 showcandidate
+7 9 3 showcandidate
+8 9 3 showcandidate
+2 9 5 showcandidate
+4 9 5 showcandidate
+1 9 7 showcandidate
+4 9 7 showcandidate
+7 9 7 showcandidate
+8 9 7 showcandidate
+1 9 8 showcandidate
+7 9 8 showcandidate
+8 9 8 showcandidate
+7 9 9 showcandidate
+8 9 9 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+8 6 0.8 0.8 1 highlightcell
+1.5 7 4 1 0.8 0.8 outlinecell
+1.5 8 2 1 0.8 0.8 outlinecell
+1.5 4 6 1 0.8 0.8 outlinecell
+1.5 8 9 1 0 0 outlinecell
+1.5 8 1 1 0.5 0.5 outlinecell
+1.5 1 6 1 0.5 0.5 outlinecell
+1.5 9 4 1 0 0 outlinecell
+1.5 8 8 1 0.5 0.5 outlinecell
+1.5 9 6 1 0.5 0.5 outlinecell
+1.5 7 6 1 0 0 outlinecell
+1.5 8 4 1 0 0 outlinecell
+1.5 6 6 1 0 0 outlinecell
+9 1 4 fullnumber
+4 1 6 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+6 2 4 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+2 3 4 fullnumber
+1 3 9 fullnumber
+6 4 1 fullnumber
+8 4 2 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+3 4 8 fullnumber
+7 5 4 fullnumber
+7 6 2 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+4 6 8 fullnumber
+2 7 1 fullnumber
+1 7 4 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+8 8 4 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+5 9 4 fullnumber
+6 9 6 fullnumber
+1 1 1 showcandidate
+3 1 1 showcandidate
+5 1 1 showcandidate
+2 1 2 showcandidate
+5 1 2 showcandidate
+6 1 2 showcandidate
+1 1 3 showcandidate
+2 1 3 showcandidate
+3 1 3 showcandidate
+5 1 3 showcandidate
+6 1 3 showcandidate
+1 1 5 showcandidate
+3 1 5 showcandidate
+7 1 5 showcandidate
+8 1 5 showcandidate
+3 1 7 showcandidate
+5 1 7 showcandidate
+6 1 7 showcandidate
+7 1 7 showcandidate
+8 1 7 showcandidate
+5 1 8 showcandidate
+7 1 8 showcandidate
+8 1 8 showcandidate
+5 1 9 showcandidate
+6 1 9 showcandidate
+7 1 9 showcandidate
+8 1 9 showcandidate
+1 2 3 showcandidate
+3 2 3 showcandidate
+5 2 3 showcandidate
+1 2 5 showcandidate
+3 2 5 showcandidate
+8 2 5 showcandidate
+3 2 6 showcandidate
+5 2 6 showcandidate
+8 2 6 showcandidate
+3 2 7 showcandidate
+5 2 7 showcandidate
+8 2 7 showcandidate
+4 3 2 showcandidate
+5 3 2 showcandidate
+6 3 2 showcandidate
+3 3 3 showcandidate
+4 3 3 showcandidate
+5 3 3 showcandidate
+6 3 3 showcandidate
+3 3 5 showcandidate
+7 3 5 showcandidate
+3 3 6 showcandidate
+5 3 6 showcandidate
+3 3 7 showcandidate
+5 3 7 showcandidate
+6 3 7 showcandidate
+7 3 7 showcandidate
+9 3 7 showcandidate
+5 3 8 showcandidate
+7 3 8 showcandidate
+9 3 8 showcandidate
+2 4 3 showcandidate
+9 4 3 showcandidate
+2 4 7 showcandidate
+7 4 7 showcandidate
+9 4 7 showcandidate
+7 4 9 showcandidate
+9 4 9 showcandidate
+1 5 1 showcandidate
+3 5 1 showcandidate
+5 5 1 showcandidate
+2 5 2 showcandidate
+4 5 2 showcandidate
+5 5 2 showcandidate
+1 5 3 showcandidate
+2 5 3 showcandidate
+3 5 3 showcandidate
+4 5 3 showcandidate
+5 5 3 showcandidate
+9 5 3 showcandidate
+2 5 5 showcandidate
+8 5 5 showcandidate
+2 5 6 showcandidate
+8 5 6 showcandidate
+1 5 7 showcandidate
+2 5 7 showcandidate
+5 5 7 showcandidate
+6 5 7 showcandidate
+8 5 7 showcandidate
+9 5 7 showcandidate
+1 5 8 showcandidate
+5 5 8 showcandidate
+8 5 8 showcandidate
+9 5 8 showcandidate
+5 5 9 showcandidate
+6 5 9 showcandidate
+8 5 9 showcandidate
+9 5 9 showcandidate
+1 6 1 showcandidate
+5 6 1 showcandidate
+1 6 3 showcandidate
+2 6 3 showcandidate
+5 6 3 showcandidate
+1 6 7 showcandidate
+2 6 7 showcandidate
+5 6 7 showcandidate
+8 6 7 showcandidate
+5 6 9 showcandidate
+8 6 9 showcandidate
+5 7 2 showcandidate
+6 7 2 showcandidate
+5 7 3 showcandidate
+6 7 3 showcandidate
+8 7 3 showcandidate
+4 7 5 showcandidate
+9 7 5 showcandidate
+4 7 7 showcandidate
+5 7 7 showcandidate
+8 7 7 showcandidate
+9 7 7 showcandidate
+5 7 8 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+5 8 3 showcandidate
+7 8 3 showcandidate
+3 8 5 showcandidate
+9 8 5 showcandidate
+3 8 6 showcandidate
+5 8 7 showcandidate
+7 8 7 showcandidate
+9 8 7 showcandidate
+7 9 3 showcandidate
+8 9 3 showcandidate
+2 9 5 showcandidate
+4 9 5 showcandidate
+1 9 7 showcandidate
+4 9 7 showcandidate
+7 9 7 showcandidate
+8 9 7 showcandidate
+1 9 8 showcandidate
+7 9 8 showcandidate
+8 9 8 showcandidate
+7 9 9 showcandidate
+8 9 9 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+3 6 0.8 0.8 1 highlightcell
+1.5 4 6 1 0.5 0.5 outlinecell
+1.5 3 9 1 0.5 0.5 outlinecell
+1.5 3 4 1 0 0 outlinecell
+1.5 8 6 1 0 0 outlinecell
+1.5 1 6 1 0 0 outlinecell
+1.5 2 4 1 0.5 0.5 outlinecell
+1.5 9 6 1 0.5 0.5 outlinecell
+1.5 7 6 1 0 0 outlinecell
+1.5 3 1 1 0 0 outlinecell
+1.5 1 4 1 0.5 0.5 outlinecell
+1.5 6 6 1 0.5 0.5 outlinecell
+9 1 4 fullnumber
+4 1 6 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+6 2 4 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+2 3 4 fullnumber
+1 3 9 fullnumber
+6 4 1 fullnumber
+8 4 2 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+3 4 8 fullnumber
+7 5 4 fullnumber
+7 6 2 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+4 6 8 fullnumber
+2 7 1 fullnumber
+1 7 4 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+8 8 4 fullnumber
+3 8 6 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+5 9 4 fullnumber
+6 9 6 fullnumber
+1 1 1 showcandidate
+3 1 1 showcandidate
+5 1 1 showcandidate
+2 1 2 showcandidate
+5 1 2 showcandidate
+6 1 2 showcandidate
+1 1 3 showcandidate
+2 1 3 showcandidate
+3 1 3 showcandidate
+5 1 3 showcandidate
+6 1 3 showcandidate
+1 1 5 showcandidate
+3 1 5 showcandidate
+7 1 5 showcandidate
+8 1 5 showcandidate
+3 1 7 showcandidate
+5 1 7 showcandidate
+6 1 7 showcandidate
+7 1 7 showcandidate
+8 1 7 showcandidate
+5 1 8 showcandidate
+7 1 8 showcandidate
+8 1 8 showcandidate
+5 1 9 showcandidate
+6 1 9 showcandidate
+7 1 9 showcandidate
+8 1 9 showcandidate
+1 2 3 showcandidate
+3 2 3 showcandidate
+5 2 3 showcandidate
+1 2 5 showcandidate
+3 2 5 showcandidate
+8 2 5 showcandidate
+5 2 6 showcandidate
+8 2 6 showcandidate
+3 2 7 showcandidate
+5 2 7 showcandidate
+8 2 7 showcandidate
+4 3 2 showcandidate
+5 3 2 showcandidate
+6 3 2 showcandidate
+3 3 3 showcandidate
+4 3 3 showcandidate
+5 3 3 showcandidate
+6 3 3 showcandidate
+3 3 5 showcandidate
+7 3 5 showcandidate
+5 3 6 showcandidate
+3 3 7 showcandidate
+5 3 7 showcandidate
+6 3 7 showcandidate
+7 3 7 showcandidate
+9 3 7 showcandidate
+5 3 8 showcandidate
+7 3 8 showcandidate
+9 3 8 showcandidate
+2 4 3 showcandidate
+9 4 3 showcandidate
+2 4 7 showcandidate
+7 4 7 showcandidate
+9 4 7 showcandidate
+7 4 9 showcandidate
+9 4 9 showcandidate
+1 5 1 showcandidate
+3 5 1 showcandidate
+5 5 1 showcandidate
+2 5 2 showcandidate
+4 5 2 showcandidate
+5 5 2 showcandidate
+1 5 3 showcandidate
+2 5 3 showcandidate
+3 5 3 showcandidate
+4 5 3 showcandidate
+5 5 3 showcandidate
+9 5 3 showcandidate
+2 5 5 showcandidate
+8 5 5 showcandidate
+2 5 6 showcandidate
+8 5 6 showcandidate
+1 5 7 showcandidate
+2 5 7 showcandidate
+5 5 7 showcandidate
+6 5 7 showcandidate
+8 5 7 showcandidate
+9 5 7 showcandidate
+1 5 8 showcandidate
+5 5 8 showcandidate
+8 5 8 showcandidate
+9 5 8 showcandidate
+5 5 9 showcandidate
+6 5 9 showcandidate
+8 5 9 showcandidate
+9 5 9 showcandidate
+1 6 1 showcandidate
+5 6 1 showcandidate
+1 6 3 showcandidate
+2 6 3 showcandidate
+5 6 3 showcandidate
+1 6 7 showcandidate
+2 6 7 showcandidate
+5 6 7 showcandidate
+8 6 7 showcandidate
+5 6 9 showcandidate
+8 6 9 showcandidate
+5 7 2 showcandidate
+6 7 2 showcandidate
+5 7 3 showcandidate
+6 7 3 showcandidate
+8 7 3 showcandidate
+4 7 5 showcandidate
+9 7 5 showcandidate
+4 7 7 showcandidate
+5 7 7 showcandidate
+8 7 7 showcandidate
+9 7 7 showcandidate
+5 7 8 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+5 8 3 showcandidate
+7 8 3 showcandidate
+9 8 5 showcandidate
+5 8 7 showcandidate
+7 8 7 showcandidate
+9 8 7 showcandidate
+7 9 3 showcandidate
+8 9 3 showcandidate
+2 9 5 showcandidate
+4 9 5 showcandidate
+1 9 7 showcandidate
+4 9 7 showcandidate
+7 9 7 showcandidate
+8 9 7 showcandidate
+1 9 8 showcandidate
+7 9 8 showcandidate
+8 9 8 showcandidate
+7 9 9 showcandidate
+8 9 9 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+2 6 0.8 0.8 1 highlightcell
+1.5 4 6 1 0 0 outlinecell
+1.5 3 4 1 0.5 0.5 outlinecell
+1.5 2 8 1 0.5 0.5 outlinecell
+1.5 8 6 1 0 0 outlinecell
+1.5 1 6 1 0.5 0.5 outlinecell
+1.5 2 9 1 0.5 0.5 outlinecell
+1.5 3 6 1 0 0 outlinecell
+1.5 2 4 1 0.5 0.5 outlinecell
+1.5 9 6 1 0.5 0.5 outlinecell
+1.5 2 1 1 0.5 0.5 outlinecell
+1.5 7 6 1 0.5 0.5 outlinecell
+1.5 1 4 1 0.8 0.8 outlinecell
+1.5 2 2 1 0.8 0.8 outlinecell
+1.5 6 6 1 0.8 0.8 outlinecell
+9 1 4 fullnumber
+4 1 6 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+6 2 4 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+2 3 4 fullnumber
+5 3 6 fullnumber
+1 3 9 fullnumber
+6 4 1 fullnumber
+8 4 2 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+3 4 8 fullnumber
+7 5 4 fullnumber
+7 6 2 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+4 6 8 fullnumber
+2 7 1 fullnumber
+1 7 4 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+8 8 4 fullnumber
+3 8 6 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+5 9 4 fullnumber
+6 9 6 fullnumber
+1 1 1 showcandidate
+3 1 1 showcandidate
+5 1 1 showcandidate
+2 1 2 showcandidate
+5 1 2 showcandidate
+6 1 2 showcandidate
+1 1 3 showcandidate
+2 1 3 showcandidate
+3 1 3 showcandidate
+5 1 3 showcandidate
+6 1 3 showcandidate
+1 1 5 showcandidate
+3 1 5 showcandidate
+7 1 5 showcandidate
+8 1 5 showcandidate
+3 1 7 showcandidate
+5 1 7 showcandidate
+6 1 7 showcandidate
+7 1 7 showcandidate
+8 1 7 showcandidate
+5 1 8 showcandidate
+7 1 8 showcandidate
+8 1 8 showcandidate
+5 1 9 showcandidate
+6 1 9 showcandidate
+7 1 9 showcandidate
+8 1 9 showcandidate
+1 2 3 showcandidate
+3 2 3 showcandidate
+5 2 3 showcandidate
+1 2 5 showcandidate
+3 2 5 showcandidate
+8 2 5 showcandidate
+8 2 6 showcandidate
+3 2 7 showcandidate
+5 2 7 showcandidate
+8 2 7 showcandidate
+4 3 2 showcandidate
+6 3 2 showcandidate
+3 3 3 showcandidate
+4 3 3 showcandidate
+6 3 3 showcandidate
+3 3 5 showcandidate
+7 3 5 showcandidate
+3 3 7 showcandidate
+6 3 7 showcandidate
+7 3 7 showcandidate
+9 3 7 showcandidate
+7 3 8 showcandidate
+9 3 8 showcandidate
+2 4 3 showcandidate
+9 4 3 showcandidate
+2 4 7 showcandidate
+7 4 7 showcandidate
+9 4 7 showcandidate
+7 4 9 showcandidate
+9 4 9 showcandidate
+1 5 1 showcandidate
+3 5 1 showcandidate
+5 5 1 showcandidate
+2 5 2 showcandidate
+4 5 2 showcandidate
+5 5 2 showcandidate
+1 5 3 showcandidate
+2 5 3 showcandidate
+3 5 3 showcandidate
+4 5 3 showcandidate
+5 5 3 showcandidate
+9 5 3 showcandidate
+2 5 5 showcandidate
+8 5 5 showcandidate
+2 5 6 showcandidate
+8 5 6 showcandidate
+1 5 7 showcandidate
+2 5 7 showcandidate
+5 5 7 showcandidate
+6 5 7 showcandidate
+8 5 7 showcandidate
+9 5 7 showcandidate
+1 5 8 showcandidate
+5 5 8 showcandidate
+8 5 8 showcandidate
+9 5 8 showcandidate
+5 5 9 showcandidate
+6 5 9 showcandidate
+8 5 9 showcandidate
+9 5 9 showcandidate
+1 6 1 showcandidate
+5 6 1 showcandidate
+1 6 3 showcandidate
+2 6 3 showcandidate
+5 6 3 showcandidate
+1 6 7 showcandidate
+2 6 7 showcandidate
+5 6 7 showcandidate
+8 6 7 showcandidate
+5 6 9 showcandidate
+8 6 9 showcandidate
+5 7 2 showcandidate
+6 7 2 showcandidate
+5 7 3 showcandidate
+6 7 3 showcandidate
+8 7 3 showcandidate
+4 7 5 showcandidate
+9 7 5 showcandidate
+4 7 7 showcandidate
+5 7 7 showcandidate
+8 7 7 showcandidate
+9 7 7 showcandidate
+5 7 8 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+5 8 3 showcandidate
+7 8 3 showcandidate
+9 8 5 showcandidate
+5 8 7 showcandidate
+7 8 7 showcandidate
+9 8 7 showcandidate
+7 9 3 showcandidate
+8 9 3 showcandidate
+2 9 5 showcandidate
+4 9 5 showcandidate
+1 9 7 showcandidate
+4 9 7 showcandidate
+7 9 7 showcandidate
+8 9 7 showcandidate
+1 9 8 showcandidate
+7 9 8 showcandidate
+8 9 8 showcandidate
+7 9 9 showcandidate
+8 9 9 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+6 0.9 0.9 0.9 highlightcol
+5 6 0.8 0.8 1 highlightcell
+9 1 4 fullnumber
+4 1 6 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+6 2 4 fullnumber
+8 2 6 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+2 3 4 fullnumber
+5 3 6 fullnumber
+1 3 9 fullnumber
+6 4 1 fullnumber
+8 4 2 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+3 4 8 fullnumber
+7 5 4 fullnumber
+7 6 2 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+4 6 8 fullnumber
+2 7 1 fullnumber
+1 7 4 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+8 8 4 fullnumber
+3 8 6 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+5 9 4 fullnumber
+6 9 6 fullnumber
+1 1 1 showcandidate
+3 1 1 showcandidate
+5 1 1 showcandidate
+2 1 2 showcandidate
+5 1 2 showcandidate
+6 1 2 showcandidate
+1 1 3 showcandidate
+2 1 3 showcandidate
+3 1 3 showcandidate
+5 1 3 showcandidate
+6 1 3 showcandidate
+1 1 5 showcandidate
+3 1 5 showcandidate
+7 1 5 showcandidate
+3 1 7 showcandidate
+5 1 7 showcandidate
+6 1 7 showcandidate
+7 1 7 showcandidate
+8 1 7 showcandidate
+5 1 8 showcandidate
+7 1 8 showcandidate
+8 1 8 showcandidate
+5 1 9 showcandidate
+6 1 9 showcandidate
+7 1 9 showcandidate
+8 1 9 showcandidate
+1 2 3 showcandidate
+3 2 3 showcandidate
+5 2 3 showcandidate
+1 2 5 showcandidate
+3 2 5 showcandidate
+3 2 7 showcandidate
+5 2 7 showcandidate
+4 3 2 showcandidate
+6 3 2 showcandidate
+3 3 3 showcandidate
+4 3 3 showcandidate
+6 3 3 showcandidate
+3 3 5 showcandidate
+7 3 5 showcandidate
+3 3 7 showcandidate
+6 3 7 showcandidate
+7 3 7 showcandidate
+9 3 7 showcandidate
+7 3 8 showcandidate
+9 3 8 showcandidate
+2 4 3 showcandidate
+9 4 3 showcandidate
+2 4 7 showcandidate
+7 4 7 showcandidate
+9 4 7 showcandidate
+7 4 9 showcandidate
+9 4 9 showcandidate
+1 5 1 showcandidate
+3 5 1 showcandidate
+5 5 1 showcandidate
+2 5 2 showcandidate
+4 5 2 showcandidate
+5 5 2 showcandidate
+1 5 3 showcandidate
+2 5 3 showcandidate
+3 5 3 showcandidate
+4 5 3 showcandidate
+5 5 3 showcandidate
+9 5 3 showcandidate
+2 5 5 showcandidate
+8 5 5 showcandidate
+2 5 6 showcandidate
+1 5 7 showcandidate
+2 5 7 showcandidate
+5 5 7 showcandidate
+6 5 7 showcandidate
+8 5 7 showcandidate
+9 5 7 showcandidate
+1 5 8 showcandidate
+5 5 8 showcandidate
+8 5 8 showcandidate
+9 5 8 showcandidate
+5 5 9 showcandidate
+6 5 9 showcandidate
+8 5 9 showcandidate
+9 5 9 showcandidate
+1 6 1 showcandidate
+5 6 1 showcandidate
+1 6 3 showcandidate
+2 6 3 showcandidate
+5 6 3 showcandidate
+1 6 7 showcandidate
+2 6 7 showcandidate
+5 6 7 showcandidate
+8 6 7 showcandidate
+5 6 9 showcandidate
+8 6 9 showcandidate
+5 7 2 showcandidate
+6 7 2 showcandidate
+5 7 3 showcandidate
+6 7 3 showcandidate
+8 7 3 showcandidate
+4 7 5 showcandidate
+9 7 5 showcandidate
+4 7 7 showcandidate
+5 7 7 showcandidate
+8 7 7 showcandidate
+9 7 7 showcandidate
+5 7 8 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+5 8 3 showcandidate
+7 8 3 showcandidate
+9 8 5 showcandidate
+5 8 7 showcandidate
+7 8 7 showcandidate
+9 8 7 showcandidate
+7 9 3 showcandidate
+8 9 3 showcandidate
+2 9 5 showcandidate
+4 9 5 showcandidate
+1 9 7 showcandidate
+4 9 7 showcandidate
+7 9 7 showcandidate
+8 9 7 showcandidate
+1 9 8 showcandidate
+7 9 8 showcandidate
+8 9 8 showcandidate
+7 9 9 showcandidate
+8 9 9 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+5 0.9 0.9 0.9 highlightbox
+5 5 0.8 0.8 1 highlightcell
+9 1 4 fullnumber
+4 1 6 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+6 2 4 fullnumber
+8 2 6 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+2 3 4 fullnumber
+5 3 6 fullnumber
+1 3 9 fullnumber
+6 4 1 fullnumber
+8 4 2 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+3 4 8 fullnumber
+7 5 4 fullnumber
+2 5 6 fullnumber
+7 6 2 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+4 6 8 fullnumber
+2 7 1 fullnumber
+1 7 4 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+8 8 4 fullnumber
+3 8 6 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+5 9 4 fullnumber
+6 9 6 fullnumber
+1 1 1 showcandidate
+3 1 1 showcandidate
+5 1 1 showcandidate
+2 1 2 showcandidate
+5 1 2 showcandidate
+6 1 2 showcandidate
+1 1 3 showcandidate
+2 1 3 showcandidate
+3 1 3 showcandidate
+5 1 3 showcandidate
+6 1 3 showcandidate
+1 1 5 showcandidate
+3 1 5 showcandidate
+7 1 5 showcandidate
+3 1 7 showcandidate
+5 1 7 showcandidate
+6 1 7 showcandidate
+7 1 7 showcandidate
+8 1 7 showcandidate
+5 1 8 showcandidate
+7 1 8 showcandidate
+8 1 8 showcandidate
+5 1 9 showcandidate
+6 1 9 showcandidate
+7 1 9 showcandidate
+8 1 9 showcandidate
+1 2 3 showcandidate
+3 2 3 showcandidate
+5 2 3 showcandidate
+1 2 5 showcandidate
+3 2 5 showcandidate
+3 2 7 showcandidate
+5 2 7 showcandidate
+4 3 2 showcandidate
+6 3 2 showcandidate
+3 3 3 showcandidate
+4 3 3 showcandidate
+6 3 3 showcandidate
+3 3 5 showcandidate
+7 3 5 showcandidate
+3 3 7 showcandidate
+6 3 7 showcandidate
+7 3 7 showcandidate
+9 3 7 showcandidate
+7 3 8 showcandidate
+9 3 8 showcandidate
+2 4 3 showcandidate
+9 4 3 showcandidate
+2 4 7 showcandidate
+7 4 7 showcandidate
+9 4 7 showcandidate
+7 4 9 showcandidate
+9 4 9 showcandidate
+1 5 1 showcandidate
+3 5 1 showcandidate
+5 5 1 showcandidate
+4 5 2 showcandidate
+5 5 2 showcandidate
+1 5 3 showcandidate
+3 5 3 showcandidate
+4 5 3 showcandidate
+5 5 3 showcandidate
+9 5 3 showcandidate
+8 5 5 showcandidate
+1 5 7 showcandidate
+5 5 7 showcandidate
+6 5 7 showcandidate
+8 5 7 showcandidate
+9 5 7 showcandidate
+1 5 8 showcandidate
+5 5 8 showcandidate
+8 5 8 showcandidate
+9 5 8 showcandidate
+5 5 9 showcandidate
+6 5 9 showcandidate
+8 5 9 showcandidate
+9 5 9 showcandidate
+1 6 1 showcandidate
+5 6 1 showcandidate
+1 6 3 showcandidate
+2 6 3 showcandidate
+5 6 3 showcandidate
+1 6 7 showcandidate
+2 6 7 showcandidate
+5 6 7 showcandidate
+8 6 7 showcandidate
+5 6 9 showcandidate
+8 6 9 showcandidate
+5 7 2 showcandidate
+6 7 2 showcandidate
+5 7 3 showcandidate
+6 7 3 showcandidate
+8 7 3 showcandidate
+4 7 5 showcandidate
+9 7 5 showcandidate
+4 7 7 showcandidate
+5 7 7 showcandidate
+8 7 7 showcandidate
+9 7 7 showcandidate
+5 7 8 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+5 8 3 showcandidate
+7 8 3 showcandidate
+9 8 5 showcandidate
+5 8 7 showcandidate
+7 8 7 showcandidate
+9 8 7 showcandidate
+7 9 3 showcandidate
+8 9 3 showcandidate
+2 9 5 showcandidate
+4 9 5 showcandidate
+1 9 7 showcandidate
+4 9 7 showcandidate
+7 9 7 showcandidate
+8 9 7 showcandidate
+1 9 8 showcandidate
+7 9 8 showcandidate
+8 9 8 showcandidate
+7 9 9 showcandidate
+8 9 9 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+8 5 0.8 0.8 1 highlightcell
+1.5 7 4 1 0.5 0.5 outlinecell
+1.5 8 2 1 0.5 0.5 outlinecell
+1.5 8 9 1 0 0 outlinecell
+1.5 8 6 1 0 0 outlinecell
+1.5 8 1 1 0 0 outlinecell
+1.5 4 5 1 0.5 0.5 outlinecell
+1.5 9 4 1 0.5 0.5 outlinecell
+1.5 6 5 1 0.8 0.8 outlinecell
+1.5 8 8 1 0.8 0.8 outlinecell
+1.5 9 6 1 0.8 0.8 outlinecell
+1.5 7 6 1 0 0 outlinecell
+1.5 8 4 1 0.5 0.5 outlinecell
+1.5 5 5 1 0.5 0.5 outlinecell
+9 1 4 fullnumber
+4 1 6 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+6 2 4 fullnumber
+8 2 6 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+2 3 4 fullnumber
+5 3 6 fullnumber
+1 3 9 fullnumber
+6 4 1 fullnumber
+8 4 2 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+3 4 8 fullnumber
+7 5 4 fullnumber
+8 5 5 fullnumber
+2 5 6 fullnumber
+7 6 2 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+4 6 8 fullnumber
+2 7 1 fullnumber
+1 7 4 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+8 8 4 fullnumber
+3 8 6 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+5 9 4 fullnumber
+6 9 6 fullnumber
+1 1 1 showcandidate
+3 1 1 showcandidate
+5 1 1 showcandidate
+2 1 2 showcandidate
+5 1 2 showcandidate
+6 1 2 showcandidate
+1 1 3 showcandidate
+2 1 3 showcandidate
+3 1 3 showcandidate
+5 1 3 showcandidate
+6 1 3 showcandidate
+1 1 5 showcandidate
+3 1 5 showcandidate
+7 1 5 showcandidate
+3 1 7 showcandidate
+5 1 7 showcandidate
+6 1 7 showcandidate
+7 1 7 showcandidate
+8 1 7 showcandidate
+5 1 8 showcandidate
+7 1 8 showcandidate
+8 1 8 showcandidate
+5 1 9 showcandidate
+6 1 9 showcandidate
+7 1 9 showcandidate
+8 1 9 showcandidate
+1 2 3 showcandidate
+3 2 3 showcandidate
+5 2 3 showcandidate
+1 2 5 showcandidate
+3 2 5 showcandidate
+3 2 7 showcandidate
+5 2 7 showcandidate
+4 3 2 showcandidate
+6 3 2 showcandidate
+3 3 3 showcandidate
+4 3 3 showcandidate
+6 3 3 showcandidate
+3 3 5 showcandidate
+7 3 5 showcandidate
+3 3 7 showcandidate
+6 3 7 showcandidate
+7 3 7 showcandidate
+9 3 7 showcandidate
+7 3 8 showcandidate
+9 3 8 showcandidate
+2 4 3 showcandidate
+9 4 3 showcandidate
+2 4 7 showcandidate
+7 4 7 showcandidate
+9 4 7 showcandidate
+7 4 9 showcandidate
+9 4 9 showcandidate
+1 5 1 showcandidate
+3 5 1 showcandidate
+5 5 1 showcandidate
+4 5 2 showcandidate
+5 5 2 showcandidate
+1 5 3 showcandidate
+3 5 3 showcandidate
+4 5 3 showcandidate
+5 5 3 showcandidate
+9 5 3 showcandidate
+1 5 7 showcandidate
+5 5 7 showcandidate
+6 5 7 showcandidate
+9 5 7 showcandidate
+1 5 8 showcandidate
+5 5 8 showcandidate
+9 5 8 showcandidate
+5 5 9 showcandidate
+6 5 9 showcandidate
+9 5 9 showcandidate
+1 6 1 showcandidate
+5 6 1 showcandidate
+1 6 3 showcandidate
+2 6 3 showcandidate
+5 6 3 showcandidate
+1 6 7 showcandidate
+2 6 7 showcandidate
+5 6 7 showcandidate
+8 6 7 showcandidate
+5 6 9 showcandidate
+8 6 9 showcandidate
+5 7 2 showcandidate
+6 7 2 showcandidate
+5 7 3 showcandidate
+6 7 3 showcandidate
+8 7 3 showcandidate
+4 7 5 showcandidate
+9 7 5 showcandidate
+4 7 7 showcandidate
+5 7 7 showcandidate
+8 7 7 showcandidate
+9 7 7 showcandidate
+5 7 8 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+5 8 3 showcandidate
+7 8 3 showcandidate
+9 8 5 showcandidate
+5 8 7 showcandidate
+7 8 7 showcandidate
+9 8 7 showcandidate
+7 9 3 showcandidate
+8 9 3 showcandidate
+2 9 5 showcandidate
+4 9 5 showcandidate
+1 9 7 showcandidate
+4 9 7 showcandidate
+7 9 7 showcandidate
+8 9 7 showcandidate
+1 9 8 showcandidate
+7 9 8 showcandidate
+8 9 8 showcandidate
+7 9 9 showcandidate
+8 9 9 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+7 5 0.8 0.8 1 highlightcell
+1.5 7 4 1 0 0 outlinecell
+1.5 7 1 1 0 0 outlinecell
+1.5 8 6 1 0.5 0.5 outlinecell
+1.5 7 9 1 0.5 0.5 outlinecell
+1.5 4 5 1 0.5 0.5 outlinecell
+1.5 9 4 1 0.5 0.5 outlinecell
+1.5 6 5 1 0.5 0.5 outlinecell
+1.5 9 6 1 0.5 0.5 outlinecell
+1.5 7 6 1 0 0 outlinecell
+1.5 8 4 1 0.5 0.5 outlinecell
+1.5 5 5 1 0.5 0.5 outlinecell
+1.5 8 5 1 0 0 outlinecell
+9 1 4 fullnumber
+4 1 6 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+6 2 4 fullnumber
+8 2 6 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+2 3 4 fullnumber
+5 3 6 fullnumber
+1 3 9 fullnumber
+6 4 1 fullnumber
+8 4 2 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+3 4 8 fullnumber
+7 5 4 fullnumber
+8 5 5 fullnumber
+2 5 6 fullnumber
+7 6 2 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+4 6 8 fullnumber
+2 7 1 fullnumber
+1 7 4 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+8 8 4 fullnumber
+9 8 5 fullnumber
+3 8 6 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+5 9 4 fullnumber
+6 9 6 fullnumber
+1 1 1 showcandidate
+3 1 1 showcandidate
+5 1 1 showcandidate
+2 1 2 showcandidate
+5 1 2 showcandidate
+6 1 2 showcandidate
+1 1 3 showcandidate
+2 1 3 showcandidate
+3 1 3 showcandidate
+5 1 3 showcandidate
+6 1 3 showcandidate
+1 1 5 showcandidate
+3 1 5 showcandidate
+7 1 5 showcandidate
+3 1 7 showcandidate
+5 1 7 showcandidate
+6 1 7 showcandidate
+7 1 7 showcandidate
+8 1 7 showcandidate
+5 1 8 showcandidate
+7 1 8 showcandidate
+8 1 8 showcandidate
+5 1 9 showcandidate
+6 1 9 showcandidate
+7 1 9 showcandidate
+8 1 9 showcandidate
+1 2 3 showcandidate
+3 2 3 showcandidate
+5 2 3 showcandidate
+1 2 5 showcandidate
+3 2 5 showcandidate
+3 2 7 showcandidate
+5 2 7 showcandidate
+4 3 2 showcandidate
+6 3 2 showcandidate
+3 3 3 showcandidate
+4 3 3 showcandidate
+6 3 3 showcandidate
+3 3 5 showcandidate
+7 3 5 showcandidate
+3 3 7 showcandidate
+6 3 7 showcandidate
+7 3 7 showcandidate
+9 3 7 showcandidate
+7 3 8 showcandidate
+9 3 8 showcandidate
+2 4 3 showcandidate
+9 4 3 showcandidate
+2 4 7 showcandidate
+7 4 7 showcandidate
+9 4 7 showcandidate
+7 4 9 showcandidate
+9 4 9 showcandidate
+1 5 1 showcandidate
+3 5 1 showcandidate
+5 5 1 showcandidate
+4 5 2 showcandidate
+5 5 2 showcandidate
+1 5 3 showcandidate
+3 5 3 showcandidate
+4 5 3 showcandidate
+5 5 3 showcandidate
+9 5 3 showcandidate
+1 5 7 showcandidate
+5 5 7 showcandidate
+6 5 7 showcandidate
+9 5 7 showcandidate
+1 5 8 showcandidate
+5 5 8 showcandidate
+9 5 8 showcandidate
+5 5 9 showcandidate
+6 5 9 showcandidate
+9 5 9 showcandidate
+1 6 1 showcandidate
+5 6 1 showcandidate
+1 6 3 showcandidate
+2 6 3 showcandidate
+5 6 3 showcandidate
+1 6 7 showcandidate
+2 6 7 showcandidate
+5 6 7 showcandidate
+8 6 7 showcandidate
+5 6 9 showcandidate
+8 6 9 showcandidate
+5 7 2 showcandidate
+6 7 2 showcandidate
+5 7 3 showcandidate
+6 7 3 showcandidate
+8 7 3 showcandidate
+4 7 5 showcandidate
+4 7 7 showcandidate
+5 7 7 showcandidate
+8 7 7 showcandidate
+9 7 7 showcandidate
+5 7 8 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+5 8 3 showcandidate
+7 8 3 showcandidate
+5 8 7 showcandidate
+7 8 7 showcandidate
+7 9 3 showcandidate
+8 9 3 showcandidate
+2 9 5 showcandidate
+4 9 5 showcandidate
+1 9 7 showcandidate
+4 9 7 showcandidate
+7 9 7 showcandidate
+8 9 7 showcandidate
+1 9 8 showcandidate
+7 9 8 showcandidate
+8 9 8 showcandidate
+7 9 9 showcandidate
+8 9 9 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+8 0.9 0.9 0.9 highlightbox
+9 5 0.8 0.8 1 highlightcell
+9 1 4 fullnumber
+4 1 6 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+6 2 4 fullnumber
+8 2 6 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+2 3 4 fullnumber
+5 3 6 fullnumber
+1 3 9 fullnumber
+6 4 1 fullnumber
+8 4 2 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+3 4 8 fullnumber
+7 5 4 fullnumber
+8 5 5 fullnumber
+2 5 6 fullnumber
+7 6 2 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+4 6 8 fullnumber
+2 7 1 fullnumber
+1 7 4 fullnumber
+4 7 5 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+8 8 4 fullnumber
+9 8 5 fullnumber
+3 8 6 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+5 9 4 fullnumber
+6 9 6 fullnumber
+1 1 1 showcandidate
+3 1 1 showcandidate
+5 1 1 showcandidate
+2 1 2 showcandidate
+5 1 2 showcandidate
+6 1 2 showcandidate
+1 1 3 showcandidate
+2 1 3 showcandidate
+3 1 3 showcandidate
+5 1 3 showcandidate
+6 1 3 showcandidate
+1 1 5 showcandidate
+3 1 5 showcandidate
+7 1 5 showcandidate
+3 1 7 showcandidate
+5 1 7 showcandidate
+6 1 7 showcandidate
+7 1 7 showcandidate
+8 1 7 showcandidate
+5 1 8 showcandidate
+7 1 8 showcandidate
+8 1 8 showcandidate
+5 1 9 showcandidate
+6 1 9 showcandidate
+7 1 9 showcandidate
+8 1 9 showcandidate
+1 2 3 showcandidate
+3 2 3 showcandidate
+5 2 3 showcandidate
+1 2 5 showcandidate
+3 2 5 showcandidate
+3 2 7 showcandidate
+5 2 7 showcandidate
+4 3 2 showcandidate
+6 3 2 showcandidate
+3 3 3 showcandidate
+4 3 3 showcandidate
+6 3 3 showcandidate
+3 3 5 showcandidate
+7 3 5 showcandidate
+3 3 7 showcandidate
+6 3 7 showcandidate
+7 3 7 showcandidate
+9 3 7 showcandidate
+7 3 8 showcandidate
+9 3 8 showcandidate
+2 4 3 showcandidate
+9 4 3 showcandidate
+2 4 7 showcandidate
+7 4 7 showcandidate
+9 4 7 showcandidate
+7 4 9 showcandidate
+9 4 9 showcandidate
+1 5 1 showcandidate
+3 5 1 showcandidate
+5 5 1 showcandidate
+4 5 2 showcandidate
+5 5 2 showcandidate
+1 5 3 showcandidate
+3 5 3 showcandidate
+4 5 3 showcandidate
+5 5 3 showcandidate
+9 5 3 showcandidate
+1 5 7 showcandidate
+5 5 7 showcandidate
+6 5 7 showcandidate
+9 5 7 showcandidate
+1 5 8 showcandidate
+5 5 8 showcandidate
+9 5 8 showcandidate
+5 5 9 showcandidate
+6 5 9 showcandidate
+9 5 9 showcandidate
+1 6 1 showcandidate
+5 6 1 showcandidate
+1 6 3 showcandidate
+2 6 3 showcandidate
+5 6 3 showcandidate
+1 6 7 showcandidate
+2 6 7 showcandidate
+5 6 7 showcandidate
+8 6 7 showcandidate
+5 6 9 showcandidate
+8 6 9 showcandidate
+5 7 2 showcandidate
+6 7 2 showcandidate
+5 7 3 showcandidate
+6 7 3 showcandidate
+8 7 3 showcandidate
+5 7 7 showcandidate
+8 7 7 showcandidate
+9 7 7 showcandidate
+5 7 8 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+5 8 3 showcandidate
+7 8 3 showcandidate
+5 8 7 showcandidate
+7 8 7 showcandidate
+7 9 3 showcandidate
+8 9 3 showcandidate
+2 9 5 showcandidate
+1 9 7 showcandidate
+4 9 7 showcandidate
+7 9 7 showcandidate
+8 9 7 showcandidate
+1 9 8 showcandidate
+7 9 8 showcandidate
+8 9 8 showcandidate
+7 9 9 showcandidate
+8 9 9 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+9 0.9 0.9 0.9 highlightbox
+7 5 0.8 1 1 highlightcell
+6 8 0.8 1 1 highlightcell
+8 1 0.8 1 1 highlightcell
+2 9 0.8 1 1 highlightcell
+9 7 1 0.8 0.8 highlightcell
+4 9 7 1 0.5 0.5 highlightcandidate
+1.5 7 5 1 0 0 outlinecell
+1.5 6 8 1 0 0 outlinecell
+1.5 2 9 1 0 0 outlinecell
+1.5 7 9 1 0.8 0.8 outlinecell
+1.5 8 1 1 0 0 outlinecell
+1.5 8 8 1 0.8 0.8 outlinecell
+1.5 8 9 1 0.8 0.8 outlinecell
+9 1 4 fullnumber
+4 1 6 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+6 2 4 fullnumber
+8 2 6 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+2 3 4 fullnumber
+5 3 6 fullnumber
+1 3 9 fullnumber
+6 4 1 fullnumber
+8 4 2 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+3 4 8 fullnumber
+7 5 4 fullnumber
+8 5 5 fullnumber
+2 5 6 fullnumber
+7 6 2 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+4 6 8 fullnumber
+2 7 1 fullnumber
+1 7 4 fullnumber
+4 7 5 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+8 8 4 fullnumber
+9 8 5 fullnumber
+3 8 6 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+5 9 4 fullnumber
+2 9 5 fullnumber
+6 9 6 fullnumber
+1 1 1 showcandidate
+3 1 1 showcandidate
+5 1 1 showcandidate
+2 1 2 showcandidate
+5 1 2 showcandidate
+6 1 2 showcandidate
+1 1 3 showcandidate
+2 1 3 showcandidate
+3 1 3 showcandidate
+5 1 3 showcandidate
+6 1 3 showcandidate
+1 1 5 showcandidate
+3 1 5 showcandidate
+7 1 5 showcandidate
+3 1 7 showcandidate
+5 1 7 showcandidate
+6 1 7 showcandidate
+7 1 7 showcandidate
+8 1 7 showcandidate
+5 1 8 showcandidate
+7 1 8 showcandidate
+8 1 8 showcandidate
+5 1 9 showcandidate
+6 1 9 showcandidate
+7 1 9 showcandidate
+8 1 9 showcandidate
+1 2 3 showcandidate
+3 2 3 showcandidate
+5 2 3 showcandidate
+1 2 5 showcandidate
+3 2 5 showcandidate
+3 2 7 showcandidate
+5 2 7 showcandidate
+4 3 2 showcandidate
+6 3 2 showcandidate
+3 3 3 showcandidate
+4 3 3 showcandidate
+6 3 3 showcandidate
+3 3 5 showcandidate
+7 3 5 showcandidate
+3 3 7 showcandidate
+6 3 7 showcandidate
+7 3 7 showcandidate
+9 3 7 showcandidate
+7 3 8 showcandidate
+9 3 8 showcandidate
+2 4 3 showcandidate
+9 4 3 showcandidate
+2 4 7 showcandidate
+7 4 7 showcandidate
+9 4 7 showcandidate
+7 4 9 showcandidate
+9 4 9 showcandidate
+1 5 1 showcandidate
+3 5 1 showcandidate
+5 5 1 showcandidate
+4 5 2 showcandidate
+5 5 2 showcandidate
+1 5 3 showcandidate
+3 5 3 showcandidate
+4 5 3 showcandidate
+5 5 3 showcandidate
+9 5 3 showcandidate
+1 5 7 showcandidate
+5 5 7 showcandidate
+6 5 7 showcandidate
+9 5 7 showcandidate
+1 5 8 showcandidate
+5 5 8 showcandidate
+9 5 8 showcandidate
+5 5 9 showcandidate
+6 5 9 showcandidate
+9 5 9 showcandidate
+1 6 1 showcandidate
+5 6 1 showcandidate
+1 6 3 showcandidate
+2 6 3 showcandidate
+5 6 3 showcandidate
+1 6 7 showcandidate
+2 6 7 showcandidate
+5 6 7 showcandidate
+8 6 7 showcandidate
+5 6 9 showcandidate
+8 6 9 showcandidate
+5 7 2 showcandidate
+6 7 2 showcandidate
+5 7 3 showcandidate
+6 7 3 showcandidate
+8 7 3 showcandidate
+5 7 7 showcandidate
+8 7 7 showcandidate
+9 7 7 showcandidate
+5 7 8 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+5 8 3 showcandidate
+7 8 3 showcandidate
+5 8 7 showcandidate
+7 8 7 showcandidate
+7 9 3 showcandidate
+8 9 3 showcandidate
+1 9 7 showcandidate
+4 9 7 showcandidate
+7 9 7 showcandidate
+8 9 7 showcandidate
+1 9 8 showcandidate
+7 9 8 showcandidate
+8 9 8 showcandidate
+7 9 9 showcandidate
+8 9 9 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+9 0.9 0.9 0.9 highlightbox
+7 4 0.8 1 1 highlightcell
+8 2 0.8 1 1 highlightcell
+3 9 0.8 1 1 highlightcell
+9 8 1 0.8 0.8 highlightcell
+1 9 8 1 0.5 0.5 highlightcandidate
+1.5 7 4 1 0 0 outlinecell
+1.5 3 9 1 0 0 outlinecell
+1.5 7 9 1 0.8 0.8 outlinecell
+1.5 8 2 1 0 0 outlinecell
+1.5 8 8 1 0.5 0.5 outlinecell
+1.5 8 9 1 0.8 0.8 outlinecell
+1.5 9 7 1 0 0 outlinecell
+9 1 4 fullnumber
+4 1 6 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+6 2 4 fullnumber
+8 2 6 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+2 3 4 fullnumber
+5 3 6 fullnumber
+1 3 9 fullnumber
+6 4 1 fullnumber
+8 4 2 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+3 4 8 fullnumber
+7 5 4 fullnumber
+8 5 5 fullnumber
+2 5 6 fullnumber
+7 6 2 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+4 6 8 fullnumber
+2 7 1 fullnumber
+1 7 4 fullnumber
+4 7 5 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+8 8 4 fullnumber
+9 8 5 fullnumber
+3 8 6 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+5 9 4 fullnumber
+2 9 5 fullnumber
+6 9 6 fullnumber
+4 9 7 fullnumber
+1 1 1 showcandidate
+3 1 1 showcandidate
+5 1 1 showcandidate
+2 1 2 showcandidate
+5 1 2 showcandidate
+6 1 2 showcandidate
+1 1 3 showcandidate
+2 1 3 showcandidate
+3 1 3 showcandidate
+5 1 3 showcandidate
+6 1 3 showcandidate
+1 1 5 showcandidate
+3 1 5 showcandidate
+7 1 5 showcandidate
+3 1 7 showcandidate
+5 1 7 showcandidate
+6 1 7 showcandidate
+7 1 7 showcandidate
+8 1 7 showcandidate
+5 1 8 showcandidate
+7 1 8 showcandidate
+8 1 8 showcandidate
+5 1 9 showcandidate
+6 1 9 showcandidate
+7 1 9 showcandidate
+8 1 9 showcandidate
+1 2 3 showcandidate
+3 2 3 showcandidate
+5 2 3 showcandidate
+1 2 5 showcandidate
+3 2 5 showcandidate
+3 2 7 showcandidate
+5 2 7 showcandidate
+4 3 2 showcandidate
+6 3 2 showcandidate
+3 3 3 showcandidate
+4 3 3 showcandidate
+6 3 3 showcandidate
+3 3 5 showcandidate
+7 3 5 showcandidate
+3 3 7 showcandidate
+6 3 7 showcandidate
+7 3 7 showcandidate
+9 3 7 showcandidate
+7 3 8 showcandidate
+9 3 8 showcandidate
+2 4 3 showcandidate
+9 4 3 showcandidate
+2 4 7 showcandidate
+7 4 7 showcandidate
+9 4 7 showcandidate
+7 4 9 showcandidate
+9 4 9 showcandidate
+1 5 1 showcandidate
+3 5 1 showcandidate
+5 5 1 showcandidate
+4 5 2 showcandidate
+5 5 2 showcandidate
+1 5 3 showcandidate
+3 5 3 showcandidate
+4 5 3 showcandidate
+5 5 3 showcandidate
+9 5 3 showcandidate
+1 5 7 showcandidate
+5 5 7 showcandidate
+6 5 7 showcandidate
+9 5 7 showcandidate
+1 5 8 showcandidate
+5 5 8 showcandidate
+9 5 8 showcandidate
+5 5 9 showcandidate
+6 5 9 showcandidate
+9 5 9 showcandidate
+1 6 1 showcandidate
+5 6 1 showcandidate
+1 6 3 showcandidate
+2 6 3 showcandidate
+5 6 3 showcandidate
+1 6 7 showcandidate
+2 6 7 showcandidate
+5 6 7 showcandidate
+8 6 7 showcandidate
+5 6 9 showcandidate
+8 6 9 showcandidate
+5 7 2 showcandidate
+6 7 2 showcandidate
+5 7 3 showcandidate
+6 7 3 showcandidate
+8 7 3 showcandidate
+5 7 7 showcandidate
+8 7 7 showcandidate
+9 7 7 showcandidate
+5 7 8 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+5 8 3 showcandidate
+7 8 3 showcandidate
+5 8 7 showcandidate
+7 8 7 showcandidate
+7 9 3 showcandidate
+8 9 3 showcandidate
+1 9 8 showcandidate
+7 9 8 showcandidate
+8 9 8 showcandidate
+7 9 9 showcandidate
+8 9 9 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+2 0.9 0.9 0.9 highlightcol
+3 4 0.8 1 1 highlightcell
+5 6 0.8 1 1 highlightcell
+7 1 0.8 1 1 highlightcell
+1 2 1 0.8 0.8 highlightcell
+2 1 2 1 0.5 0.5 highlightcandidate
+1.5 2 8 1 0.5 0.5 outlinecell
+1.5 2 2 1 0.5 0.5 outlinecell
+1.5 3 4 1 0 0 outlinecell
+1.5 4 2 1 0 0 outlinecell
+1.5 5 6 1 0 0 outlinecell
+1.5 6 2 1 0 0 outlinecell
+1.5 7 1 1 0 0 outlinecell
+1.5 8 9 1 0.8 0.8 outlinecell
+1.5 8 2 1 0.8 0.8 outlinecell
+1.5 9 5 1 0.8 0.8 outlinecell
+1.5 9 2 1 0.8 0.8 outlinecell
+9 1 4 fullnumber
+4 1 6 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+6 2 4 fullnumber
+8 2 6 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+2 3 4 fullnumber
+5 3 6 fullnumber
+1 3 9 fullnumber
+6 4 1 fullnumber
+8 4 2 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+3 4 8 fullnumber
+7 5 4 fullnumber
+8 5 5 fullnumber
+2 5 6 fullnumber
+7 6 2 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+4 6 8 fullnumber
+2 7 1 fullnumber
+1 7 4 fullnumber
+4 7 5 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+8 8 4 fullnumber
+9 8 5 fullnumber
+3 8 6 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+5 9 4 fullnumber
+2 9 5 fullnumber
+6 9 6 fullnumber
+4 9 7 fullnumber
+1 9 8 fullnumber
+1 1 1 showcandidate
+3 1 1 showcandidate
+5 1 1 showcandidate
+2 1 2 showcandidate
+5 1 2 showcandidate
+6 1 2 showcandidate
+1 1 3 showcandidate
+2 1 3 showcandidate
+3 1 3 showcandidate
+5 1 3 showcandidate
+6 1 3 showcandidate
+1 1 5 showcandidate
+3 1 5 showcandidate
+7 1 5 showcandidate
+3 1 7 showcandidate
+5 1 7 showcandidate
+6 1 7 showcandidate
+7 1 7 showcandidate
+8 1 7 showcandidate
+5 1 8 showcandidate
+7 1 8 showcandidate
+8 1 8 showcandidate
+5 1 9 showcandidate
+6 1 9 showcandidate
+7 1 9 showcandidate
+8 1 9 showcandidate
+1 2 3 showcandidate
+3 2 3 showcandidate
+5 2 3 showcandidate
+1 2 5 showcandidate
+3 2 5 showcandidate
+3 2 7 showcandidate
+5 2 7 showcandidate
+4 3 2 showcandidate
+6 3 2 showcandidate
+3 3 3 showcandidate
+4 3 3 showcandidate
+6 3 3 showcandidate
+3 3 5 showcandidate
+7 3 5 showcandidate
+3 3 7 showcandidate
+6 3 7 showcandidate
+7 3 7 showcandidate
+9 3 7 showcandidate
+7 3 8 showcandidate
+9 3 8 showcandidate
+2 4 3 showcandidate
+9 4 3 showcandidate
+2 4 7 showcandidate
+7 4 7 showcandidate
+9 4 7 showcandidate
+7 4 9 showcandidate
+9 4 9 showcandidate
+1 5 1 showcandidate
+3 5 1 showcandidate
+5 5 1 showcandidate
+4 5 2 showcandidate
+5 5 2 showcandidate
+1 5 3 showcandidate
+3 5 3 showcandidate
+4 5 3 showcandidate
+5 5 3 showcandidate
+9 5 3 showcandidate
+1 5 7 showcandidate
+5 5 7 showcandidate
+6 5 7 showcandidate
+9 5 7 showcandidate
+5 5 8 showcandidate
+9 5 8 showcandidate
+5 5 9 showcandidate
+6 5 9 showcandidate
+9 5 9 showcandidate
+1 6 1 showcandidate
+5 6 1 showcandidate
+1 6 3 showcandidate
+2 6 3 showcandidate
+5 6 3 showcandidate
+1 6 7 showcandidate
+2 6 7 showcandidate
+5 6 7 showcandidate
+8 6 7 showcandidate
+5 6 9 showcandidate
+8 6 9 showcandidate
+5 7 2 showcandidate
+6 7 2 showcandidate
+5 7 3 showcandidate
+6 7 3 showcandidate
+8 7 3 showcandidate
+5 7 7 showcandidate
+8 7 7 showcandidate
+9 7 7 showcandidate
+5 7 8 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+5 8 3 showcandidate
+7 8 3 showcandidate
+5 8 7 showcandidate
+7 8 7 showcandidate
+7 9 3 showcandidate
+8 9 3 showcandidate
+7 9 9 showcandidate
+8 9 9 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+6 0.9 0.9 0.9 highlightbox
+9 0.9 0.9 0.9 highlightcol
+4 9 0.8 0.8 0.8 highlightcell
+5 9 0.8 0.8 0.8 highlightcell
+9 4 7 1 0.5 1 highlightcandidate
+9 5 7 1 0.5 1 highlightcandidate
+9 5 8 1 0.5 1 highlightcandidate
+1.5 1 4 1 0 0 outlinecell
+1.5 2 2 1 0.5 0.5 outlinecell
+1.5 2 9 1 0.5 0.5 outlinecell
+1.5 3 9 1 0 0 outlinecell
+1.5 7 9 1 0 0 outlinecell
+1.5 8 5 1 0.5 0.5 outlinecell
+1.5 8 9 1 0.5 0.5 outlinecell
+1.5 9 1 1 0 0 outlinecell
+2 1 2 fullnumber
+9 1 4 fullnumber
+4 1 6 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+6 2 4 fullnumber
+8 2 6 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+2 3 4 fullnumber
+5 3 6 fullnumber
+1 3 9 fullnumber
+6 4 1 fullnumber
+8 4 2 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+3 4 8 fullnumber
+7 5 4 fullnumber
+8 5 5 fullnumber
+2 5 6 fullnumber
+7 6 2 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+4 6 8 fullnumber
+2 7 1 fullnumber
+1 7 4 fullnumber
+4 7 5 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+8 8 4 fullnumber
+9 8 5 fullnumber
+3 8 6 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+5 9 4 fullnumber
+2 9 5 fullnumber
+6 9 6 fullnumber
+4 9 7 fullnumber
+1 9 8 fullnumber
+1 1 1 showcandidate
+3 1 1 showcandidate
+5 1 1 showcandidate
+1 1 3 showcandidate
+3 1 3 showcandidate
+5 1 3 showcandidate
+6 1 3 showcandidate
+1 1 5 showcandidate
+3 1 5 showcandidate
+7 1 5 showcandidate
+3 1 7 showcandidate
+5 1 7 showcandidate
+6 1 7 showcandidate
+7 1 7 showcandidate
+8 1 7 showcandidate
+5 1 8 showcandidate
+7 1 8 showcandidate
+8 1 8 showcandidate
+5 1 9 showcandidate
+6 1 9 showcandidate
+7 1 9 showcandidate
+8 1 9 showcandidate
+1 2 3 showcandidate
+3 2 3 showcandidate
+5 2 3 showcandidate
+1 2 5 showcandidate
+3 2 5 showcandidate
+3 2 7 showcandidate
+5 2 7 showcandidate
+4 3 2 showcandidate
+6 3 2 showcandidate
+3 3 3 showcandidate
+4 3 3 showcandidate
+6 3 3 showcandidate
+3 3 5 showcandidate
+7 3 5 showcandidate
+3 3 7 showcandidate
+6 3 7 showcandidate
+7 3 7 showcandidate
+9 3 7 showcandidate
+7 3 8 showcandidate
+9 3 8 showcandidate
+2 4 3 showcandidate
+9 4 3 showcandidate
+2 4 7 showcandidate
+7 4 7 showcandidate
+9 4 7 showcandidate
+7 4 9 showcandidate
+9 4 9 showcandidate
+1 5 1 showcandidate
+3 5 1 showcandidate
+5 5 1 showcandidate
+4 5 2 showcandidate
+5 5 2 showcandidate
+1 5 3 showcandidate
+3 5 3 showcandidate
+4 5 3 showcandidate
+5 5 3 showcandidate
+9 5 3 showcandidate
+1 5 7 showcandidate
+5 5 7 showcandidate
+6 5 7 showcandidate
+9 5 7 showcandidate
+5 5 8 showcandidate
+9 5 8 showcandidate
+5 5 9 showcandidate
+6 5 9 showcandidate
+9 5 9 showcandidate
+1 6 1 showcandidate
+5 6 1 showcandidate
+1 6 3 showcandidate
+2 6 3 showcandidate
+5 6 3 showcandidate
+1 6 7 showcandidate
+2 6 7 showcandidate
+5 6 7 showcandidate
+8 6 7 showcandidate
+5 6 9 showcandidate
+8 6 9 showcandidate
+5 7 2 showcandidate
+6 7 2 showcandidate
+5 7 3 showcandidate
+6 7 3 showcandidate
+8 7 3 showcandidate
+5 7 7 showcandidate
+8 7 7 showcandidate
+9 7 7 showcandidate
+5 7 8 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+5 8 3 showcandidate
+7 8 3 showcandidate
+5 8 7 showcandidate
+7 8 7 showcandidate
+7 9 3 showcandidate
+8 9 3 showcandidate
+7 9 9 showcandidate
+8 9 9 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+5 8 0.8 0.8 1 highlightcell
+1.5 9 8 1 0 0 outlinecell
+1.5 2 8 1 0.5 0.5 outlinecell
+1.5 5 6 1 0.5 0.5 outlinecell
+1.5 4 8 1 0 0 outlinecell
+1.5 6 8 1 0 0 outlinecell
+1.5 8 8 1 0 0 outlinecell
+1.5 5 4 1 0 0 outlinecell
+1.5 5 5 1 0 0 outlinecell
+2 1 2 fullnumber
+9 1 4 fullnumber
+4 1 6 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+6 2 4 fullnumber
+8 2 6 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+2 3 4 fullnumber
+5 3 6 fullnumber
+1 3 9 fullnumber
+6 4 1 fullnumber
+8 4 2 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+3 4 8 fullnumber
+7 5 4 fullnumber
+8 5 5 fullnumber
+2 5 6 fullnumber
+7 6 2 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+4 6 8 fullnumber
+2 7 1 fullnumber
+1 7 4 fullnumber
+4 7 5 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+8 8 4 fullnumber
+9 8 5 fullnumber
+3 8 6 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+5 9 4 fullnumber
+2 9 5 fullnumber
+6 9 6 fullnumber
+4 9 7 fullnumber
+1 9 8 fullnumber
+1 1 1 showcandidate
+3 1 1 showcandidate
+5 1 1 showcandidate
+1 1 3 showcandidate
+3 1 3 showcandidate
+5 1 3 showcandidate
+6 1 3 showcandidate
+1 1 5 showcandidate
+3 1 5 showcandidate
+7 1 5 showcandidate
+3 1 7 showcandidate
+5 1 7 showcandidate
+6 1 7 showcandidate
+7 1 7 showcandidate
+8 1 7 showcandidate
+5 1 8 showcandidate
+7 1 8 showcandidate
+8 1 8 showcandidate
+5 1 9 showcandidate
+6 1 9 showcandidate
+7 1 9 showcandidate
+8 1 9 showcandidate
+1 2 3 showcandidate
+3 2 3 showcandidate
+5 2 3 showcandidate
+1 2 5 showcandidate
+3 2 5 showcandidate
+3 2 7 showcandidate
+5 2 7 showcandidate
+4 3 2 showcandidate
+6 3 2 showcandidate
+3 3 3 showcandidate
+4 3 3 showcandidate
+6 3 3 showcandidate
+3 3 5 showcandidate
+7 3 5 showcandidate
+3 3 7 showcandidate
+6 3 7 showcandidate
+7 3 7 showcandidate
+9 3 7 showcandidate
+7 3 8 showcandidate
+9 3 8 showcandidate
+2 4 3 showcandidate
+9 4 3 showcandidate
+2 4 7 showcandidate
+7 4 7 showcandidate
+7 4 9 showcandidate
+9 4 9 showcandidate
+1 5 1 showcandidate
+3 5 1 showcandidate
+5 5 1 showcandidate
+4 5 2 showcandidate
+5 5 2 showcandidate
+1 5 3 showcandidate
+3 5 3 showcandidate
+4 5 3 showcandidate
+5 5 3 showcandidate
+9 5 3 showcandidate
+1 5 7 showcandidate
+5 5 7 showcandidate
+6 5 7 showcandidate
+5 5 8 showcandidate
+5 5 9 showcandidate
+6 5 9 showcandidate
+9 5 9 showcandidate
+1 6 1 showcandidate
+5 6 1 showcandidate
+1 6 3 showcandidate
+2 6 3 showcandidate
+5 6 3 showcandidate
+1 6 7 showcandidate
+2 6 7 showcandidate
+5 6 7 showcandidate
+8 6 7 showcandidate
+5 6 9 showcandidate
+8 6 9 showcandidate
+5 7 2 showcandidate
+6 7 2 showcandidate
+5 7 3 showcandidate
+6 7 3 showcandidate
+8 7 3 showcandidate
+5 7 7 showcandidate
+8 7 7 showcandidate
+9 7 7 showcandidate
+5 7 8 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+5 8 3 showcandidate
+7 8 3 showcandidate
+5 8 7 showcandidate
+7 8 7 showcandidate
+7 9 3 showcandidate
+8 9 3 showcandidate
+7 9 9 showcandidate
+8 9 9 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+5 2 0.8 0.8 1 highlightcell
+1.5 8 2 1 0 0 outlinecell
+1.5 1 2 1 0.5 0.5 outlinecell
+1.5 5 6 1 0.5 0.5 outlinecell
+1.5 9 2 1 0 0 outlinecell
+1.5 5 8 1 0 0 outlinecell
+1.5 4 1 1 0 0 outlinecell
+1.5 5 4 1 0.5 0.5 outlinecell
+1.5 6 2 1 0.5 0.5 outlinecell
+1.5 4 2 1 0.5 0.5 outlinecell
+1.5 5 5 1 0.5 0.5 outlinecell
+1.5 2 2 1 0 0 outlinecell
+2 1 2 fullnumber
+9 1 4 fullnumber
+4 1 6 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+6 2 4 fullnumber
+8 2 6 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+2 3 4 fullnumber
+5 3 6 fullnumber
+1 3 9 fullnumber
+6 4 1 fullnumber
+8 4 2 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+3 4 8 fullnumber
+7 5 4 fullnumber
+8 5 5 fullnumber
+2 5 6 fullnumber
+5 5 8 fullnumber
+7 6 2 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+4 6 8 fullnumber
+2 7 1 fullnumber
+1 7 4 fullnumber
+4 7 5 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+8 8 4 fullnumber
+9 8 5 fullnumber
+3 8 6 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+5 9 4 fullnumber
+2 9 5 fullnumber
+6 9 6 fullnumber
+4 9 7 fullnumber
+1 9 8 fullnumber
+1 1 1 showcandidate
+3 1 1 showcandidate
+5 1 1 showcandidate
+1 1 3 showcandidate
+3 1 3 showcandidate
+5 1 3 showcandidate
+6 1 3 showcandidate
+1 1 5 showcandidate
+3 1 5 showcandidate
+7 1 5 showcandidate
+3 1 7 showcandidate
+5 1 7 showcandidate
+6 1 7 showcandidate
+7 1 7 showcandidate
+8 1 7 showcandidate
+7 1 8 showcandidate
+8 1 8 showcandidate
+5 1 9 showcandidate
+6 1 9 showcandidate
+7 1 9 showcandidate
+8 1 9 showcandidate
+1 2 3 showcandidate
+3 2 3 showcandidate
+5 2 3 showcandidate
+1 2 5 showcandidate
+3 2 5 showcandidate
+3 2 7 showcandidate
+5 2 7 showcandidate
+4 3 2 showcandidate
+6 3 2 showcandidate
+3 3 3 showcandidate
+4 3 3 showcandidate
+6 3 3 showcandidate
+3 3 5 showcandidate
+7 3 5 showcandidate
+3 3 7 showcandidate
+6 3 7 showcandidate
+7 3 7 showcandidate
+9 3 7 showcandidate
+7 3 8 showcandidate
+9 3 8 showcandidate
+2 4 3 showcandidate
+9 4 3 showcandidate
+2 4 7 showcandidate
+7 4 7 showcandidate
+7 4 9 showcandidate
+9 4 9 showcandidate
+1 5 1 showcandidate
+3 5 1 showcandidate
+4 5 2 showcandidate
+1 5 3 showcandidate
+3 5 3 showcandidate
+4 5 3 showcandidate
+9 5 3 showcandidate
+1 5 7 showcandidate
+6 5 7 showcandidate
+6 5 9 showcandidate
+9 5 9 showcandidate
+1 6 1 showcandidate
+5 6 1 showcandidate
+1 6 3 showcandidate
+2 6 3 showcandidate
+5 6 3 showcandidate
+1 6 7 showcandidate
+2 6 7 showcandidate
+8 6 7 showcandidate
+8 6 9 showcandidate
+5 7 2 showcandidate
+6 7 2 showcandidate
+5 7 3 showcandidate
+6 7 3 showcandidate
+8 7 3 showcandidate
+5 7 7 showcandidate
+8 7 7 showcandidate
+9 7 7 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+5 8 3 showcandidate
+7 8 3 showcandidate
+5 8 7 showcandidate
+7 8 7 showcandidate
+7 9 3 showcandidate
+8 9 3 showcandidate
+7 9 9 showcandidate
+8 9 9 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+3 2 0.8 0.8 1 highlightcell
+1.5 8 2 1 0.5 0.5 outlinecell
+1.5 3 9 1 0.5 0.5 outlinecell
+1.5 1 2 1 0.5 0.5 outlinecell
+1.5 3 4 1 0.5 0.5 outlinecell
+1.5 9 2 1 0 0 outlinecell
+1.5 5 2 1 0 0 outlinecell
+1.5 3 6 1 0 0 outlinecell
+1.5 2 1 1 0.5 0.5 outlinecell
+1.5 6 2 1 0.5 0.5 outlinecell
+1.5 4 2 1 0.5 0.5 outlinecell
+1.5 3 1 1 0.5 0.5 outlinecell
+1.5 2 2 1 0 0 outlinecell
+2 1 2 fullnumber
+9 1 4 fullnumber
+4 1 6 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+6 2 4 fullnumber
+8 2 6 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+2 3 4 fullnumber
+5 3 6 fullnumber
+1 3 9 fullnumber
+6 4 1 fullnumber
+8 4 2 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+3 4 8 fullnumber
+4 5 2 fullnumber
+7 5 4 fullnumber
+8 5 5 fullnumber
+2 5 6 fullnumber
+5 5 8 fullnumber
+7 6 2 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+4 6 8 fullnumber
+2 7 1 fullnumber
+1 7 4 fullnumber
+4 7 5 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+8 8 4 fullnumber
+9 8 5 fullnumber
+3 8 6 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+5 9 4 fullnumber
+2 9 5 fullnumber
+6 9 6 fullnumber
+4 9 7 fullnumber
+1 9 8 fullnumber
+1 1 1 showcandidate
+3 1 1 showcandidate
+5 1 1 showcandidate
+1 1 3 showcandidate
+3 1 3 showcandidate
+5 1 3 showcandidate
+6 1 3 showcandidate
+1 1 5 showcandidate
+3 1 5 showcandidate
+7 1 5 showcandidate
+3 1 7 showcandidate
+5 1 7 showcandidate
+6 1 7 showcandidate
+7 1 7 showcandidate
+8 1 7 showcandidate
+7 1 8 showcandidate
+8 1 8 showcandidate
+5 1 9 showcandidate
+6 1 9 showcandidate
+7 1 9 showcandidate
+8 1 9 showcandidate
+1 2 3 showcandidate
+3 2 3 showcandidate
+5 2 3 showcandidate
+1 2 5 showcandidate
+3 2 5 showcandidate
+3 2 7 showcandidate
+5 2 7 showcandidate
+6 3 2 showcandidate
+3 3 3 showcandidate
+4 3 3 showcandidate
+6 3 3 showcandidate
+3 3 5 showcandidate
+7 3 5 showcandidate
+3 3 7 showcandidate
+6 3 7 showcandidate
+7 3 7 showcandidate
+9 3 7 showcandidate
+7 3 8 showcandidate
+9 3 8 showcandidate
+2 4 3 showcandidate
+9 4 3 showcandidate
+2 4 7 showcandidate
+7 4 7 showcandidate
+7 4 9 showcandidate
+9 4 9 showcandidate
+1 5 1 showcandidate
+3 5 1 showcandidate
+1 5 3 showcandidate
+3 5 3 showcandidate
+9 5 3 showcandidate
+1 5 7 showcandidate
+6 5 7 showcandidate
+6 5 9 showcandidate
+9 5 9 showcandidate
+1 6 1 showcandidate
+5 6 1 showcandidate
+1 6 3 showcandidate
+2 6 3 showcandidate
+5 6 3 showcandidate
+1 6 7 showcandidate
+2 6 7 showcandidate
+8 6 7 showcandidate
+8 6 9 showcandidate
+5 7 2 showcandidate
+6 7 2 showcandidate
+5 7 3 showcandidate
+6 7 3 showcandidate
+8 7 3 showcandidate
+5 7 7 showcandidate
+8 7 7 showcandidate
+9 7 7 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+5 8 3 showcandidate
+7 8 3 showcandidate
+5 8 7 showcandidate
+7 8 7 showcandidate
+7 9 3 showcandidate
+8 9 3 showcandidate
+7 9 9 showcandidate
+8 9 9 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+2 0.9 0.9 0.9 highlightcol
+7 2 0.8 0.8 1 highlightcell
+2 1 2 fullnumber
+9 1 4 fullnumber
+4 1 6 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+6 2 4 fullnumber
+8 2 6 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+6 3 2 fullnumber
+2 3 4 fullnumber
+5 3 6 fullnumber
+1 3 9 fullnumber
+6 4 1 fullnumber
+8 4 2 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+3 4 8 fullnumber
+4 5 2 fullnumber
+7 5 4 fullnumber
+8 5 5 fullnumber
+2 5 6 fullnumber
+5 5 8 fullnumber
+7 6 2 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+4 6 8 fullnumber
+2 7 1 fullnumber
+1 7 4 fullnumber
+4 7 5 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+8 8 4 fullnumber
+9 8 5 fullnumber
+3 8 6 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+5 9 4 fullnumber
+2 9 5 fullnumber
+6 9 6 fullnumber
+4 9 7 fullnumber
+1 9 8 fullnumber
+1 1 1 showcandidate
+3 1 1 showcandidate
+5 1 1 showcandidate
+1 1 3 showcandidate
+3 1 3 showcandidate
+5 1 3 showcandidate
+1 1 5 showcandidate
+3 1 5 showcandidate
+7 1 5 showcandidate
+3 1 7 showcandidate
+5 1 7 showcandidate
+6 1 7 showcandidate
+7 1 7 showcandidate
+8 1 7 showcandidate
+7 1 8 showcandidate
+8 1 8 showcandidate
+5 1 9 showcandidate
+6 1 9 showcandidate
+7 1 9 showcandidate
+8 1 9 showcandidate
+1 2 3 showcandidate
+3 2 3 showcandidate
+5 2 3 showcandidate
+1 2 5 showcandidate
+3 2 5 showcandidate
+3 2 7 showcandidate
+5 2 7 showcandidate
+3 3 3 showcandidate
+4 3 3 showcandidate
+3 3 5 showcandidate
+7 3 5 showcandidate
+3 3 7 showcandidate
+7 3 7 showcandidate
+9 3 7 showcandidate
+7 3 8 showcandidate
+9 3 8 showcandidate
+2 4 3 showcandidate
+9 4 3 showcandidate
+2 4 7 showcandidate
+7 4 7 showcandidate
+7 4 9 showcandidate
+9 4 9 showcandidate
+1 5 1 showcandidate
+3 5 1 showcandidate
+1 5 3 showcandidate
+3 5 3 showcandidate
+9 5 3 showcandidate
+1 5 7 showcandidate
+6 5 7 showcandidate
+6 5 9 showcandidate
+9 5 9 showcandidate
+1 6 1 showcandidate
+5 6 1 showcandidate
+1 6 3 showcandidate
+2 6 3 showcandidate
+5 6 3 showcandidate
+1 6 7 showcandidate
+2 6 7 showcandidate
+8 6 7 showcandidate
+8 6 9 showcandidate
+5 7 2 showcandidate
+5 7 3 showcandidate
+6 7 3 showcandidate
+8 7 3 showcandidate
+5 7 7 showcandidate
+8 7 7 showcandidate
+9 7 7 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+5 8 3 showcandidate
+7 8 3 showcandidate
+5 8 7 showcandidate
+7 8 7 showcandidate
+7 9 3 showcandidate
+8 9 3 showcandidate
+7 9 9 showcandidate
+8 9 9 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+8 3 0.8 0.8 1 highlightcell
+1.5 8 2 1 0 0 outlinecell
+1.5 7 1 1 0.5 0.5 outlinecell
+1.5 8 9 1 0.5 0.5 outlinecell
+1.5 8 6 1 0.5 0.5 outlinecell
+1.5 9 2 1 0.5 0.5 outlinecell
+1.5 8 1 1 0 0 outlinecell
+1.5 7 2 1 0 0 outlinecell
+1.5 8 8 1 0 0 outlinecell
+1.5 8 4 1 0 0 outlinecell
+1.5 8 5 1 0.5 0.5 outlinecell
+1.5 9 1 1 0.5 0.5 outlinecell
+2 1 2 fullnumber
+9 1 4 fullnumber
+4 1 6 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+6 2 4 fullnumber
+8 2 6 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+6 3 2 fullnumber
+2 3 4 fullnumber
+5 3 6 fullnumber
+1 3 9 fullnumber
+6 4 1 fullnumber
+8 4 2 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+3 4 8 fullnumber
+4 5 2 fullnumber
+7 5 4 fullnumber
+8 5 5 fullnumber
+2 5 6 fullnumber
+5 5 8 fullnumber
+7 6 2 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+4 6 8 fullnumber
+2 7 1 fullnumber
+5 7 2 fullnumber
+1 7 4 fullnumber
+4 7 5 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+8 8 4 fullnumber
+9 8 5 fullnumber
+3 8 6 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+5 9 4 fullnumber
+2 9 5 fullnumber
+6 9 6 fullnumber
+4 9 7 fullnumber
+1 9 8 fullnumber
+1 1 1 showcandidate
+3 1 1 showcandidate
+5 1 1 showcandidate
+1 1 3 showcandidate
+3 1 3 showcandidate
+5 1 3 showcandidate
+1 1 5 showcandidate
+3 1 5 showcandidate
+7 1 5 showcandidate
+3 1 7 showcandidate
+5 1 7 showcandidate
+6 1 7 showcandidate
+7 1 7 showcandidate
+8 1 7 showcandidate
+7 1 8 showcandidate
+8 1 8 showcandidate
+5 1 9 showcandidate
+6 1 9 showcandidate
+7 1 9 showcandidate
+8 1 9 showcandidate
+1 2 3 showcandidate
+3 2 3 showcandidate
+5 2 3 showcandidate
+1 2 5 showcandidate
+3 2 5 showcandidate
+3 2 7 showcandidate
+5 2 7 showcandidate
+3 3 3 showcandidate
+4 3 3 showcandidate
+3 3 5 showcandidate
+7 3 5 showcandidate
+3 3 7 showcandidate
+7 3 7 showcandidate
+9 3 7 showcandidate
+7 3 8 showcandidate
+9 3 8 showcandidate
+2 4 3 showcandidate
+9 4 3 showcandidate
+2 4 7 showcandidate
+7 4 7 showcandidate
+7 4 9 showcandidate
+9 4 9 showcandidate
+1 5 1 showcandidate
+3 5 1 showcandidate
+1 5 3 showcandidate
+3 5 3 showcandidate
+9 5 3 showcandidate
+1 5 7 showcandidate
+6 5 7 showcandidate
+6 5 9 showcandidate
+9 5 9 showcandidate
+1 6 1 showcandidate
+5 6 1 showcandidate
+1 6 3 showcandidate
+2 6 3 showcandidate
+5 6 3 showcandidate
+1 6 7 showcandidate
+2 6 7 showcandidate
+8 6 7 showcandidate
+8 6 9 showcandidate
+6 7 3 showcandidate
+8 7 3 showcandidate
+8 7 7 showcandidate
+9 7 7 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+7 8 3 showcandidate
+5 8 7 showcandidate
+7 8 7 showcandidate
+7 9 3 showcandidate
+8 9 3 showcandidate
+7 9 9 showcandidate
+8 9 9 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+8 0.9 0.9 0.9 highlightrow
+8 7 0.8 0.8 1 highlightcell
+2 1 2 fullnumber
+9 1 4 fullnumber
+4 1 6 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+6 2 4 fullnumber
+8 2 6 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+6 3 2 fullnumber
+2 3 4 fullnumber
+5 3 6 fullnumber
+1 3 9 fullnumber
+6 4 1 fullnumber
+8 4 2 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+3 4 8 fullnumber
+4 5 2 fullnumber
+7 5 4 fullnumber
+8 5 5 fullnumber
+2 5 6 fullnumber
+5 5 8 fullnumber
+7 6 2 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+4 6 8 fullnumber
+2 7 1 fullnumber
+5 7 2 fullnumber
+1 7 4 fullnumber
+4 7 5 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+7 8 3 fullnumber
+8 8 4 fullnumber
+9 8 5 fullnumber
+3 8 6 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+5 9 4 fullnumber
+2 9 5 fullnumber
+6 9 6 fullnumber
+4 9 7 fullnumber
+1 9 8 fullnumber
+1 1 1 showcandidate
+3 1 1 showcandidate
+5 1 1 showcandidate
+1 1 3 showcandidate
+3 1 3 showcandidate
+5 1 3 showcandidate
+1 1 5 showcandidate
+3 1 5 showcandidate
+7 1 5 showcandidate
+3 1 7 showcandidate
+5 1 7 showcandidate
+6 1 7 showcandidate
+7 1 7 showcandidate
+8 1 7 showcandidate
+7 1 8 showcandidate
+8 1 8 showcandidate
+5 1 9 showcandidate
+6 1 9 showcandidate
+7 1 9 showcandidate
+8 1 9 showcandidate
+1 2 3 showcandidate
+3 2 3 showcandidate
+5 2 3 showcandidate
+1 2 5 showcandidate
+3 2 5 showcandidate
+3 2 7 showcandidate
+5 2 7 showcandidate
+3 3 3 showcandidate
+4 3 3 showcandidate
+3 3 5 showcandidate
+7 3 5 showcandidate
+3 3 7 showcandidate
+7 3 7 showcandidate
+9 3 7 showcandidate
+7 3 8 showcandidate
+9 3 8 showcandidate
+2 4 3 showcandidate
+9 4 3 showcandidate
+2 4 7 showcandidate
+7 4 7 showcandidate
+7 4 9 showcandidate
+9 4 9 showcandidate
+1 5 1 showcandidate
+3 5 1 showcandidate
+1 5 3 showcandidate
+3 5 3 showcandidate
+9 5 3 showcandidate
+1 5 7 showcandidate
+6 5 7 showcandidate
+6 5 9 showcandidate
+9 5 9 showcandidate
+1 6 1 showcandidate
+5 6 1 showcandidate
+1 6 3 showcandidate
+2 6 3 showcandidate
+5 6 3 showcandidate
+1 6 7 showcandidate
+2 6 7 showcandidate
+8 6 7 showcandidate
+8 6 9 showcandidate
+6 7 3 showcandidate
+8 7 3 showcandidate
+8 7 7 showcandidate
+9 7 7 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+5 8 7 showcandidate
+8 9 3 showcandidate
+7 9 9 showcandidate
+8 9 9 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+6 9 0.8 0.8 1 highlightcell
+1.5 3 9 1 0 0 outlinecell
+1.5 8 9 1 0 0 outlinecell
+1.5 4 8 1 0.8 0.8 outlinecell
+1.5 6 4 1 0.8 0.8 outlinecell
+1.5 7 9 1 0.8 0.8 outlinecell
+1.5 2 9 1 0.5 0.5 outlinecell
+1.5 6 8 1 0.5 0.5 outlinecell
+1.5 5 8 1 0 0 outlinecell
+1.5 6 5 1 0 0 outlinecell
+1.5 6 2 1 0 0 outlinecell
+1.5 6 6 1 0 0 outlinecell
+2 1 2 fullnumber
+9 1 4 fullnumber
+4 1 6 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+6 2 4 fullnumber
+8 2 6 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+6 3 2 fullnumber
+2 3 4 fullnumber
+5 3 6 fullnumber
+1 3 9 fullnumber
+6 4 1 fullnumber
+8 4 2 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+3 4 8 fullnumber
+4 5 2 fullnumber
+7 5 4 fullnumber
+8 5 5 fullnumber
+2 5 6 fullnumber
+5 5 8 fullnumber
+7 6 2 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+4 6 8 fullnumber
+2 7 1 fullnumber
+5 7 2 fullnumber
+1 7 4 fullnumber
+4 7 5 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+7 8 3 fullnumber
+8 8 4 fullnumber
+9 8 5 fullnumber
+3 8 6 fullnumber
+5 8 7 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+5 9 4 fullnumber
+2 9 5 fullnumber
+6 9 6 fullnumber
+4 9 7 fullnumber
+1 9 8 fullnumber
+1 1 1 showcandidate
+3 1 1 showcandidate
+5 1 1 showcandidate
+1 1 3 showcandidate
+3 1 3 showcandidate
+5 1 3 showcandidate
+1 1 5 showcandidate
+3 1 5 showcandidate
+7 1 5 showcandidate
+3 1 7 showcandidate
+6 1 7 showcandidate
+7 1 7 showcandidate
+8 1 7 showcandidate
+7 1 8 showcandidate
+8 1 8 showcandidate
+5 1 9 showcandidate
+6 1 9 showcandidate
+7 1 9 showcandidate
+8 1 9 showcandidate
+1 2 3 showcandidate
+3 2 3 showcandidate
+5 2 3 showcandidate
+1 2 5 showcandidate
+3 2 5 showcandidate
+3 2 7 showcandidate
+3 3 3 showcandidate
+4 3 3 showcandidate
+3 3 5 showcandidate
+7 3 5 showcandidate
+3 3 7 showcandidate
+7 3 7 showcandidate
+9 3 7 showcandidate
+7 3 8 showcandidate
+9 3 8 showcandidate
+2 4 3 showcandidate
+9 4 3 showcandidate
+2 4 7 showcandidate
+7 4 7 showcandidate
+7 4 9 showcandidate
+9 4 9 showcandidate
+1 5 1 showcandidate
+3 5 1 showcandidate
+1 5 3 showcandidate
+3 5 3 showcandidate
+9 5 3 showcandidate
+1 5 7 showcandidate
+6 5 7 showcandidate
+6 5 9 showcandidate
+9 5 9 showcandidate
+1 6 1 showcandidate
+5 6 1 showcandidate
+1 6 3 showcandidate
+2 6 3 showcandidate
+5 6 3 showcandidate
+1 6 7 showcandidate
+2 6 7 showcandidate
+8 6 7 showcandidate
+8 6 9 showcandidate
+6 7 3 showcandidate
+8 7 3 showcandidate
+8 7 7 showcandidate
+9 7 7 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+8 9 3 showcandidate
+7 9 9 showcandidate
+8 9 9 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+2 7 0.8 0.8 1 highlightcell
+1.5 3 9 1 0 0 outlinecell
+1.5 2 8 1 0 0 outlinecell
+1.5 2 9 1 0.5 0.5 outlinecell
+1.5 9 7 1 0.5 0.5 outlinecell
+1.5 8 7 1 0 0 outlinecell
+1.5 2 4 1 0 0 outlinecell
+1.5 2 1 1 0 0 outlinecell
+1.5 2 6 1 0 0 outlinecell
+1.5 2 2 1 0 0 outlinecell
+2 1 2 fullnumber
+9 1 4 fullnumber
+4 1 6 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+6 2 4 fullnumber
+8 2 6 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+6 3 2 fullnumber
+2 3 4 fullnumber
+5 3 6 fullnumber
+1 3 9 fullnumber
+6 4 1 fullnumber
+8 4 2 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+3 4 8 fullnumber
+4 5 2 fullnumber
+7 5 4 fullnumber
+8 5 5 fullnumber
+2 5 6 fullnumber
+5 5 8 fullnumber
+7 6 2 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+4 6 8 fullnumber
+8 6 9 fullnumber
+2 7 1 fullnumber
+5 7 2 fullnumber
+1 7 4 fullnumber
+4 7 5 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+7 8 3 fullnumber
+8 8 4 fullnumber
+9 8 5 fullnumber
+3 8 6 fullnumber
+5 8 7 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+5 9 4 fullnumber
+2 9 5 fullnumber
+6 9 6 fullnumber
+4 9 7 fullnumber
+1 9 8 fullnumber
+1 1 1 showcandidate
+3 1 1 showcandidate
+5 1 1 showcandidate
+1 1 3 showcandidate
+3 1 3 showcandidate
+5 1 3 showcandidate
+1 1 5 showcandidate
+3 1 5 showcandidate
+7 1 5 showcandidate
+3 1 7 showcandidate
+6 1 7 showcandidate
+7 1 7 showcandidate
+8 1 7 showcandidate
+7 1 8 showcandidate
+8 1 8 showcandidate
+5 1 9 showcandidate
+6 1 9 showcandidate
+7 1 9 showcandidate
+1 2 3 showcandidate
+3 2 3 showcandidate
+5 2 3 showcandidate
+1 2 5 showcandidate
+3 2 5 showcandidate
+3 2 7 showcandidate
+3 3 3 showcandidate
+4 3 3 showcandidate
+3 3 5 showcandidate
+7 3 5 showcandidate
+3 3 7 showcandidate
+7 3 7 showcandidate
+9 3 7 showcandidate
+7 3 8 showcandidate
+9 3 8 showcandidate
+2 4 3 showcandidate
+9 4 3 showcandidate
+2 4 7 showcandidate
+7 4 7 showcandidate
+7 4 9 showcandidate
+9 4 9 showcandidate
+1 5 1 showcandidate
+3 5 1 showcandidate
+1 5 3 showcandidate
+3 5 3 showcandidate
+9 5 3 showcandidate
+1 5 7 showcandidate
+6 5 7 showcandidate
+6 5 9 showcandidate
+9 5 9 showcandidate
+1 6 1 showcandidate
+5 6 1 showcandidate
+1 6 3 showcandidate
+2 6 3 showcandidate
+5 6 3 showcandidate
+1 6 7 showcandidate
+2 6 7 showcandidate
+6 7 3 showcandidate
+8 7 3 showcandidate
+8 7 7 showcandidate
+9 7 7 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+8 9 3 showcandidate
+7 9 9 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+2 5 0.8 0.8 1 highlightcell
+1.5 3 4 1 0.8 0.8 outlinecell
+1.5 2 8 1 0.8 0.8 outlinecell
+1.5 9 5 1 0.8 0.8 outlinecell
+1.5 2 7 1 0 0 outlinecell
+1.5 1 6 1 0.8 0.8 outlinecell
+1.5 7 5 1 0.8 0.8 outlinecell
+1.5 2 9 1 0.8 0.8 outlinecell
+1.5 4 5 1 0.5 0.5 outlinecell
+1.5 3 6 1 0.5 0.5 outlinecell
+1.5 2 4 1 0.5 0.5 outlinecell
+1.5 6 5 1 0.5 0.5 outlinecell
+1.5 2 1 1 0 0 outlinecell
+1.5 5 5 1 0.5 0.5 outlinecell
+1.5 2 6 1 0.5 0.5 outlinecell
+1.5 1 4 1 0.8 0.8 outlinecell
+1.5 2 2 1 0.8 0.8 outlinecell
+1.5 8 5 1 0.8 0.8 outlinecell
+2 1 2 fullnumber
+9 1 4 fullnumber
+4 1 6 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+6 2 4 fullnumber
+8 2 6 fullnumber
+3 2 7 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+6 3 2 fullnumber
+2 3 4 fullnumber
+5 3 6 fullnumber
+1 3 9 fullnumber
+6 4 1 fullnumber
+8 4 2 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+3 4 8 fullnumber
+4 5 2 fullnumber
+7 5 4 fullnumber
+8 5 5 fullnumber
+2 5 6 fullnumber
+5 5 8 fullnumber
+7 6 2 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+4 6 8 fullnumber
+8 6 9 fullnumber
+2 7 1 fullnumber
+5 7 2 fullnumber
+1 7 4 fullnumber
+4 7 5 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+7 8 3 fullnumber
+8 8 4 fullnumber
+9 8 5 fullnumber
+3 8 6 fullnumber
+5 8 7 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+5 9 4 fullnumber
+2 9 5 fullnumber
+6 9 6 fullnumber
+4 9 7 fullnumber
+1 9 8 fullnumber
+1 1 1 showcandidate
+3 1 1 showcandidate
+5 1 1 showcandidate
+1 1 3 showcandidate
+3 1 3 showcandidate
+5 1 3 showcandidate
+1 1 5 showcandidate
+3 1 5 showcandidate
+7 1 5 showcandidate
+6 1 7 showcandidate
+7 1 7 showcandidate
+8 1 7 showcandidate
+7 1 8 showcandidate
+8 1 8 showcandidate
+5 1 9 showcandidate
+6 1 9 showcandidate
+7 1 9 showcandidate
+1 2 3 showcandidate
+5 2 3 showcandidate
+1 2 5 showcandidate
+3 3 3 showcandidate
+4 3 3 showcandidate
+3 3 5 showcandidate
+7 3 5 showcandidate
+7 3 7 showcandidate
+9 3 7 showcandidate
+7 3 8 showcandidate
+9 3 8 showcandidate
+2 4 3 showcandidate
+9 4 3 showcandidate
+2 4 7 showcandidate
+7 4 7 showcandidate
+7 4 9 showcandidate
+9 4 9 showcandidate
+1 5 1 showcandidate
+3 5 1 showcandidate
+1 5 3 showcandidate
+3 5 3 showcandidate
+9 5 3 showcandidate
+1 5 7 showcandidate
+6 5 7 showcandidate
+6 5 9 showcandidate
+9 5 9 showcandidate
+1 6 1 showcandidate
+5 6 1 showcandidate
+1 6 3 showcandidate
+2 6 3 showcandidate
+5 6 3 showcandidate
+1 6 7 showcandidate
+2 6 7 showcandidate
+6 7 3 showcandidate
+8 7 3 showcandidate
+8 7 7 showcandidate
+9 7 7 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+8 9 3 showcandidate
+7 9 9 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+2 0.9 0.9 0.9 highlightrow
+2 3 0.8 0.8 1 highlightcell
+2 1 2 fullnumber
+9 1 4 fullnumber
+4 1 6 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+6 2 4 fullnumber
+1 2 5 fullnumber
+8 2 6 fullnumber
+3 2 7 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+6 3 2 fullnumber
+2 3 4 fullnumber
+5 3 6 fullnumber
+1 3 9 fullnumber
+6 4 1 fullnumber
+8 4 2 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+3 4 8 fullnumber
+4 5 2 fullnumber
+7 5 4 fullnumber
+8 5 5 fullnumber
+2 5 6 fullnumber
+5 5 8 fullnumber
+7 6 2 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+4 6 8 fullnumber
+8 6 9 fullnumber
+2 7 1 fullnumber
+5 7 2 fullnumber
+1 7 4 fullnumber
+4 7 5 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+7 8 3 fullnumber
+8 8 4 fullnumber
+9 8 5 fullnumber
+3 8 6 fullnumber
+5 8 7 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+5 9 4 fullnumber
+2 9 5 fullnumber
+6 9 6 fullnumber
+4 9 7 fullnumber
+1 9 8 fullnumber
+1 1 1 showcandidate
+3 1 1 showcandidate
+5 1 1 showcandidate
+1 1 3 showcandidate
+3 1 3 showcandidate
+5 1 3 showcandidate
+3 1 5 showcandidate
+7 1 5 showcandidate
+6 1 7 showcandidate
+7 1 7 showcandidate
+8 1 7 showcandidate
+7 1 8 showcandidate
+8 1 8 showcandidate
+5 1 9 showcandidate
+6 1 9 showcandidate
+7 1 9 showcandidate
+5 2 3 showcandidate
+3 3 3 showcandidate
+4 3 3 showcandidate
+3 3 5 showcandidate
+7 3 5 showcandidate
+7 3 7 showcandidate
+9 3 7 showcandidate
+7 3 8 showcandidate
+9 3 8 showcandidate
+2 4 3 showcandidate
+9 4 3 showcandidate
+2 4 7 showcandidate
+7 4 7 showcandidate
+7 4 9 showcandidate
+9 4 9 showcandidate
+1 5 1 showcandidate
+3 5 1 showcandidate
+1 5 3 showcandidate
+3 5 3 showcandidate
+9 5 3 showcandidate
+1 5 7 showcandidate
+6 5 7 showcandidate
+6 5 9 showcandidate
+9 5 9 showcandidate
+1 6 1 showcandidate
+5 6 1 showcandidate
+1 6 3 showcandidate
+2 6 3 showcandidate
+5 6 3 showcandidate
+1 6 7 showcandidate
+2 6 7 showcandidate
+6 7 3 showcandidate
+8 7 3 showcandidate
+8 7 7 showcandidate
+9 7 7 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+8 9 3 showcandidate
+7 9 9 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+9 9 0.8 0.8 1 highlightcell
+1.5 3 9 1 0.5 0.5 outlinecell
+1.5 9 8 1 0.5 0.5 outlinecell
+1.5 9 5 1 0.5 0.5 outlinecell
+1.5 8 9 1 0.5 0.5 outlinecell
+1.5 9 2 1 0.5 0.5 outlinecell
+1.5 7 9 1 0.5 0.5 outlinecell
+1.5 2 9 1 0.5 0.5 outlinecell
+1.5 9 7 1 0.5 0.5 outlinecell
+1.5 8 7 1 0.5 0.5 outlinecell
+1.5 9 4 1 0.5 0.5 outlinecell
+1.5 8 8 1 0.5 0.5 outlinecell
+1.5 9 6 1 0.5 0.5 outlinecell
+1.5 6 9 1 0 0 outlinecell
+1.5 9 1 1 0 0 outlinecell
+2 1 2 fullnumber
+9 1 4 fullnumber
+4 1 6 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+5 2 3 fullnumber
+6 2 4 fullnumber
+1 2 5 fullnumber
+8 2 6 fullnumber
+3 2 7 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+6 3 2 fullnumber
+2 3 4 fullnumber
+5 3 6 fullnumber
+1 3 9 fullnumber
+6 4 1 fullnumber
+8 4 2 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+3 4 8 fullnumber
+4 5 2 fullnumber
+7 5 4 fullnumber
+8 5 5 fullnumber
+2 5 6 fullnumber
+5 5 8 fullnumber
+7 6 2 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+4 6 8 fullnumber
+8 6 9 fullnumber
+2 7 1 fullnumber
+5 7 2 fullnumber
+1 7 4 fullnumber
+4 7 5 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+7 8 3 fullnumber
+8 8 4 fullnumber
+9 8 5 fullnumber
+3 8 6 fullnumber
+5 8 7 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+5 9 4 fullnumber
+2 9 5 fullnumber
+6 9 6 fullnumber
+4 9 7 fullnumber
+1 9 8 fullnumber
+1 1 1 showcandidate
+3 1 1 showcandidate
+1 1 3 showcandidate
+3 1 3 showcandidate
+3 1 5 showcandidate
+7 1 5 showcandidate
+6 1 7 showcandidate
+7 1 7 showcandidate
+8 1 7 showcandidate
+7 1 8 showcandidate
+8 1 8 showcandidate
+5 1 9 showcandidate
+6 1 9 showcandidate
+7 1 9 showcandidate
+3 3 3 showcandidate
+4 3 3 showcandidate
+3 3 5 showcandidate
+7 3 5 showcandidate
+7 3 7 showcandidate
+9 3 7 showcandidate
+7 3 8 showcandidate
+9 3 8 showcandidate
+2 4 3 showcandidate
+9 4 3 showcandidate
+2 4 7 showcandidate
+7 4 7 showcandidate
+7 4 9 showcandidate
+9 4 9 showcandidate
+1 5 1 showcandidate
+3 5 1 showcandidate
+1 5 3 showcandidate
+3 5 3 showcandidate
+9 5 3 showcandidate
+1 5 7 showcandidate
+6 5 7 showcandidate
+6 5 9 showcandidate
+9 5 9 showcandidate
+1 6 1 showcandidate
+5 6 1 showcandidate
+1 6 3 showcandidate
+2 6 3 showcandidate
+1 6 7 showcandidate
+2 6 7 showcandidate
+6 7 3 showcandidate
+8 7 3 showcandidate
+8 7 7 showcandidate
+9 7 7 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+8 9 3 showcandidate
+7 9 9 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+9 0.9 0.9 0.9 highlightrow
+9 3 0.8 0.8 1 highlightcell
+2 1 2 fullnumber
+9 1 4 fullnumber
+4 1 6 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+5 2 3 fullnumber
+6 2 4 fullnumber
+1 2 5 fullnumber
+8 2 6 fullnumber
+3 2 7 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+6 3 2 fullnumber
+2 3 4 fullnumber
+5 3 6 fullnumber
+1 3 9 fullnumber
+6 4 1 fullnumber
+8 4 2 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+3 4 8 fullnumber
+4 5 2 fullnumber
+7 5 4 fullnumber
+8 5 5 fullnumber
+2 5 6 fullnumber
+5 5 8 fullnumber
+7 6 2 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+4 6 8 fullnumber
+8 6 9 fullnumber
+2 7 1 fullnumber
+5 7 2 fullnumber
+1 7 4 fullnumber
+4 7 5 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+7 8 3 fullnumber
+8 8 4 fullnumber
+9 8 5 fullnumber
+3 8 6 fullnumber
+5 8 7 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+5 9 4 fullnumber
+2 9 5 fullnumber
+6 9 6 fullnumber
+4 9 7 fullnumber
+1 9 8 fullnumber
+7 9 9 fullnumber
+1 1 1 showcandidate
+3 1 1 showcandidate
+1 1 3 showcandidate
+3 1 3 showcandidate
+3 1 5 showcandidate
+7 1 5 showcandidate
+6 1 7 showcandidate
+7 1 7 showcandidate
+8 1 7 showcandidate
+7 1 8 showcandidate
+8 1 8 showcandidate
+5 1 9 showcandidate
+6 1 9 showcandidate
+3 3 3 showcandidate
+4 3 3 showcandidate
+3 3 5 showcandidate
+7 3 5 showcandidate
+7 3 7 showcandidate
+9 3 7 showcandidate
+7 3 8 showcandidate
+9 3 8 showcandidate
+2 4 3 showcandidate
+9 4 3 showcandidate
+2 4 7 showcandidate
+7 4 7 showcandidate
+9 4 9 showcandidate
+1 5 1 showcandidate
+3 5 1 showcandidate
+1 5 3 showcandidate
+3 5 3 showcandidate
+9 5 3 showcandidate
+1 5 7 showcandidate
+6 5 7 showcandidate
+6 5 9 showcandidate
+9 5 9 showcandidate
+1 6 1 showcandidate
+5 6 1 showcandidate
+1 6 3 showcandidate
+2 6 3 showcandidate
+1 6 7 showcandidate
+2 6 7 showcandidate
+6 7 3 showcandidate
+8 7 3 showcandidate
+8 7 7 showcandidate
+9 7 7 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+8 9 3 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+7 0.9 0.9 0.9 highlightbox
+7 3 0.8 0.8 1 highlightcell
+2 1 2 fullnumber
+9 1 4 fullnumber
+4 1 6 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+5 2 3 fullnumber
+6 2 4 fullnumber
+1 2 5 fullnumber
+8 2 6 fullnumber
+3 2 7 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+6 3 2 fullnumber
+2 3 4 fullnumber
+5 3 6 fullnumber
+1 3 9 fullnumber
+6 4 1 fullnumber
+8 4 2 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+3 4 8 fullnumber
+4 5 2 fullnumber
+7 5 4 fullnumber
+8 5 5 fullnumber
+2 5 6 fullnumber
+5 5 8 fullnumber
+7 6 2 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+4 6 8 fullnumber
+8 6 9 fullnumber
+2 7 1 fullnumber
+5 7 2 fullnumber
+1 7 4 fullnumber
+4 7 5 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+7 8 3 fullnumber
+8 8 4 fullnumber
+9 8 5 fullnumber
+3 8 6 fullnumber
+5 8 7 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+8 9 3 fullnumber
+5 9 4 fullnumber
+2 9 5 fullnumber
+6 9 6 fullnumber
+4 9 7 fullnumber
+1 9 8 fullnumber
+7 9 9 fullnumber
+1 1 1 showcandidate
+3 1 1 showcandidate
+1 1 3 showcandidate
+3 1 3 showcandidate
+3 1 5 showcandidate
+7 1 5 showcandidate
+6 1 7 showcandidate
+7 1 7 showcandidate
+8 1 7 showcandidate
+7 1 8 showcandidate
+8 1 8 showcandidate
+5 1 9 showcandidate
+6 1 9 showcandidate
+3 3 3 showcandidate
+4 3 3 showcandidate
+3 3 5 showcandidate
+7 3 5 showcandidate
+7 3 7 showcandidate
+9 3 7 showcandidate
+7 3 8 showcandidate
+9 3 8 showcandidate
+2 4 3 showcandidate
+9 4 3 showcandidate
+2 4 7 showcandidate
+7 4 7 showcandidate
+9 4 9 showcandidate
+1 5 1 showcandidate
+3 5 1 showcandidate
+1 5 3 showcandidate
+3 5 3 showcandidate
+9 5 3 showcandidate
+1 5 7 showcandidate
+6 5 7 showcandidate
+6 5 9 showcandidate
+9 5 9 showcandidate
+1 6 1 showcandidate
+5 6 1 showcandidate
+1 6 3 showcandidate
+2 6 3 showcandidate
+1 6 7 showcandidate
+2 6 7 showcandidate
+6 7 3 showcandidate
+8 7 7 showcandidate
+9 7 7 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+4 9 0.8 0.8 1 highlightcell
+1.5 3 9 1 0.5 0.5 outlinecell
+1.5 4 6 1 0.5 0.5 outlinecell
+1.5 8 9 1 0 0 outlinecell
+1.5 4 8 1 0.5 0.5 outlinecell
+1.5 7 9 1 0.5 0.5 outlinecell
+1.5 2 9 1 0.8 0.8 outlinecell
+1.5 4 4 1 0.8 0.8 outlinecell
+1.5 6 8 1 0.8 0.8 outlinecell
+1.5 5 8 1 0.5 0.5 outlinecell
+1.5 4 5 1 0.5 0.5 outlinecell
+1.5 4 1 1 0 0 outlinecell
+1.5 9 9 1 0 0 outlinecell
+1.5 4 2 1 0.5 0.5 outlinecell
+1.5 6 9 1 0.5 0.5 outlinecell
+2 1 2 fullnumber
+9 1 4 fullnumber
+4 1 6 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+5 2 3 fullnumber
+6 2 4 fullnumber
+1 2 5 fullnumber
+8 2 6 fullnumber
+3 2 7 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+6 3 2 fullnumber
+2 3 4 fullnumber
+5 3 6 fullnumber
+1 3 9 fullnumber
+6 4 1 fullnumber
+8 4 2 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+3 4 8 fullnumber
+4 5 2 fullnumber
+7 5 4 fullnumber
+8 5 5 fullnumber
+2 5 6 fullnumber
+5 5 8 fullnumber
+7 6 2 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+4 6 8 fullnumber
+8 6 9 fullnumber
+2 7 1 fullnumber
+5 7 2 fullnumber
+6 7 3 fullnumber
+1 7 4 fullnumber
+4 7 5 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+7 8 3 fullnumber
+8 8 4 fullnumber
+9 8 5 fullnumber
+3 8 6 fullnumber
+5 8 7 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+8 9 3 fullnumber
+5 9 4 fullnumber
+2 9 5 fullnumber
+6 9 6 fullnumber
+4 9 7 fullnumber
+1 9 8 fullnumber
+7 9 9 fullnumber
+1 1 1 showcandidate
+3 1 1 showcandidate
+1 1 3 showcandidate
+3 1 3 showcandidate
+3 1 5 showcandidate
+7 1 5 showcandidate
+6 1 7 showcandidate
+7 1 7 showcandidate
+8 1 7 showcandidate
+7 1 8 showcandidate
+8 1 8 showcandidate
+5 1 9 showcandidate
+6 1 9 showcandidate
+3 3 3 showcandidate
+4 3 3 showcandidate
+3 3 5 showcandidate
+7 3 5 showcandidate
+7 3 7 showcandidate
+9 3 7 showcandidate
+7 3 8 showcandidate
+9 3 8 showcandidate
+2 4 3 showcandidate
+9 4 3 showcandidate
+2 4 7 showcandidate
+7 4 7 showcandidate
+9 4 9 showcandidate
+1 5 1 showcandidate
+3 5 1 showcandidate
+1 5 3 showcandidate
+3 5 3 showcandidate
+9 5 3 showcandidate
+1 5 7 showcandidate
+6 5 7 showcandidate
+6 5 9 showcandidate
+9 5 9 showcandidate
+1 6 1 showcandidate
+5 6 1 showcandidate
+1 6 3 showcandidate
+2 6 3 showcandidate
+1 6 7 showcandidate
+2 6 7 showcandidate
+8 7 7 showcandidate
+9 7 7 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+4 3 0.8 0.8 1 highlightcell
+1.5 4 6 1 0 0 outlinecell
+1.5 4 8 1 0 0 outlinecell
+1.5 4 4 1 0.5 0.5 outlinecell
+1.5 5 2 1 0.5 0.5 outlinecell
+1.5 2 3 1 0.5 0.5 outlinecell
+1.5 4 5 1 0.5 0.5 outlinecell
+1.5 4 1 1 0.5 0.5 outlinecell
+1.5 7 3 1 0.5 0.5 outlinecell
+1.5 6 2 1 0.5 0.5 outlinecell
+1.5 8 3 1 0.5 0.5 outlinecell
+1.5 4 2 1 0.5 0.5 outlinecell
+1.5 9 3 1 0.5 0.5 outlinecell
+1.5 4 9 1 0 0 outlinecell
+2 1 2 fullnumber
+9 1 4 fullnumber
+4 1 6 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+5 2 3 fullnumber
+6 2 4 fullnumber
+1 2 5 fullnumber
+8 2 6 fullnumber
+3 2 7 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+6 3 2 fullnumber
+2 3 4 fullnumber
+5 3 6 fullnumber
+1 3 9 fullnumber
+6 4 1 fullnumber
+8 4 2 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+3 4 8 fullnumber
+9 4 9 fullnumber
+4 5 2 fullnumber
+7 5 4 fullnumber
+8 5 5 fullnumber
+2 5 6 fullnumber
+5 5 8 fullnumber
+7 6 2 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+4 6 8 fullnumber
+8 6 9 fullnumber
+2 7 1 fullnumber
+5 7 2 fullnumber
+6 7 3 fullnumber
+1 7 4 fullnumber
+4 7 5 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+7 8 3 fullnumber
+8 8 4 fullnumber
+9 8 5 fullnumber
+3 8 6 fullnumber
+5 8 7 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+8 9 3 fullnumber
+5 9 4 fullnumber
+2 9 5 fullnumber
+6 9 6 fullnumber
+4 9 7 fullnumber
+1 9 8 fullnumber
+7 9 9 fullnumber
+1 1 1 showcandidate
+3 1 1 showcandidate
+1 1 3 showcandidate
+3 1 3 showcandidate
+3 1 5 showcandidate
+7 1 5 showcandidate
+6 1 7 showcandidate
+7 1 7 showcandidate
+8 1 7 showcandidate
+7 1 8 showcandidate
+8 1 8 showcandidate
+5 1 9 showcandidate
+6 1 9 showcandidate
+3 3 3 showcandidate
+4 3 3 showcandidate
+3 3 5 showcandidate
+7 3 5 showcandidate
+7 3 7 showcandidate
+9 3 7 showcandidate
+7 3 8 showcandidate
+9 3 8 showcandidate
+2 4 3 showcandidate
+2 4 7 showcandidate
+7 4 7 showcandidate
+1 5 1 showcandidate
+3 5 1 showcandidate
+1 5 3 showcandidate
+3 5 3 showcandidate
+9 5 3 showcandidate
+1 5 7 showcandidate
+6 5 7 showcandidate
+6 5 9 showcandidate
+1 6 1 showcandidate
+5 6 1 showcandidate
+1 6 3 showcandidate
+2 6 3 showcandidate
+1 6 7 showcandidate
+2 6 7 showcandidate
+8 7 7 showcandidate
+9 7 7 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+4 0.9 0.9 0.9 highlightrow
+4 7 0.8 0.8 1 highlightcell
+2 1 2 fullnumber
+9 1 4 fullnumber
+4 1 6 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+5 2 3 fullnumber
+6 2 4 fullnumber
+1 2 5 fullnumber
+8 2 6 fullnumber
+3 2 7 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+6 3 2 fullnumber
+2 3 4 fullnumber
+5 3 6 fullnumber
+1 3 9 fullnumber
+6 4 1 fullnumber
+8 4 2 fullnumber
+2 4 3 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+3 4 8 fullnumber
+9 4 9 fullnumber
+4 5 2 fullnumber
+7 5 4 fullnumber
+8 5 5 fullnumber
+2 5 6 fullnumber
+5 5 8 fullnumber
+7 6 2 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+4 6 8 fullnumber
+8 6 9 fullnumber
+2 7 1 fullnumber
+5 7 2 fullnumber
+6 7 3 fullnumber
+1 7 4 fullnumber
+4 7 5 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+7 8 3 fullnumber
+8 8 4 fullnumber
+9 8 5 fullnumber
+3 8 6 fullnumber
+5 8 7 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+8 9 3 fullnumber
+5 9 4 fullnumber
+2 9 5 fullnumber
+6 9 6 fullnumber
+4 9 7 fullnumber
+1 9 8 fullnumber
+7 9 9 fullnumber
+1 1 1 showcandidate
+3 1 1 showcandidate
+1 1 3 showcandidate
+3 1 3 showcandidate
+3 1 5 showcandidate
+7 1 5 showcandidate
+6 1 7 showcandidate
+7 1 7 showcandidate
+8 1 7 showcandidate
+7 1 8 showcandidate
+8 1 8 showcandidate
+5 1 9 showcandidate
+6 1 9 showcandidate
+3 3 3 showcandidate
+4 3 3 showcandidate
+3 3 5 showcandidate
+7 3 5 showcandidate
+7 3 7 showcandidate
+9 3 7 showcandidate
+7 3 8 showcandidate
+9 3 8 showcandidate
+7 4 7 showcandidate
+1 5 1 showcandidate
+3 5 1 showcandidate
+1 5 3 showcandidate
+3 5 3 showcandidate
+9 5 3 showcandidate
+1 5 7 showcandidate
+6 5 7 showcandidate
+6 5 9 showcandidate
+1 6 1 showcandidate
+5 6 1 showcandidate
+1 6 3 showcandidate
+1 6 7 showcandidate
+2 6 7 showcandidate
+8 7 7 showcandidate
+9 7 7 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+3 7 0.8 0.8 1 highlightcell
+1.5 3 9 1 0 0 outlinecell
+1.5 3 4 1 0.5 0.5 outlinecell
+1.5 2 8 1 0.5 0.5 outlinecell
+1.5 2 7 1 0 0 outlinecell
+1.5 2 9 1 0.5 0.5 outlinecell
+1.5 9 7 1 0.5 0.5 outlinecell
+1.5 3 6 1 0.5 0.5 outlinecell
+1.5 8 7 1 0.5 0.5 outlinecell
+1.5 3 2 1 0 0 outlinecell
+1.5 4 7 1 0 0 outlinecell
+1.5 3 1 1 0 0 outlinecell
+2 1 2 fullnumber
+9 1 4 fullnumber
+4 1 6 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+5 2 3 fullnumber
+6 2 4 fullnumber
+1 2 5 fullnumber
+8 2 6 fullnumber
+3 2 7 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+6 3 2 fullnumber
+2 3 4 fullnumber
+5 3 6 fullnumber
+1 3 9 fullnumber
+6 4 1 fullnumber
+8 4 2 fullnumber
+2 4 3 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+7 4 7 fullnumber
+3 4 8 fullnumber
+9 4 9 fullnumber
+4 5 2 fullnumber
+7 5 4 fullnumber
+8 5 5 fullnumber
+2 5 6 fullnumber
+5 5 8 fullnumber
+7 6 2 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+4 6 8 fullnumber
+8 6 9 fullnumber
+2 7 1 fullnumber
+5 7 2 fullnumber
+6 7 3 fullnumber
+1 7 4 fullnumber
+4 7 5 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+7 8 3 fullnumber
+8 8 4 fullnumber
+9 8 5 fullnumber
+3 8 6 fullnumber
+5 8 7 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+8 9 3 fullnumber
+5 9 4 fullnumber
+2 9 5 fullnumber
+6 9 6 fullnumber
+4 9 7 fullnumber
+1 9 8 fullnumber
+7 9 9 fullnumber
+1 1 1 showcandidate
+3 1 1 showcandidate
+1 1 3 showcandidate
+3 1 3 showcandidate
+3 1 5 showcandidate
+7 1 5 showcandidate
+6 1 7 showcandidate
+8 1 7 showcandidate
+7 1 8 showcandidate
+8 1 8 showcandidate
+5 1 9 showcandidate
+6 1 9 showcandidate
+3 3 3 showcandidate
+4 3 3 showcandidate
+3 3 5 showcandidate
+7 3 5 showcandidate
+9 3 7 showcandidate
+7 3 8 showcandidate
+9 3 8 showcandidate
+1 5 1 showcandidate
+3 5 1 showcandidate
+1 5 3 showcandidate
+3 5 3 showcandidate
+9 5 3 showcandidate
+1 5 7 showcandidate
+6 5 7 showcandidate
+6 5 9 showcandidate
+1 6 1 showcandidate
+5 6 1 showcandidate
+1 6 3 showcandidate
+1 6 7 showcandidate
+2 6 7 showcandidate
+8 7 7 showcandidate
+9 7 7 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+5 9 0.8 0.8 1 highlightcell
+1.5 3 9 1 0 0 outlinecell
+1.5 5 6 1 0.5 0.5 outlinecell
+1.5 8 9 1 0.5 0.5 outlinecell
+1.5 4 8 1 0.5 0.5 outlinecell
+1.5 7 9 1 0.5 0.5 outlinecell
+1.5 5 2 1 0.8 0.8 outlinecell
+1.5 2 9 1 0.8 0.8 outlinecell
+1.5 6 8 1 0.8 0.8 outlinecell
+1.5 5 8 1 0 0 outlinecell
+1.5 4 7 1 0.8 0.8 outlinecell
+1.5 5 4 1 0.8 0.8 outlinecell
+1.5 9 9 1 0.8 0.8 outlinecell
+1.5 5 5 1 0.5 0.5 outlinecell
+1.5 6 9 1 0.5 0.5 outlinecell
+1.5 4 9 1 0 0 outlinecell
+2 1 2 fullnumber
+9 1 4 fullnumber
+4 1 6 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+5 2 3 fullnumber
+6 2 4 fullnumber
+1 2 5 fullnumber
+8 2 6 fullnumber
+3 2 7 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+6 3 2 fullnumber
+2 3 4 fullnumber
+5 3 6 fullnumber
+9 3 7 fullnumber
+1 3 9 fullnumber
+6 4 1 fullnumber
+8 4 2 fullnumber
+2 4 3 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+7 4 7 fullnumber
+3 4 8 fullnumber
+9 4 9 fullnumber
+4 5 2 fullnumber
+7 5 4 fullnumber
+8 5 5 fullnumber
+2 5 6 fullnumber
+5 5 8 fullnumber
+7 6 2 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+4 6 8 fullnumber
+8 6 9 fullnumber
+2 7 1 fullnumber
+5 7 2 fullnumber
+6 7 3 fullnumber
+1 7 4 fullnumber
+4 7 5 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+7 8 3 fullnumber
+8 8 4 fullnumber
+9 8 5 fullnumber
+3 8 6 fullnumber
+5 8 7 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+8 9 3 fullnumber
+5 9 4 fullnumber
+2 9 5 fullnumber
+6 9 6 fullnumber
+4 9 7 fullnumber
+1 9 8 fullnumber
+7 9 9 fullnumber
+1 1 1 showcandidate
+3 1 1 showcandidate
+1 1 3 showcandidate
+3 1 3 showcandidate
+3 1 5 showcandidate
+7 1 5 showcandidate
+6 1 7 showcandidate
+8 1 7 showcandidate
+7 1 8 showcandidate
+8 1 8 showcandidate
+5 1 9 showcandidate
+6 1 9 showcandidate
+3 3 3 showcandidate
+4 3 3 showcandidate
+3 3 5 showcandidate
+7 3 5 showcandidate
+7 3 8 showcandidate
+1 5 1 showcandidate
+3 5 1 showcandidate
+1 5 3 showcandidate
+3 5 3 showcandidate
+9 5 3 showcandidate
+1 5 7 showcandidate
+6 5 7 showcandidate
+6 5 9 showcandidate
+1 6 1 showcandidate
+5 6 1 showcandidate
+1 6 3 showcandidate
+1 6 7 showcandidate
+2 6 7 showcandidate
+8 7 7 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+9 0.9 0.9 0.9 highlightcol
+1 9 0.8 0.8 1 highlightcell
+2 1 2 fullnumber
+9 1 4 fullnumber
+4 1 6 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+5 2 3 fullnumber
+6 2 4 fullnumber
+1 2 5 fullnumber
+8 2 6 fullnumber
+3 2 7 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+6 3 2 fullnumber
+2 3 4 fullnumber
+5 3 6 fullnumber
+9 3 7 fullnumber
+1 3 9 fullnumber
+6 4 1 fullnumber
+8 4 2 fullnumber
+2 4 3 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+7 4 7 fullnumber
+3 4 8 fullnumber
+9 4 9 fullnumber
+4 5 2 fullnumber
+7 5 4 fullnumber
+8 5 5 fullnumber
+2 5 6 fullnumber
+5 5 8 fullnumber
+6 5 9 fullnumber
+7 6 2 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+4 6 8 fullnumber
+8 6 9 fullnumber
+2 7 1 fullnumber
+5 7 2 fullnumber
+6 7 3 fullnumber
+1 7 4 fullnumber
+4 7 5 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+7 8 3 fullnumber
+8 8 4 fullnumber
+9 8 5 fullnumber
+3 8 6 fullnumber
+5 8 7 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+8 9 3 fullnumber
+5 9 4 fullnumber
+2 9 5 fullnumber
+6 9 6 fullnumber
+4 9 7 fullnumber
+1 9 8 fullnumber
+7 9 9 fullnumber
+1 1 1 showcandidate
+3 1 1 showcandidate
+1 1 3 showcandidate
+3 1 3 showcandidate
+3 1 5 showcandidate
+7 1 5 showcandidate
+6 1 7 showcandidate
+8 1 7 showcandidate
+7 1 8 showcandidate
+8 1 8 showcandidate
+5 1 9 showcandidate
+3 3 3 showcandidate
+4 3 3 showcandidate
+3 3 5 showcandidate
+7 3 5 showcandidate
+7 3 8 showcandidate
+1 5 1 showcandidate
+3 5 1 showcandidate
+1 5 3 showcandidate
+3 5 3 showcandidate
+9 5 3 showcandidate
+1 5 7 showcandidate
+1 6 1 showcandidate
+5 6 1 showcandidate
+1 6 3 showcandidate
+1 6 7 showcandidate
+2 6 7 showcandidate
+8 7 7 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+5 7 0.8 0.8 1 highlightcell
+1.5 5 6 1 0 0 outlinecell
+1.5 4 8 1 0.5 0.5 outlinecell
+1.5 2 7 1 0.5 0.5 outlinecell
+1.5 5 2 1 0.8 0.8 outlinecell
+1.5 6 8 1 0.8 0.8 outlinecell
+1.5 9 7 1 0.8 0.8 outlinecell
+1.5 5 8 1 0.5 0.5 outlinecell
+1.5 8 7 1 0.5 0.5 outlinecell
+1.5 5 9 1 0 0 outlinecell
+1.5 4 7 1 0.5 0.5 outlinecell
+1.5 5 4 1 0.5 0.5 outlinecell
+1.5 5 5 1 0.5 0.5 outlinecell
+1.5 6 9 1 0.5 0.5 outlinecell
+1.5 4 9 1 0.5 0.5 outlinecell
+1.5 3 7 1 0.5 0.5 outlinecell
+2 1 2 fullnumber
+9 1 4 fullnumber
+4 1 6 fullnumber
+5 1 9 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+5 2 3 fullnumber
+6 2 4 fullnumber
+1 2 5 fullnumber
+8 2 6 fullnumber
+3 2 7 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+6 3 2 fullnumber
+2 3 4 fullnumber
+5 3 6 fullnumber
+9 3 7 fullnumber
+1 3 9 fullnumber
+6 4 1 fullnumber
+8 4 2 fullnumber
+2 4 3 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+7 4 7 fullnumber
+3 4 8 fullnumber
+9 4 9 fullnumber
+4 5 2 fullnumber
+7 5 4 fullnumber
+8 5 5 fullnumber
+2 5 6 fullnumber
+5 5 8 fullnumber
+6 5 9 fullnumber
+7 6 2 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+4 6 8 fullnumber
+8 6 9 fullnumber
+2 7 1 fullnumber
+5 7 2 fullnumber
+6 7 3 fullnumber
+1 7 4 fullnumber
+4 7 5 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+7 8 3 fullnumber
+8 8 4 fullnumber
+9 8 5 fullnumber
+3 8 6 fullnumber
+5 8 7 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+8 9 3 fullnumber
+5 9 4 fullnumber
+2 9 5 fullnumber
+6 9 6 fullnumber
+4 9 7 fullnumber
+1 9 8 fullnumber
+7 9 9 fullnumber
+1 1 1 showcandidate
+3 1 1 showcandidate
+1 1 3 showcandidate
+3 1 3 showcandidate
+3 1 5 showcandidate
+7 1 5 showcandidate
+6 1 7 showcandidate
+8 1 7 showcandidate
+7 1 8 showcandidate
+8 1 8 showcandidate
+3 3 3 showcandidate
+4 3 3 showcandidate
+3 3 5 showcandidate
+7 3 5 showcandidate
+7 3 8 showcandidate
+1 5 1 showcandidate
+3 5 1 showcandidate
+1 5 3 showcandidate
+3 5 3 showcandidate
+9 5 3 showcandidate
+1 5 7 showcandidate
+1 6 1 showcandidate
+5 6 1 showcandidate
+1 6 3 showcandidate
+1 6 7 showcandidate
+2 6 7 showcandidate
+8 7 7 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+6 0.9 0.9 0.9 highlightbox
+6 7 0.8 0.8 1 highlightcell
+2 1 2 fullnumber
+9 1 4 fullnumber
+4 1 6 fullnumber
+5 1 9 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+5 2 3 fullnumber
+6 2 4 fullnumber
+1 2 5 fullnumber
+8 2 6 fullnumber
+3 2 7 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+6 3 2 fullnumber
+2 3 4 fullnumber
+5 3 6 fullnumber
+9 3 7 fullnumber
+1 3 9 fullnumber
+6 4 1 fullnumber
+8 4 2 fullnumber
+2 4 3 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+7 4 7 fullnumber
+3 4 8 fullnumber
+9 4 9 fullnumber
+4 5 2 fullnumber
+7 5 4 fullnumber
+8 5 5 fullnumber
+2 5 6 fullnumber
+1 5 7 fullnumber
+5 5 8 fullnumber
+6 5 9 fullnumber
+7 6 2 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+4 6 8 fullnumber
+8 6 9 fullnumber
+2 7 1 fullnumber
+5 7 2 fullnumber
+6 7 3 fullnumber
+1 7 4 fullnumber
+4 7 5 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+7 8 3 fullnumber
+8 8 4 fullnumber
+9 8 5 fullnumber
+3 8 6 fullnumber
+5 8 7 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+8 9 3 fullnumber
+5 9 4 fullnumber
+2 9 5 fullnumber
+6 9 6 fullnumber
+4 9 7 fullnumber
+1 9 8 fullnumber
+7 9 9 fullnumber
+1 1 1 showcandidate
+3 1 1 showcandidate
+1 1 3 showcandidate
+3 1 3 showcandidate
+3 1 5 showcandidate
+7 1 5 showcandidate
+6 1 7 showcandidate
+8 1 7 showcandidate
+7 1 8 showcandidate
+8 1 8 showcandidate
+3 3 3 showcandidate
+4 3 3 showcandidate
+3 3 5 showcandidate
+7 3 5 showcandidate
+7 3 8 showcandidate
+3 5 1 showcandidate
+3 5 3 showcandidate
+9 5 3 showcandidate
+1 6 1 showcandidate
+5 6 1 showcandidate
+1 6 3 showcandidate
+2 6 7 showcandidate
+8 7 7 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+6 3 0.8 0.8 1 highlightcell
+1.5 4 3 1 0.5 0.5 outlinecell
+1.5 6 7 1 0.5 0.5 outlinecell
+1.5 6 4 1 0 0 outlinecell
+1.5 5 2 1 0.5 0.5 outlinecell
+1.5 6 8 1 0.5 0.5 outlinecell
+1.5 2 3 1 0 0 outlinecell
+1.5 4 1 1 0.8 0.8 outlinecell
+1.5 6 5 1 0.8 0.8 outlinecell
+1.5 7 3 1 0.8 0.8 outlinecell
+1.5 6 2 1 0.5 0.5 outlinecell
+1.5 8 3 1 0.5 0.5 outlinecell
+1.5 4 2 1 0.8 0.8 outlinecell
+1.5 6 9 1 0.8 0.8 outlinecell
+1.5 9 3 1 0.8 0.8 outlinecell
+1.5 6 6 1 0 0 outlinecell
+2 1 2 fullnumber
+9 1 4 fullnumber
+4 1 6 fullnumber
+5 1 9 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+5 2 3 fullnumber
+6 2 4 fullnumber
+1 2 5 fullnumber
+8 2 6 fullnumber
+3 2 7 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+6 3 2 fullnumber
+2 3 4 fullnumber
+5 3 6 fullnumber
+9 3 7 fullnumber
+1 3 9 fullnumber
+6 4 1 fullnumber
+8 4 2 fullnumber
+2 4 3 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+7 4 7 fullnumber
+3 4 8 fullnumber
+9 4 9 fullnumber
+4 5 2 fullnumber
+7 5 4 fullnumber
+8 5 5 fullnumber
+2 5 6 fullnumber
+1 5 7 fullnumber
+5 5 8 fullnumber
+6 5 9 fullnumber
+7 6 2 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+2 6 7 fullnumber
+4 6 8 fullnumber
+8 6 9 fullnumber
+2 7 1 fullnumber
+5 7 2 fullnumber
+6 7 3 fullnumber
+1 7 4 fullnumber
+4 7 5 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+7 8 3 fullnumber
+8 8 4 fullnumber
+9 8 5 fullnumber
+3 8 6 fullnumber
+5 8 7 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+8 9 3 fullnumber
+5 9 4 fullnumber
+2 9 5 fullnumber
+6 9 6 fullnumber
+4 9 7 fullnumber
+1 9 8 fullnumber
+7 9 9 fullnumber
+1 1 1 showcandidate
+3 1 1 showcandidate
+1 1 3 showcandidate
+3 1 3 showcandidate
+3 1 5 showcandidate
+7 1 5 showcandidate
+6 1 7 showcandidate
+8 1 7 showcandidate
+7 1 8 showcandidate
+8 1 8 showcandidate
+3 3 3 showcandidate
+4 3 3 showcandidate
+3 3 5 showcandidate
+7 3 5 showcandidate
+7 3 8 showcandidate
+3 5 1 showcandidate
+3 5 3 showcandidate
+9 5 3 showcandidate
+1 6 1 showcandidate
+5 6 1 showcandidate
+1 6 3 showcandidate
+8 7 7 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+6 0.9 0.9 0.9 highlightrow
+6 1 0.8 0.8 1 highlightcell
+2 1 2 fullnumber
+9 1 4 fullnumber
+4 1 6 fullnumber
+5 1 9 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+5 2 3 fullnumber
+6 2 4 fullnumber
+1 2 5 fullnumber
+8 2 6 fullnumber
+3 2 7 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+6 3 2 fullnumber
+2 3 4 fullnumber
+5 3 6 fullnumber
+9 3 7 fullnumber
+1 3 9 fullnumber
+6 4 1 fullnumber
+8 4 2 fullnumber
+2 4 3 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+7 4 7 fullnumber
+3 4 8 fullnumber
+9 4 9 fullnumber
+4 5 2 fullnumber
+7 5 4 fullnumber
+8 5 5 fullnumber
+2 5 6 fullnumber
+1 5 7 fullnumber
+5 5 8 fullnumber
+6 5 9 fullnumber
+7 6 2 fullnumber
+1 6 3 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+2 6 7 fullnumber
+4 6 8 fullnumber
+8 6 9 fullnumber
+2 7 1 fullnumber
+5 7 2 fullnumber
+6 7 3 fullnumber
+1 7 4 fullnumber
+4 7 5 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+7 8 3 fullnumber
+8 8 4 fullnumber
+9 8 5 fullnumber
+3 8 6 fullnumber
+5 8 7 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+8 9 3 fullnumber
+5 9 4 fullnumber
+2 9 5 fullnumber
+6 9 6 fullnumber
+4 9 7 fullnumber
+1 9 8 fullnumber
+7 9 9 fullnumber
+1 1 1 showcandidate
+3 1 1 showcandidate
+3 1 3 showcandidate
+3 1 5 showcandidate
+7 1 5 showcandidate
+6 1 7 showcandidate
+8 1 7 showcandidate
+7 1 8 showcandidate
+8 1 8 showcandidate
+3 3 3 showcandidate
+4 3 3 showcandidate
+3 3 5 showcandidate
+7 3 5 showcandidate
+7 3 8 showcandidate
+3 5 1 showcandidate
+3 5 3 showcandidate
+9 5 3 showcandidate
+5 6 1 showcandidate
+8 7 7 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+5 1 0.8 0.8 1 highlightcell
+1.5 5 7 1 0.5 0.5 outlinecell
+1.5 6 3 1 0.5 0.5 outlinecell
+1.5 4 3 1 0.8 0.8 outlinecell
+1.5 5 6 1 0.8 0.8 outlinecell
+1.5 7 1 1 0.8 0.8 outlinecell
+1.5 5 2 1 0.5 0.5 outlinecell
+1.5 8 1 1 0.5 0.5 outlinecell
+1.5 6 1 1 0.5 0.5 outlinecell
+1.5 5 8 1 0.5 0.5 outlinecell
+1.5 4 1 1 0.5 0.5 outlinecell
+1.5 5 9 1 0.5 0.5 outlinecell
+1.5 2 1 1 0.8 0.8 outlinecell
+1.5 5 4 1 0.8 0.8 outlinecell
+1.5 6 2 1 0.8 0.8 outlinecell
+1.5 4 2 1 0.8 0.8 outlinecell
+1.5 3 1 1 0.8 0.8 outlinecell
+1.5 5 5 1 0.8 0.8 outlinecell
+1.5 9 1 1 0 0 outlinecell
+2 1 2 fullnumber
+9 1 4 fullnumber
+4 1 6 fullnumber
+5 1 9 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+5 2 3 fullnumber
+6 2 4 fullnumber
+1 2 5 fullnumber
+8 2 6 fullnumber
+3 2 7 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+6 3 2 fullnumber
+2 3 4 fullnumber
+5 3 6 fullnumber
+9 3 7 fullnumber
+1 3 9 fullnumber
+6 4 1 fullnumber
+8 4 2 fullnumber
+2 4 3 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+7 4 7 fullnumber
+3 4 8 fullnumber
+9 4 9 fullnumber
+4 5 2 fullnumber
+7 5 4 fullnumber
+8 5 5 fullnumber
+2 5 6 fullnumber
+1 5 7 fullnumber
+5 5 8 fullnumber
+6 5 9 fullnumber
+5 6 1 fullnumber
+7 6 2 fullnumber
+1 6 3 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+2 6 7 fullnumber
+4 6 8 fullnumber
+8 6 9 fullnumber
+2 7 1 fullnumber
+5 7 2 fullnumber
+6 7 3 fullnumber
+1 7 4 fullnumber
+4 7 5 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+7 8 3 fullnumber
+8 8 4 fullnumber
+9 8 5 fullnumber
+3 8 6 fullnumber
+5 8 7 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+8 9 3 fullnumber
+5 9 4 fullnumber
+2 9 5 fullnumber
+6 9 6 fullnumber
+4 9 7 fullnumber
+1 9 8 fullnumber
+7 9 9 fullnumber
+1 1 1 showcandidate
+3 1 1 showcandidate
+3 1 3 showcandidate
+3 1 5 showcandidate
+7 1 5 showcandidate
+6 1 7 showcandidate
+8 1 7 showcandidate
+7 1 8 showcandidate
+8 1 8 showcandidate
+3 3 3 showcandidate
+4 3 3 showcandidate
+3 3 5 showcandidate
+7 3 5 showcandidate
+7 3 8 showcandidate
+3 5 1 showcandidate
+3 5 3 showcandidate
+9 5 3 showcandidate
+8 7 7 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+5 0.9 0.9 0.9 highlightrow
+5 3 0.8 0.8 1 highlightcell
+2 1 2 fullnumber
+9 1 4 fullnumber
+4 1 6 fullnumber
+5 1 9 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+5 2 3 fullnumber
+6 2 4 fullnumber
+1 2 5 fullnumber
+8 2 6 fullnumber
+3 2 7 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+6 3 2 fullnumber
+2 3 4 fullnumber
+5 3 6 fullnumber
+9 3 7 fullnumber
+1 3 9 fullnumber
+6 4 1 fullnumber
+8 4 2 fullnumber
+2 4 3 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+7 4 7 fullnumber
+3 4 8 fullnumber
+9 4 9 fullnumber
+3 5 1 fullnumber
+4 5 2 fullnumber
+7 5 4 fullnumber
+8 5 5 fullnumber
+2 5 6 fullnumber
+1 5 7 fullnumber
+5 5 8 fullnumber
+6 5 9 fullnumber
+5 6 1 fullnumber
+7 6 2 fullnumber
+1 6 3 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+2 6 7 fullnumber
+4 6 8 fullnumber
+8 6 9 fullnumber
+2 7 1 fullnumber
+5 7 2 fullnumber
+6 7 3 fullnumber
+1 7 4 fullnumber
+4 7 5 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+7 8 3 fullnumber
+8 8 4 fullnumber
+9 8 5 fullnumber
+3 8 6 fullnumber
+5 8 7 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+8 9 3 fullnumber
+5 9 4 fullnumber
+2 9 5 fullnumber
+6 9 6 fullnumber
+4 9 7 fullnumber
+1 9 8 fullnumber
+7 9 9 fullnumber
+1 1 1 showcandidate
+3 1 3 showcandidate
+3 1 5 showcandidate
+7 1 5 showcandidate
+6 1 7 showcandidate
+8 1 7 showcandidate
+7 1 8 showcandidate
+8 1 8 showcandidate
+3 3 3 showcandidate
+4 3 3 showcandidate
+3 3 5 showcandidate
+7 3 5 showcandidate
+7 3 8 showcandidate
+9 5 3 showcandidate
+8 7 7 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+1 0.9 0.9 0.9 highlightcol
+1 1 0.8 0.8 1 highlightcell
+2 1 2 fullnumber
+9 1 4 fullnumber
+4 1 6 fullnumber
+5 1 9 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+5 2 3 fullnumber
+6 2 4 fullnumber
+1 2 5 fullnumber
+8 2 6 fullnumber
+3 2 7 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+6 3 2 fullnumber
+2 3 4 fullnumber
+5 3 6 fullnumber
+9 3 7 fullnumber
+1 3 9 fullnumber
+6 4 1 fullnumber
+8 4 2 fullnumber
+2 4 3 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+7 4 7 fullnumber
+3 4 8 fullnumber
+9 4 9 fullnumber
+3 5 1 fullnumber
+4 5 2 fullnumber
+9 5 3 fullnumber
+7 5 4 fullnumber
+8 5 5 fullnumber
+2 5 6 fullnumber
+1 5 7 fullnumber
+5 5 8 fullnumber
+6 5 9 fullnumber
+5 6 1 fullnumber
+7 6 2 fullnumber
+1 6 3 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+2 6 7 fullnumber
+4 6 8 fullnumber
+8 6 9 fullnumber
+2 7 1 fullnumber
+5 7 2 fullnumber
+6 7 3 fullnumber
+1 7 4 fullnumber
+4 7 5 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+7 8 3 fullnumber
+8 8 4 fullnumber
+9 8 5 fullnumber
+3 8 6 fullnumber
+5 8 7 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+8 9 3 fullnumber
+5 9 4 fullnumber
+2 9 5 fullnumber
+6 9 6 fullnumber
+4 9 7 fullnumber
+1 9 8 fullnumber
+7 9 9 fullnumber
+1 1 1 showcandidate
+3 1 3 showcandidate
+3 1 5 showcandidate
+7 1 5 showcandidate
+6 1 7 showcandidate
+8 1 7 showcandidate
+7 1 8 showcandidate
+8 1 8 showcandidate
+3 3 3 showcandidate
+4 3 3 showcandidate
+3 3 5 showcandidate
+7 3 5 showcandidate
+7 3 8 showcandidate
+8 7 7 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+3 8 0.8 0.8 1 highlightcell
+1.5 3 9 1 0.5 0.5 outlinecell
+1.5 9 8 1 0.5 0.5 outlinecell
+1.5 3 4 1 0.5 0.5 outlinecell
+1.5 2 8 1 0.5 0.5 outlinecell
+1.5 2 7 1 0.5 0.5 outlinecell
+1.5 4 8 1 0.5 0.5 outlinecell
+1.5 2 9 1 0.5 0.5 outlinecell
+1.5 6 8 1 0.5 0.5 outlinecell
+1.5 1 9 1 0.8 0.8 outlinecell
+1.5 5 8 1 0.8 0.8 outlinecell
+1.5 3 6 1 0.8 0.8 outlinecell
+1.5 3 2 1 0.5 0.5 outlinecell
+1.5 8 8 1 0.5 0.5 outlinecell
+1.5 3 1 1 0 0 outlinecell
+1.5 3 7 1 0 0 outlinecell
+1 1 1 fullnumber
+2 1 2 fullnumber
+9 1 4 fullnumber
+4 1 6 fullnumber
+5 1 9 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+5 2 3 fullnumber
+6 2 4 fullnumber
+1 2 5 fullnumber
+8 2 6 fullnumber
+3 2 7 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+6 3 2 fullnumber
+2 3 4 fullnumber
+5 3 6 fullnumber
+9 3 7 fullnumber
+1 3 9 fullnumber
+6 4 1 fullnumber
+8 4 2 fullnumber
+2 4 3 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+7 4 7 fullnumber
+3 4 8 fullnumber
+9 4 9 fullnumber
+3 5 1 fullnumber
+4 5 2 fullnumber
+9 5 3 fullnumber
+7 5 4 fullnumber
+8 5 5 fullnumber
+2 5 6 fullnumber
+1 5 7 fullnumber
+5 5 8 fullnumber
+6 5 9 fullnumber
+5 6 1 fullnumber
+7 6 2 fullnumber
+1 6 3 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+2 6 7 fullnumber
+4 6 8 fullnumber
+8 6 9 fullnumber
+2 7 1 fullnumber
+5 7 2 fullnumber
+6 7 3 fullnumber
+1 7 4 fullnumber
+4 7 5 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+7 8 3 fullnumber
+8 8 4 fullnumber
+9 8 5 fullnumber
+3 8 6 fullnumber
+5 8 7 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+8 9 3 fullnumber
+5 9 4 fullnumber
+2 9 5 fullnumber
+6 9 6 fullnumber
+4 9 7 fullnumber
+1 9 8 fullnumber
+7 9 9 fullnumber
+3 1 3 showcandidate
+3 1 5 showcandidate
+7 1 5 showcandidate
+6 1 7 showcandidate
+8 1 7 showcandidate
+7 1 8 showcandidate
+8 1 8 showcandidate
+3 3 3 showcandidate
+4 3 3 showcandidate
+3 3 5 showcandidate
+7 3 5 showcandidate
+7 3 8 showcandidate
+8 7 7 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+3 5 0.8 0.8 1 highlightcell
+1.5 2 5 1 0.5 0.5 outlinecell
+1.5 3 9 1 0.5 0.5 outlinecell
+1.5 3 4 1 0.5 0.5 outlinecell
+1.5 9 5 1 0.5 0.5 outlinecell
+1.5 1 6 1 0.5 0.5 outlinecell
+1.5 7 5 1 0.5 0.5 outlinecell
+1.5 4 5 1 0.5 0.5 outlinecell
+1.5 3 6 1 0.5 0.5 outlinecell
+1.5 3 2 1 0.8 0.8 outlinecell
+1.5 2 4 1 0.8 0.8 outlinecell
+1.5 6 5 1 0.8 0.8 outlinecell
+1.5 3 8 1 0 0 outlinecell
+1.5 3 1 1 0.8 0.8 outlinecell
+1.5 5 5 1 0.8 0.8 outlinecell
+1.5 2 6 1 0.8 0.8 outlinecell
+1.5 1 4 1 0.8 0.8 outlinecell
+1.5 3 7 1 0.8 0.8 outlinecell
+1.5 8 5 1 0.8 0.8 outlinecell
+1 1 1 fullnumber
+2 1 2 fullnumber
+9 1 4 fullnumber
+4 1 6 fullnumber
+5 1 9 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+5 2 3 fullnumber
+6 2 4 fullnumber
+1 2 5 fullnumber
+8 2 6 fullnumber
+3 2 7 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+6 3 2 fullnumber
+2 3 4 fullnumber
+5 3 6 fullnumber
+9 3 7 fullnumber
+7 3 8 fullnumber
+1 3 9 fullnumber
+6 4 1 fullnumber
+8 4 2 fullnumber
+2 4 3 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+7 4 7 fullnumber
+3 4 8 fullnumber
+9 4 9 fullnumber
+3 5 1 fullnumber
+4 5 2 fullnumber
+9 5 3 fullnumber
+7 5 4 fullnumber
+8 5 5 fullnumber
+2 5 6 fullnumber
+1 5 7 fullnumber
+5 5 8 fullnumber
+6 5 9 fullnumber
+5 6 1 fullnumber
+7 6 2 fullnumber
+1 6 3 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+2 6 7 fullnumber
+4 6 8 fullnumber
+8 6 9 fullnumber
+2 7 1 fullnumber
+5 7 2 fullnumber
+6 7 3 fullnumber
+1 7 4 fullnumber
+4 7 5 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+7 8 3 fullnumber
+8 8 4 fullnumber
+9 8 5 fullnumber
+3 8 6 fullnumber
+5 8 7 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+8 9 3 fullnumber
+5 9 4 fullnumber
+2 9 5 fullnumber
+6 9 6 fullnumber
+4 9 7 fullnumber
+1 9 8 fullnumber
+7 9 9 fullnumber
+3 1 3 showcandidate
+3 1 5 showcandidate
+7 1 5 showcandidate
+6 1 7 showcandidate
+8 1 7 showcandidate
+8 1 8 showcandidate
+3 3 3 showcandidate
+4 3 3 showcandidate
+3 3 5 showcandidate
+8 7 7 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+3 0.9 0.9 0.9 highlightrow
+3 3 0.8 0.8 1 highlightcell
+1 1 1 fullnumber
+2 1 2 fullnumber
+9 1 4 fullnumber
+4 1 6 fullnumber
+5 1 9 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+5 2 3 fullnumber
+6 2 4 fullnumber
+1 2 5 fullnumber
+8 2 6 fullnumber
+3 2 7 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+6 3 2 fullnumber
+2 3 4 fullnumber
+3 3 5 fullnumber
+5 3 6 fullnumber
+9 3 7 fullnumber
+7 3 8 fullnumber
+1 3 9 fullnumber
+6 4 1 fullnumber
+8 4 2 fullnumber
+2 4 3 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+7 4 7 fullnumber
+3 4 8 fullnumber
+9 4 9 fullnumber
+3 5 1 fullnumber
+4 5 2 fullnumber
+9 5 3 fullnumber
+7 5 4 fullnumber
+8 5 5 fullnumber
+2 5 6 fullnumber
+1 5 7 fullnumber
+5 5 8 fullnumber
+6 5 9 fullnumber
+5 6 1 fullnumber
+7 6 2 fullnumber
+1 6 3 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+2 6 7 fullnumber
+4 6 8 fullnumber
+8 6 9 fullnumber
+2 7 1 fullnumber
+5 7 2 fullnumber
+6 7 3 fullnumber
+1 7 4 fullnumber
+4 7 5 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+7 8 3 fullnumber
+8 8 4 fullnumber
+9 8 5 fullnumber
+3 8 6 fullnumber
+5 8 7 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+8 9 3 fullnumber
+5 9 4 fullnumber
+2 9 5 fullnumber
+6 9 6 fullnumber
+4 9 7 fullnumber
+1 9 8 fullnumber
+7 9 9 fullnumber
+3 1 3 showcandidate
+7 1 5 showcandidate
+6 1 7 showcandidate
+8 1 7 showcandidate
+8 1 8 showcandidate
+4 3 3 showcandidate
+8 7 7 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+1 0.9 0.9 0.9 highlightbox
+1 3 0.8 0.8 1 highlightcell
+1 1 1 fullnumber
+2 1 2 fullnumber
+9 1 4 fullnumber
+4 1 6 fullnumber
+5 1 9 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+5 2 3 fullnumber
+6 2 4 fullnumber
+1 2 5 fullnumber
+8 2 6 fullnumber
+3 2 7 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+6 3 2 fullnumber
+4 3 3 fullnumber
+2 3 4 fullnumber
+3 3 5 fullnumber
+5 3 6 fullnumber
+9 3 7 fullnumber
+7 3 8 fullnumber
+1 3 9 fullnumber
+6 4 1 fullnumber
+8 4 2 fullnumber
+2 4 3 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+7 4 7 fullnumber
+3 4 8 fullnumber
+9 4 9 fullnumber
+3 5 1 fullnumber
+4 5 2 fullnumber
+9 5 3 fullnumber
+7 5 4 fullnumber
+8 5 5 fullnumber
+2 5 6 fullnumber
+1 5 7 fullnumber
+5 5 8 fullnumber
+6 5 9 fullnumber
+5 6 1 fullnumber
+7 6 2 fullnumber
+1 6 3 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+2 6 7 fullnumber
+4 6 8 fullnumber
+8 6 9 fullnumber
+2 7 1 fullnumber
+5 7 2 fullnumber
+6 7 3 fullnumber
+1 7 4 fullnumber
+4 7 5 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+7 8 3 fullnumber
+8 8 4 fullnumber
+9 8 5 fullnumber
+3 8 6 fullnumber
+5 8 7 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+8 9 3 fullnumber
+5 9 4 fullnumber
+2 9 5 fullnumber
+6 9 6 fullnumber
+4 9 7 fullnumber
+1 9 8 fullnumber
+7 9 9 fullnumber
+3 1 3 showcandidate
+7 1 5 showcandidate
+6 1 7 showcandidate
+8 1 7 showcandidate
+8 1 8 showcandidate
+8 7 7 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+2 0.9 0.9 0.9 highlightbox
+1 5 0.8 0.8 1 highlightcell
+1 1 1 fullnumber
+2 1 2 fullnumber
+3 1 3 fullnumber
+9 1 4 fullnumber
+4 1 6 fullnumber
+5 1 9 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+5 2 3 fullnumber
+6 2 4 fullnumber
+1 2 5 fullnumber
+8 2 6 fullnumber
+3 2 7 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+6 3 2 fullnumber
+4 3 3 fullnumber
+2 3 4 fullnumber
+3 3 5 fullnumber
+5 3 6 fullnumber
+9 3 7 fullnumber
+7 3 8 fullnumber
+1 3 9 fullnumber
+6 4 1 fullnumber
+8 4 2 fullnumber
+2 4 3 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+7 4 7 fullnumber
+3 4 8 fullnumber
+9 4 9 fullnumber
+3 5 1 fullnumber
+4 5 2 fullnumber
+9 5 3 fullnumber
+7 5 4 fullnumber
+8 5 5 fullnumber
+2 5 6 fullnumber
+1 5 7 fullnumber
+5 5 8 fullnumber
+6 5 9 fullnumber
+5 6 1 fullnumber
+7 6 2 fullnumber
+1 6 3 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+2 6 7 fullnumber
+4 6 8 fullnumber
+8 6 9 fullnumber
+2 7 1 fullnumber
+5 7 2 fullnumber
+6 7 3 fullnumber
+1 7 4 fullnumber
+4 7 5 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+7 8 3 fullnumber
+8 8 4 fullnumber
+9 8 5 fullnumber
+3 8 6 fullnumber
+5 8 7 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+8 9 3 fullnumber
+5 9 4 fullnumber
+2 9 5 fullnumber
+6 9 6 fullnumber
+4 9 7 fullnumber
+1 9 8 fullnumber
+7 9 9 fullnumber
+7 1 5 showcandidate
+6 1 7 showcandidate
+8 1 7 showcandidate
+8 1 8 showcandidate
+8 7 7 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+7 7 0.8 0.8 1 highlightcell
+1.5 7 4 1 0.8 0.8 outlinecell
+1.5 5 7 1 0.8 0.8 outlinecell
+1.5 9 8 1 0.8 0.8 outlinecell
+1.5 7 1 1 0.8 0.8 outlinecell
+1.5 8 9 1 0.8 0.8 outlinecell
+1.5 6 7 1 0.8 0.8 outlinecell
+1.5 2 7 1 0.5 0.5 outlinecell
+1.5 7 9 1 0.5 0.5 outlinecell
+1.5 7 5 1 0.5 0.5 outlinecell
+1.5 9 7 1 0.5 0.5 outlinecell
+1.5 7 2 1 0.5 0.5 outlinecell
+1.5 8 7 1 0.5 0.5 outlinecell
+1.5 7 3 1 0.5 0.5 outlinecell
+1.5 8 8 1 0.5 0.5 outlinecell
+1.5 4 7 1 0.8 0.8 outlinecell
+1.5 7 6 1 0.8 0.8 outlinecell
+1.5 9 9 1 0.8 0.8 outlinecell
+1.5 3 7 1 0 0 outlinecell
+1 1 1 fullnumber
+2 1 2 fullnumber
+3 1 3 fullnumber
+9 1 4 fullnumber
+7 1 5 fullnumber
+4 1 6 fullnumber
+5 1 9 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+5 2 3 fullnumber
+6 2 4 fullnumber
+1 2 5 fullnumber
+8 2 6 fullnumber
+3 2 7 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+6 3 2 fullnumber
+4 3 3 fullnumber
+2 3 4 fullnumber
+3 3 5 fullnumber
+5 3 6 fullnumber
+9 3 7 fullnumber
+7 3 8 fullnumber
+1 3 9 fullnumber
+6 4 1 fullnumber
+8 4 2 fullnumber
+2 4 3 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+7 4 7 fullnumber
+3 4 8 fullnumber
+9 4 9 fullnumber
+3 5 1 fullnumber
+4 5 2 fullnumber
+9 5 3 fullnumber
+7 5 4 fullnumber
+8 5 5 fullnumber
+2 5 6 fullnumber
+1 5 7 fullnumber
+5 5 8 fullnumber
+6 5 9 fullnumber
+5 6 1 fullnumber
+7 6 2 fullnumber
+1 6 3 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+2 6 7 fullnumber
+4 6 8 fullnumber
+8 6 9 fullnumber
+2 7 1 fullnumber
+5 7 2 fullnumber
+6 7 3 fullnumber
+1 7 4 fullnumber
+4 7 5 fullnumber
+7 7 6 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+7 8 3 fullnumber
+8 8 4 fullnumber
+9 8 5 fullnumber
+3 8 6 fullnumber
+5 8 7 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+8 9 3 fullnumber
+5 9 4 fullnumber
+2 9 5 fullnumber
+6 9 6 fullnumber
+4 9 7 fullnumber
+1 9 8 fullnumber
+7 9 9 fullnumber
+6 1 7 showcandidate
+8 1 7 showcandidate
+8 1 8 showcandidate
+8 7 7 showcandidate
+8 7 8 showcandidate
+9 7 8 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+9 0.9 0.9 0.9 highlightbox
+7 8 0.8 0.8 1 highlightcell
+1 1 1 fullnumber
+2 1 2 fullnumber
+3 1 3 fullnumber
+9 1 4 fullnumber
+7 1 5 fullnumber
+4 1 6 fullnumber
+5 1 9 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+5 2 3 fullnumber
+6 2 4 fullnumber
+1 2 5 fullnumber
+8 2 6 fullnumber
+3 2 7 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+6 3 2 fullnumber
+4 3 3 fullnumber
+2 3 4 fullnumber
+3 3 5 fullnumber
+5 3 6 fullnumber
+9 3 7 fullnumber
+7 3 8 fullnumber
+1 3 9 fullnumber
+6 4 1 fullnumber
+8 4 2 fullnumber
+2 4 3 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+7 4 7 fullnumber
+3 4 8 fullnumber
+9 4 9 fullnumber
+3 5 1 fullnumber
+4 5 2 fullnumber
+9 5 3 fullnumber
+7 5 4 fullnumber
+8 5 5 fullnumber
+2 5 6 fullnumber
+1 5 7 fullnumber
+5 5 8 fullnumber
+6 5 9 fullnumber
+5 6 1 fullnumber
+7 6 2 fullnumber
+1 6 3 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+2 6 7 fullnumber
+4 6 8 fullnumber
+8 6 9 fullnumber
+2 7 1 fullnumber
+5 7 2 fullnumber
+6 7 3 fullnumber
+1 7 4 fullnumber
+4 7 5 fullnumber
+7 7 6 fullnumber
+8 7 7 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+7 8 3 fullnumber
+8 8 4 fullnumber
+9 8 5 fullnumber
+3 8 6 fullnumber
+5 8 7 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+8 9 3 fullnumber
+5 9 4 fullnumber
+2 9 5 fullnumber
+6 9 6 fullnumber
+4 9 7 fullnumber
+1 9 8 fullnumber
+7 9 9 fullnumber
+6 1 7 showcandidate
+8 1 8 showcandidate
+9 7 8 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+7 0.9 0.9 0.9 highlightcol
+1 7 0.8 0.8 1 highlightcell
+1 1 1 fullnumber
+2 1 2 fullnumber
+3 1 3 fullnumber
+9 1 4 fullnumber
+7 1 5 fullnumber
+4 1 6 fullnumber
+5 1 9 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+5 2 3 fullnumber
+6 2 4 fullnumber
+1 2 5 fullnumber
+8 2 6 fullnumber
+3 2 7 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+6 3 2 fullnumber
+4 3 3 fullnumber
+2 3 4 fullnumber
+3 3 5 fullnumber
+5 3 6 fullnumber
+9 3 7 fullnumber
+7 3 8 fullnumber
+1 3 9 fullnumber
+6 4 1 fullnumber
+8 4 2 fullnumber
+2 4 3 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+7 4 7 fullnumber
+3 4 8 fullnumber
+9 4 9 fullnumber
+3 5 1 fullnumber
+4 5 2 fullnumber
+9 5 3 fullnumber
+7 5 4 fullnumber
+8 5 5 fullnumber
+2 5 6 fullnumber
+1 5 7 fullnumber
+5 5 8 fullnumber
+6 5 9 fullnumber
+5 6 1 fullnumber
+7 6 2 fullnumber
+1 6 3 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+2 6 7 fullnumber
+4 6 8 fullnumber
+8 6 9 fullnumber
+2 7 1 fullnumber
+5 7 2 fullnumber
+6 7 3 fullnumber
+1 7 4 fullnumber
+4 7 5 fullnumber
+7 7 6 fullnumber
+8 7 7 fullnumber
+9 7 8 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+7 8 3 fullnumber
+8 8 4 fullnumber
+9 8 5 fullnumber
+3 8 6 fullnumber
+5 8 7 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+8 9 3 fullnumber
+5 9 4 fullnumber
+2 9 5 fullnumber
+6 9 6 fullnumber
+4 9 7 fullnumber
+1 9 8 fullnumber
+7 9 9 fullnumber
+6 1 7 showcandidate
+8 1 8 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+3 0.9 0.9 0.9 highlightbox
+1 8 0.8 0.8 1 highlightcell
+1 1 1 fullnumber
+2 1 2 fullnumber
+3 1 3 fullnumber
+9 1 4 fullnumber
+7 1 5 fullnumber
+4 1 6 fullnumber
+6 1 7 fullnumber
+5 1 9 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+5 2 3 fullnumber
+6 2 4 fullnumber
+1 2 5 fullnumber
+8 2 6 fullnumber
+3 2 7 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+6 3 2 fullnumber
+4 3 3 fullnumber
+2 3 4 fullnumber
+3 3 5 fullnumber
+5 3 6 fullnumber
+9 3 7 fullnumber
+7 3 8 fullnumber
+1 3 9 fullnumber
+6 4 1 fullnumber
+8 4 2 fullnumber
+2 4 3 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+7 4 7 fullnumber
+3 4 8 fullnumber
+9 4 9 fullnumber
+3 5 1 fullnumber
+4 5 2 fullnumber
+9 5 3 fullnumber
+7 5 4 fullnumber
+8 5 5 fullnumber
+2 5 6 fullnumber
+1 5 7 fullnumber
+5 5 8 fullnumber
+6 5 9 fullnumber
+5 6 1 fullnumber
+7 6 2 fullnumber
+1 6 3 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+2 6 7 fullnumber
+4 6 8 fullnumber
+8 6 9 fullnumber
+2 7 1 fullnumber
+5 7 2 fullnumber
+6 7 3 fullnumber
+1 7 4 fullnumber
+4 7 5 fullnumber
+7 7 6 fullnumber
+8 7 7 fullnumber
+9 7 8 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+7 8 3 fullnumber
+8 8 4 fullnumber
+9 8 5 fullnumber
+3 8 6 fullnumber
+5 8 7 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+8 9 3 fullnumber
+5 9 4 fullnumber
+2 9 5 fullnumber
+6 9 6 fullnumber
+4 9 7 fullnumber
+1 9 8 fullnumber
+7 9 9 fullnumber
+8 1 8 showcandidate
+
+makegrid
+
+showpage
+10 510 translate
+1 1 1 fullnumber
+2 1 2 fullnumber
+3 1 3 fullnumber
+9 1 4 fullnumber
+7 1 5 fullnumber
+4 1 6 fullnumber
+6 1 7 fullnumber
+8 1 8 fullnumber
+5 1 9 fullnumber
+7 2 1 fullnumber
+9 2 2 fullnumber
+5 2 3 fullnumber
+6 2 4 fullnumber
+1 2 5 fullnumber
+8 2 6 fullnumber
+3 2 7 fullnumber
+2 2 8 fullnumber
+4 2 9 fullnumber
+8 3 1 fullnumber
+6 3 2 fullnumber
+4 3 3 fullnumber
+2 3 4 fullnumber
+3 3 5 fullnumber
+5 3 6 fullnumber
+9 3 7 fullnumber
+7 3 8 fullnumber
+1 3 9 fullnumber
+6 4 1 fullnumber
+8 4 2 fullnumber
+2 4 3 fullnumber
+4 4 4 fullnumber
+5 4 5 fullnumber
+1 4 6 fullnumber
+7 4 7 fullnumber
+3 4 8 fullnumber
+9 4 9 fullnumber
+3 5 1 fullnumber
+4 5 2 fullnumber
+9 5 3 fullnumber
+7 5 4 fullnumber
+8 5 5 fullnumber
+2 5 6 fullnumber
+1 5 7 fullnumber
+5 5 8 fullnumber
+6 5 9 fullnumber
+5 6 1 fullnumber
+7 6 2 fullnumber
+1 6 3 fullnumber
+3 6 4 fullnumber
+6 6 5 fullnumber
+9 6 6 fullnumber
+2 6 7 fullnumber
+4 6 8 fullnumber
+8 6 9 fullnumber
+2 7 1 fullnumber
+5 7 2 fullnumber
+6 7 3 fullnumber
+1 7 4 fullnumber
+4 7 5 fullnumber
+7 7 6 fullnumber
+8 7 7 fullnumber
+9 7 8 fullnumber
+3 7 9 fullnumber
+4 8 1 fullnumber
+1 8 2 fullnumber
+7 8 3 fullnumber
+8 8 4 fullnumber
+9 8 5 fullnumber
+3 8 6 fullnumber
+5 8 7 fullnumber
+6 8 8 fullnumber
+2 8 9 fullnumber
+9 9 1 fullnumber
+3 9 2 fullnumber
+8 9 3 fullnumber
+5 9 4 fullnumber
+2 9 5 fullnumber
+6 9 6 fullnumber
+4 9 7 fullnumber
+1 9 8 fullnumber
+7 9 9 fullnumber
+
+makegrid
+
+showpage

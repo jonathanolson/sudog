@@ -1,0 +1,60 @@
+%!EPS
+%%BoundingBox: 0 0 263 263
+/custwidth 27 def
+/scmul {custwidth mul} def
+/high {9 scmul} def
+/horiz {scmul dup 0 exch moveto high exch lineto} def
+/vert {scmul dup 0 moveto high lineto} def
+/lcross {dup horiz vert} def
+/charbbox {gsave newpath 0 0 moveto false charpath flattenpath pathbbox grestore} def
+/charheight {charbbox exch pop sub neg exch pop} def
+/charwidth {charbbox pop exch pop sub neg} def
+/addheight {exch charheight add} def
+/addwidth {exch charwidth add} def
+/heightoff {
+	(1) (2) (3) (4) (5) (6) (7) (8) (9)
+	0
+	addheight addheight addheight addheight addheight addheight addheight addheight addheight
+	9 div 2 div
+} def
+/widthoff {
+	(1) (2) (3) (4) (5) (6) (7) (8) (9)
+	0
+	addwidth addwidth addwidth addwidth addwidth addwidth addwidth addwidth addwidth
+	9 div 2 div
+} def
+/charoffset {
+	dup charwidth 2 div neg exch charheight 2 div neg rmoveto
+} def
+/displaynumber {
+	moveto dup charoffset show
+} def
+/flipcoords {
+	1 sub 0.5 add custwidth mul exch
+	9 sub neg 0.5 add custwidth mul
+} def
+10 10 translate
+newpath
+1 2 4 5 7 8 lcross lcross lcross lcross lcross lcross
+0.5 setgray
+0.5 setlinewidth
+stroke
+newpath
+3 6 lcross lcross
+closepath
+1 setlinewidth
+0 setgray
+stroke
+newpath
+0 0 moveto 0 high lineto high high lineto high 0 lineto
+closepath
+stroke
+
+/Helvetica findfont
+20 scalefont
+setfont
+
+(6) 1 2 flipcoords displaynumber
+
+showpage
+
