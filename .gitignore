@@ -1,2 +1,15 @@
 tests
 *.o
+bench_a
+build_data_permutations
+data_permutations.h
+gui2
+invalid_puzzles
+print_complete
+solved
+sudoprint
+sudosolve
+testa
+unsolve_six
+unsolved
+valid_puzzles
