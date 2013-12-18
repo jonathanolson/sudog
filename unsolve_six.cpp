@@ -14,6 +14,7 @@
 #include "boxline.h"
 #include "nfish.h"
 #include "simple_coloring.h"
+#include "ywing.h"
 
 int main(int argc, char* argv[]) {
 	if(argc < 2) {
@@ -104,6 +105,14 @@ int main(int argc, char* argv[]) {
 			if(scs.size() > 0) {
 				for(int i=0; i < scs.size(); i++) {
 					scs[i].apply(&bits);
+				}
+				continue;
+			}
+			
+			std::vector<YWing> ywings = find_ywings(&bits);
+			if(ywings.size() > 0) {
+				for(int i=0; i < ywings.size(); i++) {
+					ywings[i].apply(&bits);
 				}
 				continue;
 			}

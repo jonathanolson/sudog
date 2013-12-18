@@ -61,6 +61,10 @@ bool spot_equal(Spot a, Spot b) {
 	return (a.row == b.row && a.col == b.col);
 }
 
+bool spot_visible(Spot a, Spot b) {
+	return (a.row == b.row || a.col == b.col || boxid_of_spot(a) == boxid_of_spot(b));
+}
+
 int idx_of_spots(std::vector<Spot>& spots, Spot p) {
 	for(int i=0; i < spots.size(); i++) {
 		if(spot_equal(p, spots[i])) { return i; }

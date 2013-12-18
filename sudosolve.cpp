@@ -21,6 +21,7 @@
 #include "boxline.h"
 #include "nfish.h"
 #include "simple_coloring.h"
+#include "ywing.h"
 
 #include "pretty_solver.h"
 #include "pattern.h"
@@ -88,6 +89,11 @@ Pattern* find_pattern(Bits& bits) {
 	std::vector<SimpleColoring> scs = find_simple_colorings(&bits);
 	if(scs.size() > 0) {
 		return scs[0].clone();
+	}
+	
+	std::vector<YWing> ywings = find_ywings(&bits);
+	if(ywings.size() > 0) {
+		return ywings[0].clone();
 	}
 	
 	return NULL;

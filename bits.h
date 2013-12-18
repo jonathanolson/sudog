@@ -47,6 +47,9 @@ class Bits : public BitMatrix {
 	int* possibles;
 };
 
+int count_bits(int bit);
+int first_bits(int bit);
+
 std::ostream& operator << (std::ostream& os, Bits& bits);
 std::istream& operator >> (std::istream& os, Bits& bits);
 

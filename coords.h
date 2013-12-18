@@ -28,6 +28,7 @@ int idx_of_row(int row, int which);
 int idx_of_col(int col, int which);
 
 bool spot_equal(Spot a, Spot b);
+bool spot_visible(Spot a, Spot b);
 
 bool in_spots(std::vector<Spot>& spots, Spot p);
 int idx_of_spots(std::vector<Spot>& spots, Spot p);

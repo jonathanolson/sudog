@@ -34,6 +34,7 @@
 #include "boxline.h"
 #include "nfish.h"
 #include "simple_coloring.h"
+#include "ywing.h"
 
 #include "pretty_solver.h"
 #include "pattern.h"
@@ -177,6 +178,7 @@ void find_patterns() {
 	std::vector<BoxLine> boxlines = find_boxlines(&bits);
 	std::vector<NFish> nfishes = find_nfishes(&bits);
 	std::vector<SimpleColoring> scs = find_simple_colorings(&bits);
+	std::vector<YWing> ywings = find_ywings(&bits);
 	for(int i=0; i < snss.size(); i++) {
 		if(!pattern_novel(patterns, &(snss[i]))) { continue; }
 		add_pattern(&(snss[i]));
@@ -208,6 +210,10 @@ void find_patterns() {
 	for(int i=0; i < scs.size(); i++) {
 		if(!pattern_novel(patterns, &(scs[i]))) { continue; }
 		add_pattern(&(scs[i]));
+	}
+	for(int i=0; i < ywings.size(); i++) {
+		if(!pattern_novel(patterns, &(ywings[i]))) { continue; }
+		add_pattern(&(ywings[i]));
 	}
 	
 	

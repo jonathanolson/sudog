@@ -68,13 +68,27 @@ int Bits::get_candidate_int(Spot p, int val) {
 }
 
 int Bits::count_candidates(Spot p) {
+	return count_bits(bits[idx_of_spot(p)]);
+}
+
+// how many bits are set in the first 9 positions
+int count_bits(int bit) {
 	int num = 0;
-	for(int i=1; i <= 9; i++) {
-		if(has_candidate(p, i)) {
+	for(int i=0; i < 9; i++) {
+		if((bit >> i) % 2 == 1) {
 			num++;
 		}
 	}
 	return num;
+}
+
+// the 1-based index of the first set bit
+int first_bits(int bit) {
+	for(int i=0; i < 9; i++) {
+		if((bit >> i) % 2 == 1) {
+			return i + 1;
+		}
+	}
 }
 
 bool Bits::has_value(Spot p) {
@@ -97,11 +111,7 @@ void Bits::set_value(Spot p, int val) {
 }
 
 int Bits::first_bit(Spot p) {
-	int ret = 0;
-	for(int i=1; i<=9; i++) {
-		if(has_candidate(p, i)) { return i; }
-	}
-	return ret;
+	return first_bits(bits[idx_of_spot(p)]);
 }
 
 int Bits::bit_of_spot(Spot p) {

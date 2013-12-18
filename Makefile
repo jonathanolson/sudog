@@ -8,7 +8,7 @@ FLAGS = -O3
 
 TESTS = testa gui2 print_complete invalid_puzzles valid_puzzles unsolved solved unsolve_six bench_a sudoprint sudosolve
 GUIFILES = cairo_out.o
-TECHNIQUES = simple_naked_single.o naked_single.o hidden_single.o nh_subset.o pointing.o boxline.o nfish.o simple_coloring.o
+TECHNIQUES = simple_naked_single.o naked_single.o hidden_single.o nh_subset.o pointing.o boxline.o nfish.o simple_coloring.o ywing.o
 TECHHEADERS = coords.h psout.h bits.h target.h key.h pattern.h digit_chain.h
 OBJS = \
 	coords.o psout.o backtrack_common.o backtrack_naive_unique.o bitmatrix_to_ps.o bits_to_output.o bits.o pretty_solver.o \
@@ -148,6 +148,9 @@ nfish.o: nfish.h nfish.cpp $(TECHHEADERS)
 
 simple_coloring.o: simple_coloring.h simple_coloring.cpp $(TECHHEADERS)
 	g++ $(FLAGS) -c simple_coloring.cpp
+
+ywing.o: ywing.h ywing.cpp $(TECHHEADERS)
+	g++ $(FLAGS) -c ywing.cpp
 
 
 
