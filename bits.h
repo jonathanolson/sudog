@@ -1,3 +1,9 @@
+/*---------------------------------------------------------------------------*
+* "Bits" represents a Sudoku board state, where each cell has:
+* - A value: 1-9 indicate a filled-in number, 0 indicates unknown
+* - A bitmask: 9 bits, indicating whether each number 1-9 is a possible candidate (1), or whether it is disallowed (0)
+*----------------------------------------------------------------------------*/
+
 #ifndef BITS_H
 #define BITS_H
 
